@@ -1,0 +1,41 @@
+@media screen  and (max-width: 550px) {
+    .logoPagina{
+        width: 100px;
+        height: 50px;
+    }
+    .ContenedorGestor{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .tituloGestor{
+        display: flex;
+        margin-top: 20px;
+    }
+    .balanceMensual{
+        margin-top: 10px;
+        margin-bottom: 25px;
+    }
+    .balanceMensual h2{
+        display: flex;
+        justify-content: center;
+    
+    }
+    .MesGestor{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px;
+        border: 1px solid black;
+        width: 75px;
+        height: 25px;
+        margin-top: 5px;
+        
+    }
+    .MesGestor a {
+        
+        text-decoration: none;
+        color: black;
+        
+    }
+}
