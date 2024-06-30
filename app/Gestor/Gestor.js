@@ -1,21 +1,24 @@
 import React from "react";
-import TarjetasGestor from "../TarjetasGestor/TarjetasGestor";
-import styles from'./Gestor.module.css';
+import TarjetasGestor from "../components/TarjetasGestor/TarjetasGestor";
+import './Gestor.module.css';
+import Titulo from "../components/Titulo/Titulo";
+import Subtitulo from "../components/Subtitulo/Subtitulo";
+import Mes from "../components/Mes/Mes";
 const Gestor = () => {
   return (
     <main>
-      <section className={styles.ContenedorGestor}>
-        <div className={styles.tituloGestor}>
-          <h1>Gestor</h1>
+      <section className= "ContenedorGestor">
+        <div className= "tituloGestor">
+          <Titulo texto = {"Gestor"}></Titulo>    
         </div>            
-        <div className={styles.MesGestor}>
-          <a href="">Julio</a>
+        <div className="MesGestor">
+          <a href=""><Mes/></a>
         </div>
-        <div className={styles.balanceMensual}>
-          <h3>Balance mensual</h3>
+        <div className= "balanceMensual">
+          <Subtitulo texto={"Balance Mensual"}></Subtitulo>
           <h2>$300000</h2>
         </div>
-        <div className={styles.tarjetasGestor}>
+        <div className= "tarjetasGestor">
           <TarjetasGestor 
             imgSrc="/assets/img/gastos.png" 
             altText="imagen gastos" 
@@ -35,8 +38,10 @@ const Gestor = () => {
             amount="$1000" 
           />
         </div>
-        <div className={styles.botonReporteMensual}>
-          <a href="">Descargar Reporte Mensual</a>
+        <div className= "botonReporteMensual">
+          <a href="" download="Reporte de este mes">
+            Descargar Reporte Mensual
+          </a>
         </div>
       </section>
     </main>
