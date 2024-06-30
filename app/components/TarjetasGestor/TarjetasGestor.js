@@ -1,18 +1,23 @@
 import React from 'react';
-import styles from './TarjetasGestor.module.css';
+import './TarjetasGestor.module.css';
 
-const TarjetasGestor = ({ imgSrc, altText, titulo, cantidad }) => {
+const TarjetasGestor = ({ imgSrc, altText, titulo, cantidad, onAgregar, balanceInicial}) => {
+  const manejarClick = () =>{
+    onAgregar(balanceInicial);
+  };
   return (
-    <div className={styles.tarjetas}>
-      <div className={styles.ContenedorimagenIngresos}>
-        <img className={styles.imagenIngresos} src={imgSrc} alt={altText} />
+    <div className= "tarjetas">
+      <div className= "ContenedorimagenIngresos">
+        <img className= "imagenIngresos" src={imgSrc} alt={altText} />
       </div>
-      <div className={styles.Infotarjetas}>
-        <div className={styles.contenido}>
+      <div className= "Infotarjetas">
+        <div className= "contenido">
           <p>{titulo}</p>
           <p>{cantidad}</p>
         </div>
-        <img src="/assets/img/signomas.webp" alt="signo mas" />
+        <button onClick={manejarClick}>
+          <img src="/assets/img/signomas.webp" alt="signo mas" />
+        </button>
       </div>
     </div>
   );

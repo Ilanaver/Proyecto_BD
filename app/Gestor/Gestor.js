@@ -1,10 +1,29 @@
-import React from "react";
+import React, {useState} from "react";
 import TarjetasGestor from "../components/TarjetasGestor/TarjetasGestor";
 import './Gestor.module.css';
 import Titulo from "../components/Titulo/Titulo";
 import Subtitulo from "../components/Subtitulo/Subtitulo";
 import Mes from "../components/Mes/Mes";
+import Popup from "../components/Popup/Popup";
 const Gestor = () => {
+
+    const [mostrarPopup, setMostrarPopup] = useState(false);
+    const [datosPopup, setDatosPopup] = useState(null);
+  
+    const abrirPopup = (balanceInicial) => {
+      setDatosPopup({balanceInicial})
+      setMostrarPopup(true);
+    };
+  
+    const cerrarPopup = () => {
+      setMostrarPopup(false);
+    };
+    const enviarDatosPopup = (datos) => {
+      console.log('Cantidad:', datos.cantidad);
+      console.log('Motivo:', datos.motivo);
+      cerrarPopup();
+    };
+
   return (
     <main>
       <section className= "ContenedorGestor">
@@ -22,20 +41,23 @@ const Gestor = () => {
           <TarjetasGestor 
             imgSrc="/assets/img/gastos.png" 
             altText="imagen gastos" 
-            title="Ingresos" 
-            amount="$2000" 
+            titulo="Ingresos" 
+            cantidad="$2000" 
+            onAgregar={abrirPopup}
           />
           <TarjetasGestor 
             imgSrc="/assets/img/gastos.png" 
             altText="imagen gastos" 
-            title="Gastos" 
-            amount="$500" 
+            titulo="Gastos" 
+            cantidad="$500" 
+            onAgregar={abrirPopup}
           />
           <TarjetasGestor
             imgSrc="/assets/img/ahorros.png" 
             altText="imagen ahorros" 
-            title="Ahorros" 
-            amount="$1000" 
+            titulo="Ahorros" 
+            cantidad="$1000" 
+            onAgregar={abrirPopup}
           />
         </div>
         <div className= "botonReporteMensual">
@@ -43,6 +65,9 @@ const Gestor = () => {
             Descargar Reporte Mensual
           </a>
         </div>
+        {mostrarPopup && (
+          <Popup onClose={cerrarPopup} onSubmit={enviarDatosPopup}/>
+        )}
       </section>
     </main>
   );
