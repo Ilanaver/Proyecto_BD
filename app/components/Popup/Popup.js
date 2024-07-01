@@ -1,46 +1,44 @@
-import Subtitulo from '../Subtitulo/Subtitulo';
-import './Popup.css'
 import React, { useState } from 'react';
+import styles from './Popup.module.css'
 import Subtitulo from '../Subtitulo/Subtitulo';
 
 const Popup = ({ onClose, onSubmit }) => {
   const [cantidad, setCantidad] = useState('');
   const [motivo, setMotivo] = useState('');
 
-  const handleSubmit = (e) => {
+  const manejarEnvio = (e) => {
     e.preventDefault();
     onSubmit({ cantidad: parseFloat(cantidad), motivo });
-    setCantidad('');
-    setMotivo('');
-    onClose();
   };
 
   return (
-    <div className="popup">
-      <div className="popup-inner">
-        <Subtitulo texto={"Ingrese el ingreso"}></Subtitulo>
-        <form onSubmit={handleSubmit}>
-          <label>
-            <p>Cantidad:</p>
+    <div className={styles.contenedorPopup}>
+      <div className={styles.popup}>
+        <button className={styles.cerrar} onClick={onClose}>
+          &times;
+        </button>
+        <Subtitulo texto={"Haga su ingreso"}></Subtitulo>
+        <div className={styles.inputsPopup}>
+          <div className={styles.input}>
             <input
               type="number"
               value={cantidad}
               onChange={(e) => setCantidad(e.target.value)}
-              required
+              placeholder="Ingrese cantidad"
             />
-          </label>
-          <label>
-            <p>Motivo:</p>
+          </div>
+          <div className={styles.input}>
             <input
               type="text"
               value={motivo}
               onChange={(e) => setMotivo(e.target.value)}
-              required
+              placeholder="Ingrese motivo"
             />
-          </label>
-          <button type="submit" onClick={onClose}>Guardar</button>
-        </form>
-        <button onClick={onClose}>Cerrar</button>
+          </div>
+        </div>
+        <div className={styles.botonEnviar}>
+          <button onClick={manejarEnvio}>Enviar</button>
+        </div>
       </div>
     </div>
   );

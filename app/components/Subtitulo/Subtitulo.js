@@ -1,6 +1,6 @@
 import React from "react";
 import './Subtitulo.css'
 function Subtitulo ({texto}){
-    return <h1>{texto}</h1>
+    return <div className="Subtitulo"><h1>{texto}</h1></div>
 }
 export default Subtitulo;

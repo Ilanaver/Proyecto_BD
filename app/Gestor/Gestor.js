@@ -1,72 +1,88 @@
+'use client';
 import React, {useState} from "react";
 import TarjetasGestor from "../components/TarjetasGestor/TarjetasGestor";
-import './Gestor.module.css';
+import style from './Gestor.module.css';
 import Titulo from "../components/Titulo/Titulo";
 import Subtitulo from "../components/Subtitulo/Subtitulo";
 import Mes from "../components/Mes/Mes";
 import Popup from "../components/Popup/Popup";
 const Gestor = () => {
 
-    const [mostrarPopup, setMostrarPopup] = useState(false);
-    const [datosPopup, setDatosPopup] = useState(null);
-  
-    const abrirPopup = (balanceInicial) => {
-      setDatosPopup({balanceInicial})
-      setMostrarPopup(true);
-    };
-  
-    const cerrarPopup = () => {
-      setMostrarPopup(false);
-    };
-    const enviarDatosPopup = (datos) => {
-      console.log('Cantidad:', datos.cantidad);
-      console.log('Motivo:', datos.motivo);
-      cerrarPopup();
-    };
+  const [ingresos, setIngresos] = useState(0);
+  const [gastos, setGastos] = useState(0);
+  const [ahorros, setAhorros] = useState(0);
+  const [mostrarPopup, setMostrarPopup] = useState(false);
+  const [motivo, setMotivo] = useState('');
+
+  const manejarClick = (motivo) => {
+    setMotivo(motivo);
+    setMostrarPopup(true);
+  };
+  const enviarDatosPopup = (datos) => {
+    console.log('Cantidad:', datos.cantidad);
+    console.log('Motivo:', datos.motivo);
+    actualizarBalance(datos);
+    cerrarPopup();
+  };
+  const cerrarPopup = () => {
+    setMostrarPopup(false);
+  };
+
+  const actualizarBalance = (datos) => {
+    const { cantidad, motivo } = datos;
+
+    if (motivo.toLowerCase() === 'ingresos') {
+      setIngresos(prevIngresos => prevIngresos + cantidad);
+    } else if (motivo.toLowerCase() === 'gastos') {
+      setGastos(prevGastos => prevGastos + cantidad);
+    } else if (motivo.toLowerCase() === 'ahorros') {
+      setAhorros(prevAhorros => prevAhorros + cantidad);
+    }
+  };
 
   return (
     <main>
-      <section className= "ContenedorGestor">
-        <div className= "tituloGestor">
+      <section className= {style.ContenedorGestor}>
+        <div className= {style.tituloGestor}>
           <Titulo texto = {"Gestor"}></Titulo>    
         </div>            
-        <div className="MesGestor">
+        <div className={style.MesGestor}>
           <a href=""><Mes/></a>
         </div>
-        <div className= "balanceMensual">
+        <div className= {style.balanceMensual}>
           <Subtitulo texto={"Balance Mensual"}></Subtitulo>
           <h2>$300000</h2>
         </div>
-        <div className= "tarjetasGestor">
+        <div className= {style.tarjetasGestor}>
           <TarjetasGestor 
-            imgSrc="/assets/img/gastos.png" 
-            altText="imagen gastos" 
+            imgSrc={"/ingresos.png"}
+            altText="imagen ingresos" 
             titulo="Ingresos" 
-            cantidad="$2000" 
-            onAgregar={abrirPopup}
+            cantidad={`$${ingresos}`}
+            onAgregar={() => manejarClick ('ingresos')}
           />
           <TarjetasGestor 
-            imgSrc="/assets/img/gastos.png" 
+            imgSrc={"/gastos.png"} 
             altText="imagen gastos" 
             titulo="Gastos" 
-            cantidad="$500" 
-            onAgregar={abrirPopup}
+            cantidad={`$${gastos}`} 
+            onAgregar={() => manejarClick ('gastos')}
           />
           <TarjetasGestor
-            imgSrc="/assets/img/ahorros.png" 
+            imgSrc={"/ahorros.png"}
             altText="imagen ahorros" 
             titulo="Ahorros" 
-            cantidad="$1000" 
-            onAgregar={abrirPopup}
+            cantidad={`$${ahorros}`} 
+            onAgregar={() => manejarClick ('ahorros')}
           />
         </div>
-        <div className= "botonReporteMensual">
+        <div className= {style.botonReporteMensual}>
           <a href="" download="Reporte de este mes">
             Descargar Reporte Mensual
           </a>
         </div>
         {mostrarPopup && (
-          <Popup onClose={cerrarPopup} onSubmit={enviarDatosPopup}/>
+          <Popup onClose={cerrarPopup} onSubmit={enviarDatosPopup} motivo={motivo} />
         )}
       </section>
     </main>
