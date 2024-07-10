@@ -1,19 +1,38 @@
 'use client';
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import TarjetasGestor from "../components/TarjetasGestor/TarjetasGestor";
 import style from './Gestor.module.css';
 import Titulo from "../components/Titulo/Titulo";
 import Subtitulo from "../components/Subtitulo/Subtitulo";
 import Mes from "../components/Mes/Mes";
 import Popup from "../components/Popup/Popup";
-const Gestor = () => {
 
+const Gestor = () => {
+  const [data, setData] = useState(null); // Estado para almacenar los datos de la API
   const [ingresos, setIngresos] = useState(0);
   const [gastos, setGastos] = useState(0);
   const [ahorros, setAhorros] = useState(0);
   const [mostrarPopup, setMostrarPopup] = useState(false);
   const [motivo, setMotivo] = useState('');
 
+  useEffect(() => {
+    const idusuario = 1; // Reemplaza con el ID de usuario que necesitas
+    const url = `http://localhost:3001/gestor/${idusuario}`;
+
+    fetch(url)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        setData(data); // Almacenar los datos en el estado
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
   const manejarClick = (motivo) => {
     setMotivo(motivo);
     setMostrarPopup(true);
@@ -51,7 +70,7 @@ const Gestor = () => {
         </div>
         <div className= {style.balanceMensual}>
           <Subtitulo texto={"Balance Mensual"}></Subtitulo>
-          <h2>$300000</h2>
+          <h2>{JSON.stringify(data)}</h2>
         </div>
         <div className= {style.tarjetasGestor}>
           <TarjetasGestor 
