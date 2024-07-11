@@ -6,33 +6,46 @@ import Titulo from "../components/Titulo/Titulo";
 import Subtitulo from "../components/Subtitulo/Subtitulo";
 import Mes from "../components/Mes/Mes";
 import Popup from "../components/Popup/Popup";
+//import {axios} from "axios"
 
 const Gestor = () => {
-  const [data, setData] = useState(null); // Estado para almacenar los datos de la API
   const [ingresos, setIngresos] = useState(0);
   const [gastos, setGastos] = useState(0);
   const [ahorros, setAhorros] = useState(0);
   const [mostrarPopup, setMostrarPopup] = useState(false);
   const [motivo, setMotivo] = useState('');
+  /* AXIOS, TERMINAR DESPUES
+  const [pokemones, setpokemon] = useState([])
 
   useEffect(() => {
-    const idusuario = 1; // Reemplaza con el ID de usuario que necesitas
-    const url = `http://localhost:3001/gestor/${idusuario}`;
+    axios.get("https://pokeapi.co/api/v2/pokemon?limit=10")
+    .then(response => {
+      setpokemon(response.data)
+    })
+      
+  }, [])
 
-    fetch(url)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
+  const cargarMas () => {
+
+  }
+  */
+  //EJEMPLO DE FLECHA:
+  const [dolares, setDolares] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3001/gestor/2")
+      .then(res => res.json())
       .then(data => {
-        setData(data); // Almacenar los datos en el estado
+        console.log('Fetched data:', data); // Log the fetched data
+        const saldoActual = data.map(item => item['Saldo actual']); // Adjust this line based on the actual structure of your data
+        console.log('Saldo actual:', saldoActual); // Log the extracted saldo
+        setDolares(saldoActual);
       })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
+      .catch(err => console.error('Error fetching data:', err));
   }, []);
+
+  //Para que fucione tengo que tener el proyecto back corriendo y la bdd abierta
+  
   const manejarClick = (motivo) => {
     setMotivo(motivo);
     setMostrarPopup(true);
@@ -70,7 +83,7 @@ const Gestor = () => {
         </div>
         <div className= {style.balanceMensual}>
           <Subtitulo texto={"Balance Mensual"}></Subtitulo>
-          <h2>{JSON.stringify(data)}</h2>
+          <h2>{dolares.length > 0 ? dolares.join(', ') : 'Cargando...'}</h2> 
         </div>
         <div className= {style.tarjetasGestor}>
           <TarjetasGestor 
