@@ -27,7 +27,8 @@ const TarjetasGestor = ({ imgSrc, altText, titulo, cantidad, onAgregar, balanceI
          src={imgSrc} 
          alt={altText}
          width={100}
-         height={100} />
+         height={100} 
+         />
       </div>
       <div className= {style.Infotarjetas}>
         <div className= {style.contenido}>

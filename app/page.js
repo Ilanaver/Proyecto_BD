@@ -1,6 +1,5 @@
 import Image from "next/image";
 import './page.module.css';
-import Gestor from "@/app/gestor/page";
 import Footer from "@/app/components/Footer/Footer";
 import Link from "next/link";
 

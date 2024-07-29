@@ -1,12 +1,14 @@
 'use client';
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import TarjetasGestor from "../components/TarjetasGestor/TarjetasGestor";
 import style from './Gestor.module.css';
 import Titulo from "../components/Titulo/Titulo";
 import Subtitulo from "../components/Subtitulo/Subtitulo";
 import Mes from "../components/Mes/Mes";
 import Popup from "../components/Popup/Popup";
-//import {axios} from "axios"
+import jsPDF from 'jspdf';
+import { useSearchParams } from "next/navigation";
 
 const Gestor = () => {
   const [ingresos, setIngresos] = useState(0);
@@ -14,48 +16,94 @@ const Gestor = () => {
   const [ahorros, setAhorros] = useState(0);
   const [mostrarPopup, setMostrarPopup] = useState(false);
   const [motivo, setMotivo] = useState('');
-  /* AXIOS, TERMINAR DESPUES
-  const [pokemones, setpokemon] = useState([])
+  const [saldo, setSaldo] = useState([]);
+  const [saldoTipo, setSaldoTipo] = useState([]);
+  const [reporte, setReporte] = useState([]);
+  const [idtipos, setIdTipos] = useState(null); // Agregar estado para idtipos
 
   useEffect(() => {
-    axios.get("https://pokeapi.co/api/v2/pokemon?limit=10")
-    .then(response => {
-      setpokemon(response.data)
-    })
-      
-  }, [])
-
-  const cargarMas () => {
-
-  }
-  */
-  //EJEMPLO DE FLECHA:
-  const [dolares, setDolares] = useState([]);
-
-  useEffect(() => {
-    fetch("http://localhost:3001/gestor/2")
-      .then(res => res.json())
-      .then(data => {
-        console.log('Fetched data:', data); // Log the fetched data
-        const saldoActual = data.map(item => item['Saldo actual']); // Adjust this line based on the actual structure of your data
-        console.log('Saldo actual:', saldoActual); // Log the extracted saldo
-        setDolares(saldoActual);
+    axios.get("http://localhost:3001/gestor/2")
+      .then(res => {
+        console.log('Fetched data:', res.data);
+        const saldoActual = res.data.map(item => item['Saldo actual']);
+        console.log('Saldo actual:', saldoActual);
+        setSaldo(saldoActual);
       })
       .catch(err => console.error('Error fetching data:', err));
   }, []);
 
-  //Para que fucione tengo que tener el proyecto back corriendo y la bdd abierta
-  
+  useEffect(() => {
+    axios.get("http://localhost:3001/gestor/operaciones/2")
+      .then(res => {
+        console.log('Fetched data:', res.data);
+        setReporte(res.data);
+      })
+      .catch(err => console.error('Error fetching data:', err));
+  }, []);
+
   const manejarClick = (motivo) => {
     setMotivo(motivo);
+    
+    if (motivo === 'gastos') {
+      setIdTipos(1);
+    } else if (motivo === 'ingresos') {
+      setIdTipos(2);
+    } else if (motivo === 'ahorros') {
+      setIdTipos(3);
+    }
+    
     setMostrarPopup(true);
   };
+
   const enviarDatosPopup = (datos) => {
     console.log('Cantidad:', datos.cantidad);
     console.log('Motivo:', datos.motivo);
+    
+    if (!datos.cantidad || !datos.motivo) {
+      console.error('Faltan datos en el formulario');
+      return;
+    }
+
     actualizarBalance(datos);
     cerrarPopup();
+
+    axios.post("http://localhost:3001/gestor/addOperacion", {
+      IdPerfil: 2,
+      IdTipos: datos.motivo,
+      IdSubTipo: datos.subtipo,
+      Importe: datos.cantidad,
+      Fecha: new Date().toISOString(),
+      Observaciones: datos.observaciones || ""
+    })
+    .then(response => {
+      console.log('Data inserted successfully:', response.data);
+      setReporte(prevReporte => [...prevReporte, {
+        importe: datos.cantidad,
+        tipo: datos.motivo,
+        subtipo: datos.subtipo,
+        fecha: new Date().toISOString(),
+        observaciones: datos.observaciones || ""
+      }]);
+    })
+    .catch(error => {
+      console.error('Error inserting data:', error);
+    });
   };
+
+  useEffect(() => {
+    console.log('idtipos:', idtipos); // Verificar el valor de idtipos
+    if (idtipos) {
+      axios.get(`http://localhost:3001/gestor/2/${idtipos}`)
+        .then(res => {
+          console.log('Fetched saldoTipo data:', res.data);
+          const saldoTpio = res.data.map(item => item['Saldo actual']);
+          console.log('Saldo actual tipo:', saldoTpio);
+          setSaldoTipo(saldoTpio);
+        })
+        .catch(err => console.error('Error fetching data:', err));
+    }
+  }, [idtipos]);
+
   const cerrarPopup = () => {
     setMostrarPopup(false);
   };
@@ -72,44 +120,58 @@ const Gestor = () => {
     }
   };
 
+  const generarReportePDF = () => {
+    const doc = new jsPDF();
+
+    doc.setFontSize(18);
+    doc.text('Reporte Mensual', 14, 22);
+
+    doc.setFontSize(12);
+    reporte.forEach((item, index) => {
+      doc.text(`Importe: ${item.importe}, Tipo: ${item.tipo}, Subtipo: ${item.subtipo}`, 14, 40 + index * 10);
+    });
+
+    doc.save('Reporte_Mensual.pdf');
+  };
+
   return (
     <main>
-      <section className= {style.ContenedorGestor}>
-        <div className= {style.tituloGestor}>
-          <Titulo texto = {"Gestor"}></Titulo>    
-        </div>            
+      <section className={style.ContenedorGestor}>
+        <div className={style.tituloGestor}>
+          <Titulo texto={"Gestor"} />
+        </div>
         <div className={style.MesGestor}>
-          <a href=""><Mes/></a>
+          <a href=""><Mes /></a>
         </div>
-        <div className= {style.balanceMensual}>
-          <Subtitulo texto={"Balance Mensual"}></Subtitulo>
-          <h2>{dolares.length > 0 ? dolares.join(', ') : 'Cargando...'}</h2> 
+        <div className={style.balanceMensual}>
+          <Subtitulo texto={"Balance Mensual"} />
+          <h2>{saldo.length > 0 ? saldo.join(', ') : 'Cargando...'}</h2>
         </div>
-        <div className= {style.tarjetasGestor}>
-          <TarjetasGestor 
-            imgSrc={"/ingresos.png"}
-            altText="imagen ingresos" 
-            titulo="Ingresos" 
-            cantidad={`$${ingresos}`}
-            onAgregar={() => manejarClick ('ingresos')}
-          />
-          <TarjetasGestor 
-            imgSrc={"/gastos.png"} 
-            altText="imagen gastos" 
-            titulo="Gastos" 
-            cantidad={`$${gastos}`} 
-            onAgregar={() => manejarClick ('gastos')}
+        <div className={style.tarjetasGestor}>
+          <TarjetasGestor
+            imgSrc="/ingresos.png"
+            altText="imagen ingresos"
+            titulo="Ingresos"
+            cantidad={`$${saldoTipo.length > 0 ? saldoTipo.join(', ') : 'Cargando...'}`}
+            onAgregar={() => manejarClick('ingresos')}
           />
           <TarjetasGestor
-            imgSrc={"/ahorros.png"}
-            altText="imagen ahorros" 
-            titulo="Ahorros" 
-            cantidad={`$${ahorros}`} 
-            onAgregar={() => manejarClick ('ahorros')}
+            imgSrc="/gastos.png"
+            altText="imagen gastos"
+            titulo="Gastos"
+            cantidad={`$${saldoTipo.length > 0 ? saldoTipo.join(', ') : 'Cargando...'}`}
+            onAgregar={() => manejarClick('gastos')}
+          />
+          <TarjetasGestor
+            imgSrc="/ahorros.png"
+            altText="imagen ahorros"
+            titulo="Ahorros"
+            cantidad={`$${saldoTipo.length > 0 ? saldoTipo.join(', ') : 'Cargando...'}`}
+            onAgregar={() => manejarClick('ahorros')}
           />
         </div>
-        <div className= {style.botonReporteMensual}>
-          <a href="" download="Reporte de este mes">
+        <div className={style.botonReporteMensual}>
+          <a onClick={generarReportePDF}>
             Descargar Reporte Mensual
           </a>
         </div>
