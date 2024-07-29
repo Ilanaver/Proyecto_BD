@@ -1,0 +1,27 @@
+@media screen and (max-width: 600px) {
+
+.Titulo{
+    display: flex;
+    justify-content: center;
+}
+.ContenedorBuscador{
+    display: flex;
+    justify-content: center;
+    border: #3278FB;
+}
+.Buscador{
+    display: flex;
+}
+.ContenedorTarjetas{
+    display: flex;
+    justify-content: center;
+
+}
+.tarjeta{
+    display: flex;
+    align-items: center;
+    margin-left: 5%;
+    border: #3278FB;
+    
+}
+}
