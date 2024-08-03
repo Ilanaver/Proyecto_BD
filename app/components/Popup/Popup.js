@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import styles from './Popup.module.css'
 import Subtitulo from '../Subtitulo/Subtitulo';
 
-const Popup = ({ onClose, onSubmit }) => {
+const Popup = ({ onClose, onSubmit, motivo }) => {
   const [cantidad, setCantidad] = useState('');
-  const [motivo, setMotivo] = useState('');
+  const [subtipo, setSubtipo] = useState('');
+  const [fecha, setFecha] = useState('');
+  const [observaciones, setObservaciones] = useState('');
 
   const manejarEnvio = (e) => {
     e.preventDefault();
-    onSubmit({ cantidad: parseFloat(cantidad), motivo });
+    onSubmit({ cantidad: parseFloat(cantidad), motivo, subtipo, fecha, observaciones });
   };
 
   return (
@@ -17,28 +19,47 @@ const Popup = ({ onClose, onSubmit }) => {
         <button className={styles.cerrar} onClick={onClose}>
           &times;
         </button>
-        <Subtitulo texto={"Haga su ingreso"}></Subtitulo>
-        <div className={styles.inputsPopup}>
-          <div className={styles.input}>
+        <div className={styles.encabezado}>
+          <Subtitulo texto={`Agregar ${motivo}`} />
+        </div>
+        <form onSubmit={manejarEnvio}>
+          <div className={styles.campo}>
+            <label>Cantidad</label>
             <input
               type="number"
+              step="0.01"
               value={cantidad}
               onChange={(e) => setCantidad(e.target.value)}
-              placeholder="Ingrese cantidad"
+              required
             />
           </div>
-          <div className={styles.input}>
+          <div className={styles.campo}>
+            <label>Subtipo</label>
             <input
               type="text"
-              value={motivo}
-              onChange={(e) => setMotivo(e.target.value)}
-              placeholder="Ingrese motivo"
+              value={subtipo}
+              onChange={(e) => setSubtipo(e.target.value)}
+              required
             />
           </div>
-        </div>
-        <div className={styles.botonEnviar}>
-          <button onClick={manejarEnvio}>Enviar</button>
-        </div>
+          <div className={styles.campo}>
+            <label>Fecha</label>
+            <input
+              type="date"
+              value={fecha}
+              onChange={(e) => setFecha(e.target.value)}
+              required
+            />
+          </div>
+          <div className={styles.campo}>
+            <label>Observaciones</label>
+            <textarea
+              value={observaciones}
+              onChange={(e) => setObservaciones(e.target.value)}
+            />
+          </div>
+          <button type="submit">Agregar</button>
+        </form>
       </div>
     </div>
   );

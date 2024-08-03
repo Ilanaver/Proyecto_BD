@@ -8,7 +8,6 @@ import Subtitulo from "../components/Subtitulo/Subtitulo";
 import Mes from "../components/Mes/Mes";
 import Popup from "../components/Popup/Popup";
 import jsPDF from 'jspdf';
-import { useSearchParams } from "next/navigation";
 
 const Gestor = () => {
   const [ingresos, setIngresos] = useState(0);
@@ -16,101 +15,131 @@ const Gestor = () => {
   const [ahorros, setAhorros] = useState(0);
   const [mostrarPopup, setMostrarPopup] = useState(false);
   const [motivo, setMotivo] = useState('');
-  const [saldo, setSaldo] = useState([]);
-  const [saldoTipo, setSaldoTipo] = useState([]);
+  const [saldo, setSaldo] = useState(0);
+  const [saldoTipo, setSaldoTipo] = useState({ 1: 0, 2: 0, 3: 0 });
   const [reporte, setReporte] = useState([]);
-  const [idtipos, setIdTipos] = useState(null); // Agregar estado para idtipos
+  const [idtipos, setIdTipos] = useState(null);
 
-  useEffect(() => {
-    axios.get("http://localhost:3001/gestor/2")
+  const fetchSaldos = () => {
+    axios.get("http://localhost:3000/gestor/2")
       .then(res => {
-        console.log('Fetched data:', res.data);
+        console.log('Fetched saldo actual:', res.data);
         const saldoActual = res.data.map(item => item['Saldo actual']);
-        console.log('Saldo actual:', saldoActual);
         setSaldo(saldoActual);
       })
-      .catch(err => console.error('Error fetching data:', err));
-  }, []);
+      .catch(err => console.error('Error fetching saldo actual:', err));
+  };
 
-  useEffect(() => {
-    axios.get("http://localhost:3001/gestor/operaciones/2")
+  const fetchReporte = () => {
+    axios.get("http://localhost:3000/gestor/operaciones/2")
       .then(res => {
-        console.log('Fetched data:', res.data);
+        console.log('Fetched reporte:', res.data);
         setReporte(res.data);
       })
-      .catch(err => console.error('Error fetching data:', err));
+      .catch(err => console.error('Error fetching reporte:', err));
+  };
+
+  const fetchSaldosPorTipo = async (idTipo) => {
+    try {
+      const res = await axios.get(`http://localhost:3000/gestor/2/${idTipo}`);
+      console.log(`Fetched saldoTipo data for idTipo ${idTipo}:`, res.data);
+      const saldoTipo = res.data.map(item => item['Saldo actual']);
+      setSaldoTipo(prevSaldoTipo => ({ ...prevSaldoTipo, [idTipo]: saldoTipo }));
+    } catch (err) {
+      console.error(`Error fetching saldoTipo data for idTipo ${idTipo}:`, err);
+    }
+  };
+
+  useEffect(() => {
+    fetchSaldos();
+    fetchReporte();
+    fetchSaldosPorTipo(1); // Gastos
+    fetchSaldosPorTipo(2); // Ingresos
+    fetchSaldosPorTipo(3); // Ahorros
   }, []);
 
-  const manejarClick = (motivo) => {
-    setMotivo(motivo);
-    
-    if (motivo === 'gastos') {
-      setIdTipos(1);
-    } else if (motivo === 'ingresos') {
-      setIdTipos(2);
-    } else if (motivo === 'ahorros') {
-      setIdTipos(3);
+  const manejarClick = (idTipo) => {
+    let motivo;
+    if (idTipo === 1) {
+      motivo = 'gastos';
+    } else if (idTipo === 2) {
+      motivo = 'ingresos';
+    } else if (idTipo === 3) {
+      motivo = 'ahorros';
     }
-    
+    setMotivo(motivo);
+    setIdTipos(idTipo);
     setMostrarPopup(true);
   };
 
   const enviarDatosPopup = (datos) => {
     console.log('Cantidad:', datos.cantidad);
     console.log('Motivo:', datos.motivo);
-    
-    if (!datos.cantidad || !datos.motivo) {
+    console.log('Subtipo:', datos.subtipo);
+    console.log('Fecha:', datos.fecha);
+    console.log('Observaciones:', datos.observaciones);
+
+    if (!datos.cantidad || !datos.motivo || !datos.subtipo || !datos.fecha) {
       console.error('Faltan datos en el formulario');
       return;
     }
 
-    actualizarBalance(datos);
-    cerrarPopup();
+    let tipo = null;
+    let cantidad = datos.cantidad;
+    
+    if (datos.motivo === "ingresos") {
+      tipo = 2;
+    } else if (datos.motivo === "gastos") {
+      tipo = 1;
+      // Convertir la cantidad a negativa para gastos
+      cantidad = -Math.abs(datos.cantidad);
+    } else {
+      tipo = 3;
+    }
 
-    axios.post("http://localhost:3001/gestor/addOperacion", {
-      IdPerfil: 2,
-      IdTipos: datos.motivo,
-      IdSubTipo: datos.subtipo,
-      Importe: datos.cantidad,
-      Fecha: new Date().toISOString(),
-      Observaciones: datos.observaciones || ""
-    })
+    const requestData = {
+      "idperfil_fk": 2,
+      "idtipos_fk": tipo,
+      "idsubtipo_fk": datos.subtipo,
+      "importe": cantidad,
+      "fecha": datos.fecha,
+      "observaciones": datos.observaciones
+    }
+
+    console.log('Datos a enviar:', requestData);
+
+    axios.post("http://localhost:3000/gestor/addOperacion", requestData)
     .then(response => {
       console.log('Data inserted successfully:', response.data);
       setReporte(prevReporte => [...prevReporte, {
-        importe: datos.cantidad,
+        importe: cantidad,
         tipo: datos.motivo,
         subtipo: datos.subtipo,
-        fecha: new Date().toISOString(),
+        fecha: datos.fecha,
         observaciones: datos.observaciones || ""
       }]);
+
+      // Actualiza los saldos después de agregar la operación
+      fetchSaldos();
+      fetchSaldosPorTipo(1); // Gastos
+      fetchSaldosPorTipo(2); // Ingresos
+      fetchSaldosPorTipo(3); // Ahorros
+
     })
     .catch(error => {
       console.error('Error inserting data:', error);
+      console.log('Error details:', error.response ? error.response.data : error.message);
     });
-  };
 
-  useEffect(() => {
-    console.log('idtipos:', idtipos); // Verificar el valor de idtipos
-    if (idtipos) {
-      axios.get(`http://localhost:3001/gestor/2/${idtipos}`)
-        .then(res => {
-          console.log('Fetched saldoTipo data:', res.data);
-          const saldoTpio = res.data.map(item => item['Saldo actual']);
-          console.log('Saldo actual tipo:', saldoTpio);
-          setSaldoTipo(saldoTpio);
-        })
-        .catch(err => console.error('Error fetching data:', err));
-    }
-  }, [idtipos]);
+    actualizarBalance(cantidad, datos.motivo);
+    cerrarPopup();
+  };
 
   const cerrarPopup = () => {
     setMostrarPopup(false);
   };
 
-  const actualizarBalance = (datos) => {
-    const { cantidad, motivo } = datos;
-
+  const actualizarBalance = (cantidad, motivo) => {
     if (motivo.toLowerCase() === 'ingresos') {
       setIngresos(prevIngresos => prevIngresos + cantidad);
     } else if (motivo.toLowerCase() === 'gastos') {
@@ -145,29 +174,35 @@ const Gestor = () => {
         </div>
         <div className={style.balanceMensual}>
           <Subtitulo texto={"Balance Mensual"} />
-          <h2>{saldo.length > 0 ? saldo.join(', ') : 'Cargando...'}</h2>
+          <h2>{saldo !== null ? `$${saldo}` : 'Cargando...'}</h2>
         </div>
         <div className={style.tarjetasGestor}>
           <TarjetasGestor
+            id={2}
             imgSrc="/ingresos.png"
             altText="imagen ingresos"
             titulo="Ingresos"
-            cantidad={`$${saldoTipo.length > 0 ? saldoTipo.join(', ') : 'Cargando...'}`}
-            onAgregar={() => manejarClick('ingresos')}
+            cantidad={`$${saldoTipo[2]}`}
+            onAgregar={manejarClick}
+            balanceInicial={saldoTipo[2]}
           />
           <TarjetasGestor
+            id={1}
             imgSrc="/gastos.png"
             altText="imagen gastos"
             titulo="Gastos"
-            cantidad={`$${saldoTipo.length > 0 ? saldoTipo.join(', ') : 'Cargando...'}`}
-            onAgregar={() => manejarClick('gastos')}
+            cantidad={`$${saldoTipo[1]}`}
+            onAgregar={manejarClick}
+            balanceInicial={saldoTipo[1]}
           />
           <TarjetasGestor
+            id={3}
             imgSrc="/ahorros.png"
             altText="imagen ahorros"
             titulo="Ahorros"
-            cantidad={`$${saldoTipo.length > 0 ? saldoTipo.join(', ') : 'Cargando...'}`}
-            onAgregar={() => manejarClick('ahorros')}
+            cantidad={`$${saldoTipo[3]}`}
+            onAgregar={manejarClick}
+            balanceInicial={saldoTipo[3]}
           />
         </div>
         <div className={style.botonReporteMensual}>
