@@ -124,13 +124,14 @@ const Gestor = () => {
       fetchSaldosPorTipo(1); // Gastos
       fetchSaldosPorTipo(2); // Ingresos
       fetchSaldosPorTipo(3); // Ahorros
+      fetchReporte();
 
     })
     .catch(error => {
       console.error('Error inserting data:', error);
       console.log('Error details:', error.response ? error.response.data : error.message);
     });
-
+    console.log(datos.motivo)
     actualizarBalance(cantidad, datos.motivo);
     cerrarPopup();
   };
@@ -182,7 +183,6 @@ const Gestor = () => {
             imgSrc="/ingresos.png"
             altText="imagen ingresos"
             titulo="Ingresos"
-            cantidad={`$${saldoTipo[2]}`}
             onAgregar={manejarClick}
             balanceInicial={saldoTipo[2]}
           />
@@ -191,7 +191,6 @@ const Gestor = () => {
             imgSrc="/gastos.png"
             altText="imagen gastos"
             titulo="Gastos"
-            cantidad={`$${saldoTipo[1]}`}
             onAgregar={manejarClick}
             balanceInicial={saldoTipo[1]}
           />
@@ -200,7 +199,6 @@ const Gestor = () => {
             imgSrc="/ahorros.png"
             altText="imagen ahorros"
             titulo="Ahorros"
-            cantidad={`$${saldoTipo[3]}`}
             onAgregar={manejarClick}
             balanceInicial={saldoTipo[3]}
           />
