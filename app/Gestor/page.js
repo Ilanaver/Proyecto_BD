@@ -68,7 +68,7 @@ const Gestor = () => {
       motivo = 'ahorros';
     }
     setMotivo(motivo);
-    setIdTipos(idTipo);
+    setIdTipos(idTipo); // Set the idtipos for the selected option
     setMostrarPopup(true);
   };
 
@@ -211,7 +211,7 @@ const Gestor = () => {
           </a>
         </div>
         {mostrarPopup && (
-          <Popup onClose={cerrarPopup} onSubmit={enviarDatosPopup} motivo={motivo} />
+          <Popup onClose={cerrarPopup} onSubmit={enviarDatosPopup} motivo={motivo} idtipos={idtipos} />
         )}
       </section>
     </main>
