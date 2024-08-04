@@ -8,6 +8,7 @@ import Subtitulo from "../components/Subtitulo/Subtitulo";
 import Mes from "../components/Mes/Mes";
 import Popup from "../components/Popup/Popup";
 import jsPDF from 'jspdf';
+import Footer from "../components/Footer/Footer";
 
 const Gestor = () => {
   const [ingresos, setIngresos] = useState(0);
@@ -175,7 +176,7 @@ const Gestor = () => {
         </div>
         <div className={style.balanceMensual}>
           <Subtitulo texto={"Balance Mensual"} />
-          <h2>{saldo !== null ? `$${saldo}` : 'Cargando...'}</h2>
+          <h2>{saldo == 0 ? '$0' : saldo}</h2>
         </div>
         <div className={style.tarjetasGestor}>
           <TarjetasGestor
@@ -184,7 +185,7 @@ const Gestor = () => {
             altText="imagen ingresos"
             titulo="Ingresos"
             onAgregar={manejarClick}
-            balanceInicial={saldoTipo[2]}
+            balanceInicial={saldoTipo[2] == 0 ? 0 : saldoTipo[2]}
           />
           <TarjetasGestor
             id={1}
@@ -192,7 +193,7 @@ const Gestor = () => {
             altText="imagen gastos"
             titulo="Gastos"
             onAgregar={manejarClick}
-            balanceInicial={saldoTipo[1]}
+            balanceInicial={saldoTipo[1] == 0 ? 0 : saldoTipo[1]}
           />
           <TarjetasGestor
             id={3}
@@ -200,7 +201,7 @@ const Gestor = () => {
             altText="imagen ahorros"
             titulo="Ahorros"
             onAgregar={manejarClick}
-            balanceInicial={saldoTipo[3]}
+            balanceInicial={saldoTipo[3] == 0 ? 0 : saldoTipo[3]}
           />
         </div>
         <div className={style.botonReporteMensual}>
@@ -212,6 +213,7 @@ const Gestor = () => {
           <Popup onClose={cerrarPopup} onSubmit={enviarDatosPopup} motivo={motivo} idtipos={idtipos} />
         )}
       </section>
+      <Footer></Footer>
     </main>
   );
 };
