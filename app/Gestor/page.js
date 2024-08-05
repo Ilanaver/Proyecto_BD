@@ -197,7 +197,7 @@ const Gestor = () => {
           />
           <TarjetasGestor
             id={3}
-            imgSrc="/ahorros.png"
+            imgSrc="/ahorros."
             altText="imagen ahorros"
             titulo="Ahorros"
             onAgregar={manejarClick}
