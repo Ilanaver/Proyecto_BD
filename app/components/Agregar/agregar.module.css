@@ -1,0 +1,73 @@
+.container {
+    padding: 0 1rem;
+  }
+  
+  .main {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .formContainer {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .inputGroup {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input, textarea, select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  button {
+    background-color: #3278FB;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 1s, color 1s;
+  }
+  
+  button:hover {
+    background-color: #fff;
+    color: #3278FB;
+  }
+  
+  /* Media query for devices with a max width of 600px */
+  @media (max-width: 600px) {
+    .container {
+      padding: 0 1rem;
+    }
+  
+    .formContainer {
+      width: 100%;
+      padding: 10px;
+    }
+  
+    input, textarea, select {
+      padding: 6px;
+    }
+  
+    button {
+      padding: 8px;
+    }
+  }
