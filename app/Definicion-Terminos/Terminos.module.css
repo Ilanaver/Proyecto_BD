@@ -1,33 +1,42 @@
-@media screen and (max-width: 600px) {
+
+
 
 .Titulo{
     display: flex;
     justify-content: center;
 }
-.Agregar{
-    padding: 5px 10px;
-    font-size: 12px;
-    color: #fff;
-    background-color: #3278FB;
-    border: 2px solid #3278FB;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 1s, color 1s;
+body {
+    font-family: Arial, sans-serif;
 }
 
-.Agregar:hover {
-    background-color: #fff;
-    color: #3278FB;
-}
-
-.ContenedorBuscador{
+.ContenedorBuscador {
     display: flex;
     justify-content: center;
-    border: 1px solid #3278FB;
-    margin-bottom: 10%;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
-.Buscador{
+
+.Buscador {
     display: flex;
+    align-items: center;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    padding: 5px;
+    width: 300px;
+    box-sizing: border-box;
+}
+
+.Buscador img {
+    width: 25px;
+    height: 35px;
+    margin-right: 10px;
+}
+
+.Buscador input{
+    border: none;
+}
+.Buscador input:focus{
+    border: none;
 }
 .ContenedorTarjetas{
     display: flex;
@@ -40,13 +49,12 @@
 .tarjeta{
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 40px;
+    justify-content: space-around;
     border: solid 2px #3278FB;
     border-radius: 8px;
     margin-bottom: 5%;
     width: 400px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 
     
-}
 }
