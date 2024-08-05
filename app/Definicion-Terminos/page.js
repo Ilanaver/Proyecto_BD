@@ -9,35 +9,35 @@ const Terminos = () => {
         <body> 
             <main>
                 <div className={style.Titulo}>
-                    <Titulo>Definicion de terminos</Titulo>
+                    <Titulo texto={"Definicion de Terminos"}/>
                     <a  href=""className={style.Agregar}>Agregar Definicion</a>
                 </div>
                     <div className={style.ContenedorBuscador}>
                         <div className={style.Buscador}>
-                            <img src="" alt=""/>
-                            <input type="submit"/>
+                            <img src="/lupa.png" alt=""/>
+                            <input type="submit" value="buscar algo" />
                         </div>
                     </div>
                     <div className={style.ContenedorTarjetas}>
                         <div className={style.tarjeta}>
                             <h2>¿Que es el dolar MEP?</h2>
-                            <img src="../assets/img/FlechitaAbajo.png" alt=""/>
+                            <img src="/flechaabajo.png" alt=""/>
                         </div>
                         <div className={style.tarjeta}>
                             <h2>¿Que es el dolar MEP?</h2>
-                            <img src="../assets/img/FlechitaAbajo.png" alt=""/>
+                            <img src="/flechaabajo.png" alt=""/>
                         </div>
                         <div className={style.tarjeta}>
                             <h2>¿Que es el dolar MEP?</h2>
-                            <img src="../assets/img/FlechitaAbajo.png" alt=""/>
+                            <img src="/flechaabajo.png" alt=""/>
                         </div>
                         <div>
                             <h2>¿Que es el dolar MEP?</h2>
-                            <img src="../assets/img/FlechitaAbajo.png" alt=""/>
+                            <img src="/flechaabajo.png" alt=""/>
                         </div>
                         <div className={style.tarjeta}>
                             <h2>¿Que es el dolar MEP?</h2>
-                            <img src="../assets/img/FlechitaAbajo.png" alt=""/>
+                            <img src="/flechaabajo.png" alt=""/>
                         </div>
                     </div>
             </main>

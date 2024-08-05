@@ -19,24 +19,34 @@
     background-color: #fff;
     color: #3278FB;
 }
+
 .ContenedorBuscador{
     display: flex;
     justify-content: center;
-    border: #3278FB;
+    border: 1px solid #3278FB;
+    margin-bottom: 10%;
 }
 .Buscador{
     display: flex;
 }
 .ContenedorTarjetas{
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    column-gap: 5%;
 
 }
 .tarjeta{
     display: flex;
     align-items: center;
-    margin-left: 5%;
-    border: #3278FB;
+    justify-content: center;
+    gap: 40px;
+    border: solid 2px #3278FB;
+    border-radius: 8px;
+    margin-bottom: 5%;
+    width: 400px;
+
     
 }
 }
