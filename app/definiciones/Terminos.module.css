@@ -1,42 +1,87 @@
-@media screen and (max-width: 600px) {
-
-.Titulo{
+.Titulo {
     display: flex;
     justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+    box-sizing: border-box;
 }
-.Agregar{
-    padding: 5px 10px;
-    font-size: 12px;
-    color: #fff;
-    background-color: #a7a7a7;
-    border: 2px solid #3278FB;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 1s, color 1s;
+.Titulo h1{
+    margin: 0;
 }
-
-.Agregar:hover {
-    background-color: #fff;
-    color: #3278FB;
-}
-.ContenedorBuscador{
+.ContenedorBuscador {
     display: flex;
     justify-content: center;
-    border: #3278FB;
+    margin: 10% 0; /* Espaciado entre el título y las tarjetas */
 }
-.Buscador{
-    display: flex;
-}
-.ContenedorTarjetas{
-    display: flex;
-    justify-content: center;
 
-}
-.tarjeta{
+.Buscador {
     display: flex;
     align-items: center;
-    margin-left: 5%;
-    border: #3278FB;
-    
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    padding: 1px 1%;
+    width: 300px;
+    box-sizing: border-box;
 }
+
+.Buscador img {
+    width: 25px;
+    height: 35px;
+    margin-right: 10px;
+}
+
+.Buscador input {
+    border: none;
+    height: 100%;
+}
+
+.Buscador input:focus {
+    outline: none;
+}
+
+.ContenedorTarjetas {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    column-gap: 5%;
+}
+
+.tarjeta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border: solid 2px #3278FB;
+    border-radius: 8px;
+    margin-bottom: 5%;
+    padding: 1%;
+    width: 400px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.tarjetaHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.contenido {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #ccc;
+    font-size: 14px;
+    color: #333;
+    width: 100%;
+}
+
+.Agregar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
 }

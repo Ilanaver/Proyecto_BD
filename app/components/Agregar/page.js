@@ -1,5 +1,7 @@
+'use client';
+
 import { useState } from 'react';
-import styles from '../styles/agregar.module.css';
+import styles from './agregar.module.css';
 import Titulo from '../Titulo/Titulo';
 
 export default function Agregar() {
@@ -56,6 +58,7 @@ export default function Agregar() {
             />
           </div>
           <button onClick={addContent}>Agregar Contenido</button>
+          
         </div>
       </main>
     </div>

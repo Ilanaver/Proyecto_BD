@@ -1,4 +1,4 @@
-import style from './contenidoaudiovisual.module.css';
+/*import style from './contenidoaudiovisual.module.css';
 
 
 const video = () => {
@@ -62,4 +62,4 @@ const video = () => {
     </div>
 </body>
 }
-export default video;
+export default video;*/
