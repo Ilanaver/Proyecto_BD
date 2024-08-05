@@ -27,10 +27,10 @@ const video = () => {
                     <a href="">Ver mas</a>
                 </div> 
                 <div class="imagenesContenido">
-                    <img src="../assets/img/Audiovizual.png" alt="">
-                    <img src="../assets/img/Audiovizual.png" alt="">
-                    <img src="../assets/img/Audiovizual.png" alt="">
-                    <img src="../assets/img/Audiovizual.png" alt="">
+                    <img src="../assets/img/Audiovizual.png" alt=""/>
+                    <img src="../assets/img/Audiovizual.png" alt=""/>
+                    <img src="../assets/img/Audiovizual.png" alt=""/>
+                    <img src="../assets/img/Audiovizual.png" alt=""/>
                 </div>
             </div>
             <div class="contenido">
@@ -51,10 +51,10 @@ const video = () => {
                 <a href="">Ver mas</a>
             </div>
             <div class="imagenesContenido">
-                <img src="../assets/img/Audiovizual.png" alt="">
-                <img src="../assets/img/Audiovizual.png" alt="">
-                <img src="../assets/img/Audiovizual.png" alt="">
-                <img src="../assets/img/Audiovizual.png" alt="">
+                <img src="../assets/img/Audiovizual.png" alt=""/>
+                <img src="../assets/img/Audiovizual.png" alt=""/>
+                <img src="../assets/img/Audiovizual.png" alt=""/>
+                <img src="../assets/img/Audiovizual.png" alt=""/>
             </div>
             
         </div>
