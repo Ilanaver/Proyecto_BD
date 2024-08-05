@@ -2,6 +2,7 @@
 import React, {useEffect, useState} from "react";
 import Titulo from "../components/Titulo/Titulo";
 import style from './Terminos.module.css';
+import Link from 'next/link'
 
 
 const Terminos = () => {
@@ -10,7 +11,7 @@ const Terminos = () => {
             <main>
                 <div className={style.Titulo}>
                     <Titulo texto={"Definicion de Terminos"}/>
-                    <a  href=""className={style.Agregar}>Agregar Definicion</a>
+                    <Link  href="./components/agregar"className={style.Agregar}>Agregar Definicion</Link>
                 </div>
                     <div className={style.ContenedorBuscador}>
                         <div className={style.Buscador}>
