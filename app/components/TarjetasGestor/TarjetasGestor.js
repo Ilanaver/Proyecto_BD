@@ -44,9 +44,10 @@ const TarjetasGestor = ({ id, imgSrc, altText, titulo, cantidad, onAgregar, bala
         </div>
         <Image 
           src="/signomas.webp"
+          className='signoMas'
           alt="signo mas"
           width={50}
-          height={50}
+          height={30}
           onClick={manejarClick}
         />
       </div>

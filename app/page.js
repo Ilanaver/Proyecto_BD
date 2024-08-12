@@ -7,7 +7,8 @@ import Link from "next/link";
 export default function Home() {
   return (
    <>
-      <Link href="/Gestor.page.js/">Gestor</Link>
+      <Link href="/gestor">Gestor</Link>
+      <Link href="/definiciones">Definiciones</Link>
       <Footer></Footer>
 
    </>

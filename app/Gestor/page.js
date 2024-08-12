@@ -176,7 +176,7 @@ const Gestor = () => {
         </div>
         <div className={style.balanceMensual}>
           <Subtitulo texto={"Balance Mensual"} />
-          <h2>{saldo == 0 ? '$0' : saldo}</h2>
+          <h2>{saldo == 0 ? '$0' : `$${saldo}`}</h2>
         </div>
         <div className={style.tarjetasGestor}>
           <TarjetasGestor

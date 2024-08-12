@@ -23,12 +23,12 @@
     margin-bottom: 15px;
   }
   
-  label {
+  .label {
     display: block;
     margin-bottom: 5px;
   }
   
-  input, textarea, select {
+  .input, .textarea, .select {
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;
@@ -36,7 +36,7 @@
     border-radius: 4px;
   }
   
-  button {
+  .button {
     background-color: #3278FB;
     color: #fff;
     border: none;
@@ -47,7 +47,7 @@
     transition: background-color 1s, color 1s;
   }
   
-  button:hover {
+  .button:hover {
     background-color: #fff;
     color: #3278FB;
   }
@@ -63,11 +63,11 @@
       padding: 10px;
     }
   
-    input, textarea, select {
+    .input, .textarea, .select {
       padding: 6px;
     }
   
-    button {
+    .button {
       padding: 8px;
     }
   }
