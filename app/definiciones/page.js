@@ -5,6 +5,7 @@ import axios from 'axios'; // Asegúrate de tener axios importado
 import Titulo from "../components/Titulo/Titulo";
 import style from './Terminos.module.css';
 import Link from 'next/link'
+import Footer from "../components/Footer/Footer";
 
 const Terminos = () => {
     const [definiciones, setDefiniciones] = useState([]);
@@ -92,7 +93,7 @@ const Terminos = () => {
             </div>
             <Link href="./components/agregar" className={style.Agregar}>Agregar Definicion</Link>
             <Link href="./components/agregar" className={style.Agregar}>Eliminar Definicion</Link>
-
+            <Footer></Footer>
         </main>
     );
 };

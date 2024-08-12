@@ -9,7 +9,7 @@ const Footer = () => {
           <ul className={styles.footerPagina}>
             <li className={styles.navegadorFooter}>
                 <div className={styles.textoFooter}>
-                  <Link href={"#"}>
+                  <Link href={"/gestor"}>
                     
                       <Image
                         src={"/gestor.png"}
@@ -22,7 +22,7 @@ const Footer = () => {
             </li>
             <li className={styles.navegadorFooter}>
               <div className={styles.textoFooter}>
-                <Link href={"#"}>
+                <Link href={"/definiciones"}>
                     <Image
                       src={"/academia.png"}
                       width={75}
