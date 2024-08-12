@@ -43,7 +43,7 @@ const TarjetasGestor = ({ id, imgSrc, altText, titulo, cantidad, onAgregar, bala
           <p>{`$${balance}`}</p>
         </div>
         <Image 
-          src="/signomas.webp"
+          src="/signomas.png"
           className='signoMas'
           alt="signo mas"
           width={50}

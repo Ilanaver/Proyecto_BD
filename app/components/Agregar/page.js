@@ -74,7 +74,7 @@ export default function Agregar() {
   return (
     <div className={styles.container}>
       <div>
-      <Link href="../definiciones">Volver</Link>
+      <Link href="../academia">Volver</Link>
       <Titulo texto={"Agregar Contenido"} />
         <meta name="description" content="Formulario para agregar contenido" />
         <link rel="icon" href="/favicon.ico" />

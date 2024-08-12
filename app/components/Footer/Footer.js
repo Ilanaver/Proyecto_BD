@@ -22,7 +22,7 @@ const Footer = () => {
             </li>
             <li className={styles.navegadorFooter}>
               <div className={styles.textoFooter}>
-                <Link href={"/definiciones"}>
+                <Link href={"/academia"}>
                     <Image
                       src={"/academia.png"}
                       width={75}

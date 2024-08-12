@@ -1,0 +1,29 @@
+@media screen and (max-width: 600px) {
+    .container {
+    padding: 20px;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.item p {
+    margin-top: 10px;
+    font-size: 14px;
+}
+}
