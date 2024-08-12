@@ -11,6 +11,7 @@ export default function Home() {
       <Link href="/definiciones">Definiciones</Link>
       <Footer></Footer>
       <Link href="/contenido">Contenido audiovisual</Link>
+      <Link href="/academia">Academia</Link>
 
    </>
   );

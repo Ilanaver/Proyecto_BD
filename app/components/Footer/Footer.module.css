@@ -1,24 +1,42 @@
+/* Footer.module.css */
 
-@media screen  and (max-width: 550px) {
-    .footerPagina{
-        display: flex;
-        justify-content: space-evenly;
-    }
-    .navegadorFooter{
-        list-style: none;
-        display: flex;
+.navegador {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.footerPagina {
+    display: flex;
+    justify-content: space-evenly;
+    text-decoration: none;
+    margin: 0;
+    padding: 10px 0;
+    background-color: #f8f8f8; /* O cualquier color de fondo que prefieras */
+}
+
+.navegadorFooter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    color: #787878;
+}
+
+.navegadorFooter img {
+    width: 65px;
+    height: 50px;
+}
+
+@media screen and (max-width: 550px) {
+    .footerPagina {
         flex-direction: column;
-        justify-content: center;
         align-items: center;
     }
-    .navegadorFooter img{
-            width: 65px;
-            height: 50px;
-    }
-    .textoFooter{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+
+    .navegadorFooter {
+        margin-bottom: 10px;
     }
 }

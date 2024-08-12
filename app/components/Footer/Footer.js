@@ -5,44 +5,16 @@ import Link from "next/link";
 const Footer = () => {
     return (
       <footer>
-        <nav>
+        <nav className={styles.navegador}>
           <ul className={styles.footerPagina}>
             <li className={styles.navegadorFooter}>
-                <div className={styles.textoFooter}>
-                  <Link href={"/gestor"}>
-                    
-                      <Image
-                        src={"/gestor.png"}
-                        width={75}
-                        height={75}
-                      />
-                      <p>Gestor</p>
-                  </Link>
-                </div>
+            <a href=""><img src="/academia.png" alt="Foto Academia"/></a>Academia
             </li>
             <li className={styles.navegadorFooter}>
-              <div className={styles.textoFooter}>
-                <Link href={"/definiciones"}>
-                    <Image
-                      src={"/academia.png"}
-                      width={75}
-                      height={75}
-                    /> 
-                    <p>Academia</p>
-                </Link>
-              </div>          
+            <a href=""><img src="/gestor.png" alt="Foto Gestor"/></a>Gestor
             </li>
             <li className={styles.navegadorFooter}>
-              <div className={styles.textoFooter}>
-                <Link href={"#"}>
-                <Image
-                  src={"/estadisticas.png"}
-                  width={75}
-                  height={75}
-                />
-                <p>Estadisticas</p>
-                </Link>
-              </div>            
+            <a href=""><img src="/estadisticas.png" alt="Foto Estadisticas"/></a>Estadisticas
             </li>
           </ul>
         </nav>
