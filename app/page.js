@@ -10,6 +10,7 @@ export default function Home() {
       <Link href="/gestor">Gestor</Link>
       <Link href="/definiciones">Definiciones</Link>
       <Footer></Footer>
+      <Link href="/contenido">Contenido audiovisual</Link>
 
    </>
   );
