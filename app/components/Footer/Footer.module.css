@@ -1,24 +1,29 @@
 
-@media screen  and (max-width: 550px) {
-    .footerPagina{
+
+
+
+
+@media screen and (max-width: 550px) {
+    .footerPagina {
         display: flex;
         justify-content: space-evenly;
+        text-decoration: none;
+        margin: 0;
+        padding: 10px 0;
+        background-color: #f8f8f8; /* O cualquier color de fondo que prefieras */
     }
-    .navegadorFooter{
+    
+    .navegadorFooter {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         list-style: none;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        color: #787878;
     }
-    .navegadorFooter img{
-            width: 65px;
-            height: 50px;
-    }
-    .textoFooter{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+    
+    .navegadorFooter img {
+        width: 65px;
+        height: 50px;
     }
 }

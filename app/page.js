@@ -12,6 +12,8 @@ export default function Home() {
       <Link href="/contenido">Contenido</Link>
       <Link href="/vermas">vermas</Link>
       <Footer></Footer>
+      <Link href="/contenido">Contenido audiovisual</Link>
+      <Link href="/academia">Academia</Link>
 
    </>
   );

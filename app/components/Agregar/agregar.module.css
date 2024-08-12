@@ -2,7 +2,7 @@
     padding: 0 1rem;
   }
   
-  .main {
+  .body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
