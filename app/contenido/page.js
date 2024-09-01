@@ -43,30 +43,34 @@ const Audiovisual = () => {
 
     return (
         <main>
-            <Titulo texto={"Contenido Audiovisual"} />
-            <div className={style.contenedorContenido}>
-                {categories.map(category => (
-                    <div key={category} className={style.contenido}>
-                        <div className={style.tituloContenido}>
-                            <h2>{category}</h2>
-                            <button onClick={() => handleVerMasClick(category)} className={style.verMasButton}>Ver más</button>
+            <section className={style.contenedor}>    
+                <div className={style.tituloaudiovisual}>
+                    <Titulo texto={"Contenido Audiovisual"}/>
+                </div>
+                <div className={style.contenedorContenido}>
+                    {categories.map(category => (
+                        <div key={category} className={style.contenido}>
+                            <div className={style.tituloContenido}>
+                                <h2>{category}</h2>
+                                <button onClick={() => handleVerMasClick(category)} className={style.verMasButton}>Ver más</button>
+                            </div>
+                            <div className={style.imagenesContenido}>
+                                {content[category].map((item, index) => (
+                                    <div key={index} className={style.item} onClick={() => handleImageClick(item.idvideo)}>
+                                        <img
+                                            src='/audiovisual.png'
+                                            alt={item.titulo}
+                                            className={style.image}
+                                        />
+                                        <p className={style.itemTitle}>{item.titulo}</p>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                        <div className={style.imagenesContenido}>
-                            {content[category].map((item, index) => (
-                                <div key={index} className={style.item} onClick={() => handleImageClick(item.idvideo)}>
-                                    <img
-                                        src={item.img}
-                                        alt={item.titulo}
-                                        className={style.image}
-                                    />
-                                    <p className={style.itemTitle}>{item.titulo}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                ))}
-            </div>
-            <Link href="./components/agregar" className={style.Agregar}>Agregar Definicion</Link>
+                    ))}
+                </div>
+                <Link href="./components/agregar" className={style.Agregar}>Agregar Definicion</Link>
+            </section>
             <Footer />
         </main>
     );
