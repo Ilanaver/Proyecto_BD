@@ -181,7 +181,7 @@ const Gestor = () => {
         <div className={style.tarjetasGestor}>
           <TarjetasGestor
             id={2}
-            imgSrc="/ingresos.png"
+            imgSrc="/gastos.png"
             altText="imagen ingresos"
             titulo="Ingresos"
             onAgregar={manejarClick}
@@ -197,7 +197,7 @@ const Gestor = () => {
           />
           <TarjetasGestor
             id={3}
-            imgSrc="/ahorros.png"
+            imgSrc="/gastos.png"
             altText="imagen ahorros"
             titulo="Ahorros"
             onAgregar={manejarClick}
