@@ -93,7 +93,7 @@ const Terminos = () => {
                     ))}
                 </div>
                 <Link href="./components/agregar" className={style.Agregar}>Agregar Definicion</Link>
-                <Link href="./components/agregar" className={style.Agregar}>Eliminar Definicion</Link>
+                <Link href="./components/eliminar" className={style.Agregar}>Eliminar Definicion</Link>
             </section>
             <Footer></Footer>
         </main>

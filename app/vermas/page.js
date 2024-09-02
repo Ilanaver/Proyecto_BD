@@ -42,23 +42,31 @@ const VerMas = () => {
   if (error) return <p>{error}</p>;
 
   return (
+  <main className={styles.main}>    
+  <button onClick={() => router.back()} className={styles.returnLink}>Volver</button>      
+
     <div className={styles.container}>
+
+      <div className={styles.titulo}>
       <Titulo texto={`Más sobre ${categoria}`} />
-      <main className={styles.main}>
+      
+      </div>
+      
         {details.length === 0 ? (
           <p>No se encontraron detalles.</p>
         ) : (
           details.map((item, index) => (
             <div key={index} className={styles.item} onClick={() => handleImageClick(item.idvideo)}>
               <h2>{item.titulo}</h2>
-              <img src={item.img} alt={item.titulo} className={styles.image} />
+              <img src="https://media.tycsports.com/files/2024/09/01/761460/river-vs-independiente_416x234.webp?v=1" alt={item.titulo} className={styles.image} />
               <p>{item.descripcion}</p>
             </div>
           ))
         )}
-      </main>
-      <Footer />
-    </div>
+      
+      </div>
+      <Footer></Footer>
+    </main>
   );
 };
 

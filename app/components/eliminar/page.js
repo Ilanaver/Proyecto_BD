@@ -1,100 +1,102 @@
 'use client';
-import React, { useEffect, useState } from "react";
-import style from './academia.module.css';
-import Titulo from "../components/Titulo/Titulo";
-import Footer from "../components/Footer/Footer";
-const Eliminar = () => {
-return(
+
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import styles from './eliminar.module.css';
+import Link from 'next/link';
+import Titulo from '../Titulo/Titulo';
+import Footer from '../Footer/Footer';
+
+export default function Eliminar() {
+  const [category, setCategory] = useState('definicion');
+  const [contentList, setContentList] = useState([]);
+  const [selectedItem, setSelectedItem] = useState('');
+
+  useEffect(() => {
+    // Fetch the list of content based on selected category
+    const fetchData = async () => {
+      try {
+        let response;
+        if (category === 'definicion') {
+          response = await axios.get('http://localhost:3000/definiciones/todas');
+        } else if (category === 'audiovisual') {
+          response = await axios.get('http://localhost:3000/contenido-multimedia/todos');
+        }
+        setContentList(response.data);
+      } catch (error) {
+        console.error(`Error fetching ${category === 'definicion' ? 'definitions' : 'audiovisual content'}:`, error);
+      }
+    };
+
+    fetchData();
+  }, [category]);
+
+  const deleteContent = async () => {
+    if (!selectedItem) {
+      alert('Seleccione un ítem para eliminar.');
+      return;
+    }
+
+    try {
+      let response;
+      if (category === 'definicion') {
+        response = await axios.delete(`http://localhost:3000/definiciones/deleteTermino/${selectedItem}`);
+      } else if (category === 'audiovisual') {
+        response = await axios.delete(`http://localhost:3000/contenido-multimedia/borrar-video/${selectedItem}`);
+      }
+
+      if (response.status === 200) {
+        alert(`${category === 'definicion' ? 'Definición' : 'Video'} eliminado con éxito`);
+        // Remove deleted item from content list
+        setContentList(contentList.filter(item => item.id !== selectedItem));
+        setSelectedItem('');
+      } else {
+        alert(`Error inesperado: ${response.status}`);
+      }
+    } catch (error) {
+      console.error('Error al eliminar el contenido:', error.response ? error.response.data : error.message);
+      alert('Ocurrió un error al eliminar el contenido');
+    }
+  };
+
+  return (
     <div className={styles.container}>
-      <div>
-      <Link href="../definiciones">Volver</Link>
-      <Titulo texto={"Eliminar Contenido"} />
-        <meta name="description" content="Formulario para agregar contenido" />
-        <link rel="icon" href="/favicon.ico" />
+      <div className={styles.header}>
+        <Link href="../academia" className={styles.returnLink}>Volver</Link>
+        <Titulo texto={"Eliminar Contenido"} />
       </div>
 
       <main className={styles.main}>
         <div className={styles.formContainer}>
           <div className={styles.inputGroup}>
             <label htmlFor="category">Seleccione una opción:</label>
-            <select id="category" value={category} onChange={(e) => setCategory(e.target.value)}>
+            <select id="category" value={category} onChange={(e) => setCategory(e.target.value)} className={styles.select}>
               <option value="definicion">Definición de términos</option>
               <option value="audiovisual">Audiovisual</option>
             </select>
           </div>
 
           <div className={styles.inputGroup}>
-            <label htmlFor="title">Título</label>
-            <input
-              type="text"
-              id="title"
-              placeholder="Ingrese el título aquí"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
+            <label htmlFor="content">Seleccione el ítem a eliminar:</label>
+            <select
+              id="content"
+              value={selectedItem}
+              onChange={(e) => setSelectedItem(e.target.value)}
+              className={styles.select}
+            >
+              <option value="">Seleccione...</option>
+              {contentList.map((item, index) => (
+                <option key={index} value={item.id}>
+                  {item.titulo}
+                </option>
+              ))}
+            </select>
           </div>
 
-          {category === 'audiovisual' && (
-            <>
-              <div className={styles.inputGroup}>
-                <label htmlFor="videoLink">Enlace del video</label>
-                <input
-                  type="text"
-                  id="videoLink"
-                  placeholder="Ingrese el enlace del video aquí"
-                  value={videoLink}
-                  onChange={(e) => setVideoLink(e.target.value)}
-                />
-              </div>
-              <div className={styles.inputGroup}>
-                <label htmlFor="img">Imagen</label>
-                <input
-                  type="text"
-                  id="img"
-                  placeholder="Ingrese la URL de la imagen aquí"
-                  value={img}
-                  onChange={(e) => setImg(e.target.value)}
-                />
-              </div>
-              <div className={styles.inputGroup}>
-                <label htmlFor="description">Descripción</label>
-                <textarea
-                  id="description"
-                  placeholder="Ingrese la descripción aquí"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                />
-              </div>
-              <div className={styles.inputGroup}>
-                <label htmlFor="categoriaVideo">Categoría del video</label>
-                <input
-                  type="text"
-                  id="categoriaVideo"
-                  placeholder="Ingrese la categoría del video aquí"
-                  value={categoriaVideo}
-                  onChange={(e) => setCategoriaVideo(e.target.value)}
-                />
-              </div>
-            </>
-          )}
-
-          {category === 'definicion' && (
-            <div className={styles.inputGroup}>
-              <label htmlFor="content">Contenido</label>
-              <textarea
-                id="content"
-                placeholder="Ingrese el contenido aquí"
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-              />
-            </div>
-          )}
-
-          <button onClick={addContent}>Agregar Contenido</button>
+          <button onClick={deleteContent} className={styles.button}>Eliminar Contenido</button>
         </div>
       </main>
-      <Footer></Footer>
+      <Footer />
     </div>
-);
+  );
 }
-export default Eliminar;

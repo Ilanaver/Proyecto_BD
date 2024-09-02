@@ -28,7 +28,19 @@
         border-radius: 10px;
         margin-bottom: 20px;
       }
-      
+      .returnLink {
+        font-size: 1rem;
+        color: #fff;
+        background-color: #3278FB;
+        padding: 10px 10px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.3s, transform 0.3s;
+        display: inline-block;
+        border: none;
+    }
+    
       .videoInfo p {
         font-size: 18px;
         color: #333;

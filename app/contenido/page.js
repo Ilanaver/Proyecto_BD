@@ -8,29 +8,37 @@ import Footer from "../components/Footer/Footer";
 import { useRouter } from 'next/navigation';
 import Link from "next/link";
 
-const categories = ["Ahorro", "Inversiones", "Impuestos"];
-
 const Audiovisual = () => {
-    const [content, setContent] = useState({
-        Ahorro: [],
-        Inversiones: [],
-        Impuestos: [],
-    });
+    const [categories, setCategories] = useState([]);  // Estado para categorías dinámicas
+    const [content, setContent] = useState({});
     const router = useRouter();
 
     useEffect(() => {
-        categories.forEach(category => {
-            axios.get(`http://localhost:3000/contenido-multimedia/${category}`)
-                .then(response => {
-                    setContent(prevContent => ({
-                        ...prevContent,
-                        [category]: response.data,
-                    }));
-                })
-                .catch(error => {
-                    console.error(`Error fetching data for ${category}:`, error);
+        // Obtener todas las categorías desde la API
+        axios.get('http://localhost:3000/contenido-multimedia/')
+            .then(response => {
+                console.log(response.data)
+                // Extraer categorías únicas de la respuesta
+                const categoriasUnicas = [...new Set(response.data.map(item => item.categoria))];
+                setCategories(categoriasUnicas);
+
+                // Para cada categoría, obtener los videos correspondientes
+                categoriasUnicas.forEach(category => {
+                    axios.get(`http://localhost:3000/contenido-multimedia/${category}`)
+                        .then(response => {
+                            setContent(prevContent => ({
+                                ...prevContent,
+                                [category]: response.data.slice(0, 4), // Top 4 videos por categoría
+                            }));
+                        })
+                        .catch(error => {
+                            console.error(`Error fetching data for ${category}:`, error);
+                        });
                 });
-        });
+            })
+            .catch(error => {
+                console.error('Error fetching categories:', error);
+            });
     }, []);
 
     const handleVerMasClick = (category) => {
@@ -48,6 +56,7 @@ const Audiovisual = () => {
                     <Titulo texto={"Contenido Audiovisual"}/>
                 </div>
                 <div className={style.contenedorContenido}>
+                    {/* Renderizar dinámicamente las categorías y sus videos */}
                     {categories.map(category => (
                         <div key={category} className={style.contenido}>
                             <div className={style.tituloContenido}>
@@ -55,7 +64,7 @@ const Audiovisual = () => {
                                 <button onClick={() => handleVerMasClick(category)} className={style.verMasButton}>Ver más</button>
                             </div>
                             <div className={style.imagenesContenido}>
-                                {content[category].map((item, index) => (
+                                {(content[category] || []).map((item, index) => (
                                     <div key={index} className={style.item} onClick={() => handleImageClick(item.idvideo)}>
                                         <img
                                             src='/audiovisual.png'
@@ -70,6 +79,7 @@ const Audiovisual = () => {
                     ))}
                 </div>
                 <Link href="./components/agregar" className={style.Agregar}>Agregar Definicion</Link>
+                <Link href="./components/eliminar" className={style.Agregar}>Eliminar Definicion</Link>
             </section>
             <Footer />
         </main>

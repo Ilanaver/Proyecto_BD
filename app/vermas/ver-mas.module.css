@@ -1,14 +1,18 @@
 @media screen and (max-width: 600px) {
     .container {
-    padding: 20px;
-}
-
-.main {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    padding-bottom: 95px;
 }
 
+.main {
+    padding: 20px;
+}
+.titulo{
+    margin-top: -2%;
+    text-align: center;
+}
 .item {
     border: 1px solid #ddd;
     padding: 10px;
@@ -25,5 +29,17 @@
 .item p {
     margin-top: 10px;
     font-size: 14px;
+}
+.returnLink {
+    font-size: 1rem;
+    color: #fff;
+    background-color: #3278FB;
+    padding: 10px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.3s;
+    display: inline-block;
+    border: none;
 }
 }

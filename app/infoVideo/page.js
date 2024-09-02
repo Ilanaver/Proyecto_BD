@@ -9,6 +9,7 @@ import Footer from '../components/Footer/Footer'; // Ajusta la ruta según tu es
 import styles from './infoVideo.module.css'; // Ajusta la ruta según tu estructura
 
 const InfoVideo = () => {
+  const router = useRouter();
     const searchParams = useSearchParams();
     const idvideo = searchParams.get('idvideo');
 
@@ -40,6 +41,7 @@ const InfoVideo = () => {
 
   return (
     <div className={styles.container}>
+      <button onClick={() => router.back()} className={styles.returnLink}>Volver</button>      
       <Titulo texto={`Información sobre el video`} />
       <main className={styles.main}>
       {videoDetails.length === 0 ? (
