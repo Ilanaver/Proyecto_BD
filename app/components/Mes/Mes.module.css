@@ -1,0 +1,34 @@
+.mesContenedor {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .mesActual {
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .listaMeses {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    width: 100%;
+    z-index: 1000;
+  }
+  
+  .mesItem {
+    padding: 8px;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .mesItem:hover {
+    background-color: #f0f0f0;
+  }
+  

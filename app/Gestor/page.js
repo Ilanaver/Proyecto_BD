@@ -10,6 +10,21 @@ import Popup from "../components/Popup/Popup";
 import jsPDF from 'jspdf';
 import Footer from "../components/Footer/Footer";
 
+const meses = {
+  1: "Enero",
+  2: "Febrero",
+  3: "Marzo",
+  4: "Abril",
+  5: "Mayo",
+  6: "Junio",
+  7: "Julio",
+  8: "Agosto",
+  9: "Septiembre",
+  10: "Octubre",
+  11: "Noviembre",
+  12: "Diciembre"
+};
+
 const Gestor = () => {
   const [ingresos, setIngresos] = useState(0);
   const [gastos, setGastos] = useState(0);
@@ -20,19 +35,28 @@ const Gestor = () => {
   const [saldoTipo, setSaldoTipo] = useState({ 1: 0, 2: 0, 3: 0 });
   const [reporte, setReporte] = useState([]);
   const [idtipos, setIdTipos] = useState(null);
+  const [mesSeleccionado, setMesSeleccionado] = useState(new Date().getMonth() + 1);
+  const [anioSeleccionado, setAnioSeleccionado] = useState(new Date().getFullYear());
+
+  const handleMesChange = (nuevoMes, nuevoAnio) => {
+    setMesSeleccionado(nuevoMes);
+    setAnioSeleccionado(nuevoAnio);
+  };
 
   const fetchSaldos = () => {
-    axios.get("http://localhost:3000/gestor/2")
-      .then(res => {
-        console.log('Fetched saldo actual:', res.data);
-        const saldoActual = res.data.map(item => item['Saldo actual']);
-        setSaldo(saldoActual);
-      })
-      .catch(err => console.error('Error fetching saldo actual:', err));
+    if (mesSeleccionado && anioSeleccionado) {
+      axios.get(`http://localhost:3000/gestor/2/${mesSeleccionado}/${anioSeleccionado}`)
+        .then(res => {
+          console.log('Fetched saldo actual:', res.data);
+          const saldoActual = res.data.map(item => item['Saldo actual']);
+          setSaldo(saldoActual);
+        })
+        .catch(err => console.error('Error fetching saldo actual:', err));
+    }
   };
 
   const fetchReporte = () => {
-    axios.get("http://localhost:3000/gestor/operaciones/2")
+    axios.get(`http://localhost:3000/gestor/operaciones/2/${mesSeleccionado}/${anioSeleccionado}`)
       .then(res => {
         console.log('Fetched reporte:', res.data);
         setReporte(res.data);
@@ -41,13 +65,15 @@ const Gestor = () => {
   };
 
   const fetchSaldosPorTipo = async (idTipo) => {
-    try {
-      const res = await axios.get(`http://localhost:3000/gestor/2/${idTipo}`);
-      console.log(`Fetched saldoTipo data for idTipo ${idTipo}:`, res.data);
-      const saldoTipo = res.data.map(item => item['Saldo actual']);
-      setSaldoTipo(prevSaldoTipo => ({ ...prevSaldoTipo, [idTipo]: saldoTipo }));
-    } catch (err) {
-      console.error(`Error fetching saldoTipo data for idTipo ${idTipo}:`, err);
+    if (mesSeleccionado && anioSeleccionado) {
+      try {
+        const res = await axios.get(`http://localhost:3000/gestor/2/${idTipo}/${mesSeleccionado}/${anioSeleccionado}`);
+        console.log(`Fetched saldoTipo data for idTipo ${idTipo}:`, res.data);
+        const saldoTipo = res.data.map(item => item['Saldo actual']);
+        setSaldoTipo(prevSaldoTipo => ({ ...prevSaldoTipo, [idTipo]: saldoTipo }));
+      } catch (err) {
+        console.error(`Error fetching saldoTipo data for idTipo ${idTipo}:`, err);
+      }
     }
   };
 
@@ -57,7 +83,7 @@ const Gestor = () => {
     fetchSaldosPorTipo(1); // Gastos
     fetchSaldosPorTipo(2); // Ingresos
     fetchSaldosPorTipo(3); // Ahorros
-  }, []);
+  }, [mesSeleccionado, anioSeleccionado]);
 
   const manejarClick = (idTipo) => {
     let motivo;
@@ -87,7 +113,7 @@ const Gestor = () => {
 
     let tipo = null;
     let cantidad = datos.cantidad;
-    
+
     if (datos.motivo === "ingresos") {
       tipo = 2;
     } else if (datos.motivo === "gastos") {
@@ -162,7 +188,7 @@ const Gestor = () => {
       doc.text(`Importe: ${item.importe}, Tipo: ${item.tipo}, Subtipo: ${item.subtipo}`, 14, 40 + index * 10);
     });
 
-    doc.save('Reporte_Mensual.pdf');
+    doc.save(`Reporte_Mensual_${meses[mesSeleccionado]}_${anioSeleccionado}.pdf`);
   };
 
   return (
@@ -172,7 +198,7 @@ const Gestor = () => {
           <Titulo texto={"Gestor"} />
         </div>
         <div className={style.MesGestor}>
-          <a href=""><Mes /></a>
+          <Mes onMesChange={handleMesChange} />
         </div>
         <div className={style.balanceMensual}>
           <Subtitulo texto={"Balance Mensual"} />

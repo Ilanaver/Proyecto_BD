@@ -1,28 +1,53 @@
 import { useEffect, useState } from 'react';
+import style from './Mes.module.css';
 
-const Mes = () => {
+const Mes = ({ onMesChange }) => {
   const meses = [
     'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
     'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
   ];
 
   const [mesActual, setMesActual] = useState('');
+  const [mostrarLista, setMostrarLista] = useState(false);
+  const anioActual = new Date().getFullYear();
 
   useEffect(() => {
-    const actualizarMes = () => {
-      const fecha = new Date();
-      const mes = meses[fecha.getMonth()];
-      setMesActual(mes);
-    };
+    const fecha = new Date();
+    const mes = meses[fecha.getMonth()];
+    setMesActual(mes);
+    onMesChange(fecha.getMonth() + 1, anioActual); // Envía el mes y el año al cargar el componente
+  }, []);
 
-    actualizarMes();
+  const handleMesClick = () => {
+    setMostrarLista(!mostrarLista);
+  };
 
-    const intervalId = setInterval(actualizarMes, 60000); // Actualiza cada minuto
+  const handleMesSeleccionado = (mes, index) => {
+    setMesActual(mes);
+    setMostrarLista(false);
+    onMesChange(index + 1, anioActual); // Envía el mes (index + 1) y el año
+  };
 
-    return () => clearInterval(intervalId); // Limpia el intervalo cuando el componente se desmonte
-  }, [meses]);
-
-  return mesActual;
+  return (
+    <div className={style.mesContenedor}>
+      <div onClick={handleMesClick} className={style.mesActual}>
+        {mesActual} {anioActual}
+      </div>
+      {mostrarLista && (
+        <ul className={style.listaMeses}>
+          {meses.map((mes, index) => (
+            <li
+              key={index}
+              onClick={() => handleMesSeleccionado(mes, index)}
+              className={style.mesItem}
+            >
+              {mes}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
 };
 
 export default Mes;

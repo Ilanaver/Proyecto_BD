@@ -17,7 +17,9 @@
         overflow: hidden;
         width: 100%;
     }
-    
+    .signoMas{
+        cursor: pointer;
+    }
     .imagenIngresos{
         width: 100px;
     }
