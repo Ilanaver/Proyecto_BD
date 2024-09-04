@@ -6,6 +6,7 @@ import styles from './agregar.module.css';
 import Link from 'next/link'
 import Titulo from '../Titulo/Titulo';
 import Footer from '../Footer/Footer';
+import { useSearchParams, useRouter } from 'next/navigation';
 
 export default function Agregar() {
   const [category, setCategory] = useState('definicion');
@@ -15,6 +16,7 @@ export default function Agregar() {
   const [img, setImg] = useState('');
   const [description, setDescription] = useState('');
   const [categoriaVideo, setCategoriaVideo] = useState('');
+  const router = useRouter();
 
   const addContent = async () => {
     if (category === 'definicion') {
@@ -75,7 +77,7 @@ export default function Agregar() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <Link href="../academia" className={styles.returnLink}>Volver</Link>
+      <button onClick={() => router.back()} className={styles.returnLink}>Volver</button>      
         <Titulo texto={"Agregar Contenido"} />
       </div>
 

@@ -6,11 +6,13 @@ import styles from './eliminar.module.css';
 import Link from 'next/link';
 import Titulo from '../Titulo/Titulo';
 import Footer from '../Footer/Footer';
+import { useSearchParams, useRouter } from 'next/navigation';
 
 export default function Eliminar() {
   const [category, setCategory] = useState('definicion');
   const [contentList, setContentList] = useState([]);
   const [selectedItem, setSelectedItem] = useState('');
+  const router = useRouter();
 
   useEffect(() => {
     // Fetch the list of content based on selected category
@@ -62,7 +64,7 @@ export default function Eliminar() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <Link href="../academia" className={styles.returnLink}>Volver</Link>
+      <button onClick={() => router.back()} className={styles.returnLink}>Volver</button>      
         <Titulo texto={"Eliminar Contenido"} />
       </div>
 

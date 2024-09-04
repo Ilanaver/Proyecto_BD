@@ -78,7 +78,7 @@ const Audiovisual = () => {
                         </div>
                     ))}
                 </div>
-                <Link href="./components/agregar" className={style.Agregar}>Agregar Definicion</Link>
+                <Link href="./components/Agregar" className={style.Agregar}>Agregar Definicion</Link>
                 <Link href="./components/eliminar" className={style.Agregar}>Eliminar Definicion</Link>
             </section>
             <Footer />
