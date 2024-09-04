@@ -3,10 +3,9 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './eliminar.module.css';
-import Link from 'next/link';
 import Titulo from '../Titulo/Titulo';
 import Footer from '../Footer/Footer';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 export default function Eliminar() {
   const [category, setCategory] = useState('definicion');
@@ -34,6 +33,7 @@ export default function Eliminar() {
   }, [category]);
 
   const deleteContent = async () => {
+    console.log(selectedItem);
     if (!selectedItem) {
       alert('Seleccione un ítem para eliminar.');
       return;
@@ -50,7 +50,7 @@ export default function Eliminar() {
       if (response.status === 200) {
         alert(`${category === 'definicion' ? 'Definición' : 'Video'} eliminado con éxito`);
         // Remove deleted item from content list
-        setContentList(contentList.filter(item => item.id !== selectedItem));
+        setContentList(contentList.filter(item => item.idtermino !== parseInt(selectedItem) && item.idvideo !== parseInt(selectedItem)));
         setSelectedItem('');
       } else {
         alert(`Error inesperado: ${response.status}`);
@@ -64,7 +64,7 @@ export default function Eliminar() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-      <button onClick={() => router.back()} className={styles.returnLink}>Volver</button>      
+        <button onClick={() => router.back()} className={styles.returnLink}>Volver</button>      
         <Titulo texto={"Eliminar Contenido"} />
       </div>
 
@@ -88,7 +88,7 @@ export default function Eliminar() {
             >
               <option value="">Seleccione...</option>
               {contentList.map((item, index) => (
-                <option key={index} value={item.id}>
+                <option key={index} value={category === 'definicion' ? item.idtermino : item.idvideo}>
                   {item.titulo}
                 </option>
               ))}
