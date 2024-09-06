@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .navegadorFooter {
     display: flex;
     flex-direction: column;
@@ -27,5 +28,37 @@
         justify-content: center;
         align-items: center;
         gap: 50px; /* Espacio entre los elementos del footer */
+=======
+@media screen and (max-width: 550px) {
+    .footerFixed {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #f8f8f8; /* O el color que prefieras */
+        z-index: 1000; /* Asegúrate de que esté por encima de otros elementos */
+    }
+
+    .footerPagina {
+        display: flex;
+        justify-content: space-evenly;
+        text-decoration: none;
+        margin: 0;
+        padding: 10px 0;
+    }
+    
+    .navegadorFooter {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        list-style: none;
+        color: #787878;
+    }
+    
+    .navegadorFooter img {
+        width: 65px;
+        height: 50px;
+>>>>>>> 29a2b95e794f33518fe0d0dfff49970da8a3ff11
     }
 }

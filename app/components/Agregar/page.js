@@ -6,6 +6,7 @@ import styles from './agregar.module.css';
 import Link from 'next/link'
 import Titulo from '../Titulo/Titulo';
 import Footer from '../Footer/Footer';
+import { useSearchParams, useRouter } from 'next/navigation';
 
 export default function Agregar() {
   const [category, setCategory] = useState('definicion');
@@ -15,6 +16,7 @@ export default function Agregar() {
   const [img, setImg] = useState('');
   const [description, setDescription] = useState('');
   const [categoriaVideo, setCategoriaVideo] = useState('');
+  const router = useRouter();
 
   const addContent = async () => {
     if (category === 'definicion') {
@@ -71,20 +73,19 @@ export default function Agregar() {
     }
   };
 
+  
   return (
     <div className={styles.container}>
-      <div>
-      <Link href="../definiciones">Volver</Link>
-      <Titulo texto={"Agregar Contenido"} />
-        <meta name="description" content="Formulario para agregar contenido" />
-        <link rel="icon" href="/favicon.ico" />
+      <div className={styles.header}>
+      <button onClick={() => router.back()} className={styles.returnLink}>Volver</button>      
+        <Titulo texto={"Agregar Contenido"} />
       </div>
 
       <main className={styles.main}>
         <div className={styles.formContainer}>
           <div className={styles.inputGroup}>
             <label htmlFor="category">Seleccione una opción:</label>
-            <select id="category" value={category} onChange={(e) => setCategory(e.target.value)}>
+            <select id="category" value={category} onChange={(e) => setCategory(e.target.value)} className={styles.select}>
               <option value="definicion">Definición de términos</option>
               <option value="audiovisual">Audiovisual</option>
             </select>
@@ -98,6 +99,7 @@ export default function Agregar() {
               placeholder="Ingrese el título aquí"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
+              className={styles.input}
             />
           </div>
 
@@ -111,6 +113,7 @@ export default function Agregar() {
                   placeholder="Ingrese el enlace del video aquí"
                   value={videoLink}
                   onChange={(e) => setVideoLink(e.target.value)}
+                  className={styles.input}
                 />
               </div>
               <div className={styles.inputGroup}>
@@ -121,6 +124,7 @@ export default function Agregar() {
                   placeholder="Ingrese la URL de la imagen aquí"
                   value={img}
                   onChange={(e) => setImg(e.target.value)}
+                  className={styles.input}
                 />
               </div>
               <div className={styles.inputGroup}>
@@ -130,6 +134,7 @@ export default function Agregar() {
                   placeholder="Ingrese la descripción aquí"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
+                  className={styles.textarea}
                 />
               </div>
               <div className={styles.inputGroup}>
@@ -140,6 +145,7 @@ export default function Agregar() {
                   placeholder="Ingrese la categoría del video aquí"
                   value={categoriaVideo}
                   onChange={(e) => setCategoriaVideo(e.target.value)}
+                  className={styles.input}
                 />
               </div>
             </>
@@ -153,14 +159,15 @@ export default function Agregar() {
                 placeholder="Ingrese el contenido aquí"
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
+                className={styles.textarea}
               />
             </div>
           )}
 
-          <button onClick={addContent}>Agregar Contenido</button>
+          <button onClick={addContent} className={styles.button}>Agregar Contenido</button>
         </div>
       </main>
-      <Footer></Footer>
+      <Footer />
     </div>
   );
 }

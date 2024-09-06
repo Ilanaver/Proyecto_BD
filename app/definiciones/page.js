@@ -56,43 +56,45 @@ const Terminos = () => {
 
     return (
         <main>
-            <div className={style.Titulo}>
-                <Titulo texto={"Definicion de Terminos"} />
-            </div>
-            <div className={style.ContenedorBuscador}>
-                <form className={style.Buscador} onSubmit={handleSearchSubmit}>
-                    <img src="/lupa.png" alt="" />
-                    <input 
-                        type="text" 
-                        value={buscador} 
-                        onChange={handleSearchChange} 
-                        placeholder="Buscar algo" 
-                    />
-                    <button type="submit">Buscar</button>
-                </form>
-            </div>
-            <div className={style.ContenedorTarjetas}>
-                {definicionesToShow.map((definicion, index) => (
-                    <div className={style.tarjeta} key={index}>
-                        <div className={style.tarjetaHeader}>
-                            <h2>{definicion.titulo}</h2>
-                            <img 
-                                src="/flechaabajo.png" 
-                                alt="" 
-                                onClick={() => toggleContentVisibility(index)} 
-                                style={{ cursor: 'pointer' }} 
-                            />
-                        </div>
-                        {expandedIndices.includes(index) && (
-                            <div className={style.contenido}>
-                                {definicion.contenido}
+            <section className={style.contenedor}>
+                <div className={style.Titulo}>
+                    <Titulo texto={"Definicion de Terminos"} />
+                </div>
+                <div className={style.ContenedorBuscador}>
+                    <form className={style.Buscador} onSubmit={handleSearchSubmit}>
+                        <img src="/lupa.png" alt="" />
+                        <input 
+                            type="text" 
+                            value={buscador} 
+                            onChange={handleSearchChange} 
+                            placeholder="Buscar algo" 
+                        />
+                        <button type="submit">Buscar</button>
+                    </form>
+                </div>
+                <div className={style.ContenedorTarjetas}>
+                    {definicionesToShow.map((definicion, index) => (
+                        <div className={style.tarjeta} key={index}>
+                            <div className={style.tarjetaHeader}>
+                                <h2>{definicion.titulo}</h2>
+                                <img 
+                                    src="/flechaabajo.png" 
+                                    alt="" 
+                                    onClick={() => toggleContentVisibility(index)} 
+                                    style={{ cursor: 'pointer' }} 
+                                />
                             </div>
-                        )}
-                    </div>
-                ))}
-            </div>
-            <Link href="./components/agregar" className={style.Agregar}>Agregar Definicion</Link>
-            <Link href="./components/agregar" className={style.Agregar}>Eliminar Definicion</Link>
+                            {expandedIndices.includes(index) && (
+                                <div className={style.contenido}>
+                                    {definicion.contenido}
+                                </div>
+                            )}
+                        </div>
+                    ))}
+                </div>
+                <Link href="./components/Agregar" className={style.Agregar}>Agregar Definicion</Link>
+                <Link href="./components/eliminar" className={style.Agregar}>Eliminar Definicion</Link>
+            </section>
             <Footer></Footer>
         </main>
     );

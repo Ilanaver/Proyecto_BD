@@ -18,7 +18,11 @@ const Academia = () => {
                         <p>Simple y sin vueltas</p>
                     </div>
                     <div className={style.cardarrow}>
+<<<<<<< HEAD
                     <a href="./definiciones"><img  src="/flechaderecha.png" alt="Flecha"/></a>
+=======
+                        <a href="../definiciones"><img  src="/flechaderecha.png" alt="Flecha"/></a>
+>>>>>>> 29a2b95e794f33518fe0d0dfff49970da8a3ff11
                     </div>
                 </div>
                 <div className={style.card}>
@@ -30,7 +34,11 @@ const Academia = () => {
                         <p>Con tus influencers favoritos</p>
                     </div>
                     <div className={style.cardarrow}>
+<<<<<<< HEAD
                         <a href="./contenido"><img  src="/flechaderecha.png" alt="Flecha"/></a>
+=======
+                       <a href="../contenido"> <img src="/flechaderecha.png" alt="Flecha"/></a>
+>>>>>>> 29a2b95e794f33518fe0d0dfff49970da8a3ff11
                     </div>
                 </div>
                 <div className={style.card}>
@@ -42,7 +50,11 @@ const Academia = () => {
                         <p>Aprendé algo nuevo todos los días</p>
                     </div>
                     <div className={style.cardarrow}>
+<<<<<<< HEAD
                         <img href="../#" src="/flechaderecha.png" alt="Flecha"/>
+=======
+                       <a href="../#"><img  src="/flechaderecha.png" alt="Flecha"/></a> 
+>>>>>>> 29a2b95e794f33518fe0d0dfff49970da8a3ff11
                     </div>
                 </div>
                 <div className={style.card}>
@@ -54,7 +66,11 @@ const Academia = () => {
                         <p>Resolvé todas tus inquietudes</p>
                     </div>
                     <div className={style.cardarrow}>
+<<<<<<< HEAD
                         <img href="../asesor" src="/flechaderecha.png" alt="Flecha"/>
+=======
+                       <a href="../asesor"> <img  src="/flechaderecha.png" alt="Flecha"/></a>
+>>>>>>> 29a2b95e794f33518fe0d0dfff49970da8a3ff11
                     </div>
                 </div>
                 <div className={style.card}>
@@ -66,7 +82,11 @@ const Academia = () => {
                         <p>Posibles inversiones</p>
                     </div>
                     <div className={style.cardarrow}>
+<<<<<<< HEAD
                         <img href="../chatbot" src="/flechaderecha.png" alt="Flecha"/>
+=======
+                       <a href="../chatbot"> <img  src="/flechaderecha.png" alt="Flecha"/></a>
+>>>>>>> 29a2b95e794f33518fe0d0dfff49970da8a3ff11
                     </div>
                 </div>
             </div>

@@ -17,7 +17,9 @@
         overflow: hidden;
         width: 100%;
     }
-    
+    .signoMas{
+        cursor: pointer;
+    }
     .imagenIngresos{
         width: 100px;
     }
@@ -28,7 +30,7 @@
         gap: 5px;
     }
     .Infotarjetas img{
-        margin-right: 10%;
+        margin-right: 5%;
         display: flex;
         justify-content: center;
         align-items: center;
