@@ -1,21 +1,3 @@
-/* Footer.module.css */
-
-.navegador {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-}
-
-.footerPagina {
-    display: flex;
-    justify-content: space-evenly;
-    text-decoration: none;
-    margin: 0;
-    padding: 10px 0;
-    background-color: #f8f8f8; /* O cualquier color de fondo que prefieras */
-}
-
 .navegadorFooter {
     display: flex;
     flex-direction: column;
@@ -25,6 +7,15 @@
     color: #787878;
 }
 
+.footerPagina {
+    display: flex;
+    text-decoration: none;
+    margin: 0;
+    padding: 10px 0;
+    justify-content: center; /* Centra el contenido dentro del footer */
+    align-items: center; /* Centra el contenido verticalmente */
+}
+
 .navegadorFooter img {
     width: 65px;
     height: 50px;
@@ -32,11 +23,9 @@
 
 @media screen and (max-width: 550px) {
     .footerPagina {
-        flex-direction: column;
+        display: flex;
+        justify-content: center;
         align-items: center;
-    }
-
-    .navegadorFooter {
-        margin-bottom: 10px;
+        gap: 50px; /* Espacio entre los elementos del footer */
     }
 }

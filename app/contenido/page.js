@@ -1,10 +1,14 @@
 import style from './contenidoaudiovisual.module.css';
 import Titulo from '../components/Titulo/Titulo';
+import Link from 'next/link'
+
 const video = () => {
     return(
     <body>
         <Titulo texto={"Contenido Audiovisual"}/>
-        <Agregar/>
+        <Link href="./components/agregar" className={style.Agregar}>Agregar Definicion</Link>
+        <Link href="./components/agregar" className={style.Agregar}>Eliminar Definicion</Link>
+
         <div className={style.contenedorContenido}>
             <div classname={style.contenido}>
                 <div className={style.tituloContenido}>

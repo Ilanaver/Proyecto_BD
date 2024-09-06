@@ -1,100 +1,52 @@
-'use client';
-import React, { useEffect, useState } from "react";
-import style from './academia.module.css';
-import Titulo from "../components/Titulo/Titulo";
-import Footer from "../components/Footer/Footer";
-const Eliminar = () => {
-return(
+'use client'
+import React, { useState } from "react";
+import styles from './eliminar.module.css.module.css';
+
+const DeleteForm = () => {
+  const [category, setCategory] = useState("");
+  const [title, setTitle] = useState("");
+
+  const handleCategoryChange = (event) => {
+    setCategory(event.target.value);
+  };
+
+  const handleTitleChange = (event) => {
+    setTitle(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    alert(`Se ha eliminado "${title}" de la categoría "${category}".`);
+  };
+
+  return (
     <div className={styles.container}>
-      <div>
-      <Link href="../definiciones">Volver</Link>
-      <Titulo texto={"Eliminar Contenido"} />
-        <meta name="description" content="Formulario para agregar contenido" />
-        <link rel="icon" href="/favicon.ico" />
-      </div>
-
-      <main className={styles.main}>
-        <div className={styles.formContainer}>
-          <div className={styles.inputGroup}>
-            <label htmlFor="category">Seleccione una opción:</label>
-            <select id="category" value={category} onChange={(e) => setCategory(e.target.value)}>
-              <option value="definicion">Definición de términos</option>
-              <option value="audiovisual">Audiovisual</option>
-            </select>
-          </div>
-
-          <div className={styles.inputGroup}>
-            <label htmlFor="title">Título</label>
-            <input
-              type="text"
-              id="title"
-              placeholder="Ingrese el título aquí"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-          </div>
-
-          {category === 'audiovisual' && (
-            <>
-              <div className={styles.inputGroup}>
-                <label htmlFor="videoLink">Enlace del video</label>
-                <input
-                  type="text"
-                  id="videoLink"
-                  placeholder="Ingrese el enlace del video aquí"
-                  value={videoLink}
-                  onChange={(e) => setVideoLink(e.target.value)}
-                />
-              </div>
-              <div className={styles.inputGroup}>
-                <label htmlFor="img">Imagen</label>
-                <input
-                  type="text"
-                  id="img"
-                  placeholder="Ingrese la URL de la imagen aquí"
-                  value={img}
-                  onChange={(e) => setImg(e.target.value)}
-                />
-              </div>
-              <div className={styles.inputGroup}>
-                <label htmlFor="description">Descripción</label>
-                <textarea
-                  id="description"
-                  placeholder="Ingrese la descripción aquí"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                />
-              </div>
-              <div className={styles.inputGroup}>
-                <label htmlFor="categoriaVideo">Categoría del video</label>
-                <input
-                  type="text"
-                  id="categoriaVideo"
-                  placeholder="Ingrese la categoría del video aquí"
-                  value={categoriaVideo}
-                  onChange={(e) => setCategoriaVideo(e.target.value)}
-                />
-              </div>
-            </>
-          )}
-
-          {category === 'definicion' && (
-            <div className={styles.inputGroup}>
-              <label htmlFor="content">Contenido</label>
-              <textarea
-                id="content"
-                placeholder="Ingrese el contenido aquí"
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-              />
-            </div>
-          )}
-
-          <button onClick={addContent}>Agregar Contenido</button>
+      <h2>Eliminar Elemento</h2>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <div className={styles.formGroup}>
+          <label htmlFor="category">Categoría</label>
+          <select id="category" value={category} onChange={handleCategoryChange} className={styles.input} required>
+            <option value="">Selecciona una categoría</option>
+            <option value="Definición de términos">Definición de términos</option>
+            <option value="Audiovisual">Audiovisual</option>
+          </select>
         </div>
-      </main>
-      <Footer></Footer>
+        <div className={styles.formGroup}>
+          <label htmlFor="title">Título</label>
+          <input
+            type="text"
+            id="title"
+            value={title}
+            onChange={handleTitleChange}
+            className={styles.input}
+            placeholder="Ingresa el título a borrar"
+            required
+          />
+        </div>
+        <button type="submit" className={styles.button}>Confirmar</button>
+      </form>
     </div>
-);
-}
-export default Eliminar;
+  );
+};
+
+export default DeleteForm;

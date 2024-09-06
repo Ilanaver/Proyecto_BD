@@ -18,31 +18,31 @@ const Academia = () => {
                         <p>Simple y sin vueltas</p>
                     </div>
                     <div className={style.cardarrow}>
-                        <img href="/definiciones" src="/flechaderecha.png" alt="Flecha"/>
+                    <a href="./definiciones"><img  src="/flechaderecha.png" alt="Flecha"/></a>
                     </div>
                 </div>
                 <div className={style.card}>
                     <div className={style.cardimg}>
-                        <img src="/contenidoaudiovisual.png" alt="Contenido Audiovisual"/>
+                       <a href="./definicion"> <img src="/contenidoaudiovisual.png" alt="Contenido Audiovisual"/></a>
                     </div>
                     <div className={style.cardcontent}>
                         <h3>Contenido Audiovisual</h3>
                         <p>Con tus influencers favoritos</p>
                     </div>
                     <div className={style.cardarrow}>
-                        <img href="contenido" src="/flechaderecha.png" alt="Flecha"/>
+                        <a href="./contenido"><img  src="/flechaderecha.png" alt="Flecha"/></a>
                     </div>
                 </div>
                 <div className={style.card}>
                     <div className={style.cardimg}>
-                        <img src="/leccion.png" alt="Lección diaria"/>
+                        <img src="./leccion.png" alt="Lección diaria"/>
                     </div>
                     <div className={style.cardcontent}>
                         <h3>Lección diaria</h3>
                         <p>Aprendé algo nuevo todos los días</p>
                     </div>
                     <div className={style.cardarrow}>
-                        <img href="#" src="/flechaderecha.png" alt="Flecha"/>
+                        <img href="../#" src="/flechaderecha.png" alt="Flecha"/>
                     </div>
                 </div>
                 <div className={style.card}>
@@ -54,7 +54,7 @@ const Academia = () => {
                         <p>Resolvé todas tus inquietudes</p>
                     </div>
                     <div className={style.cardarrow}>
-                        <img href="/asesor" src="/flechaderecha.png" alt="Flecha"/>
+                        <img href="../asesor" src="/flechaderecha.png" alt="Flecha"/>
                     </div>
                 </div>
                 <div className={style.card}>
@@ -66,7 +66,7 @@ const Academia = () => {
                         <p>Posibles inversiones</p>
                     </div>
                     <div className={style.cardarrow}>
-                        <img href="/chatbot" src="/flechaderecha.png" alt="Flecha"/>
+                        <img href="../chatbot" src="/flechaderecha.png" alt="Flecha"/>
                     </div>
                 </div>
             </div>
