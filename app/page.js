@@ -16,7 +16,7 @@ export default function Home() {
       <Link href="/academia">Academia</Link>
       
       
-      <Link href="/perfil">Perfil</Link>
+      <Link href="/Perfil">Perfil</Link>
       <Link href="/registro">registro</Link>
 
    </>

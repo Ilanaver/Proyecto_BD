@@ -37,7 +37,7 @@ const perfil = () =>{
                 </div>
             </div>
             <div className={style.cerrarSesion}>
-                <h3 className={style.h3}>Cerrar Sesion</h3>
+                <a href="./iniciosesion" className={style.h3}>Cerrar Sesion</a>
             </div>
         </body>
         <Footer></Footer>

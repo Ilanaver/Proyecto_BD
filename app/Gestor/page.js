@@ -9,6 +9,7 @@ import Mes from "../components/Mes/Mes";
 import Popup from "../components/Popup/Popup";
 import jsPDF from 'jspdf';
 import Footer from "../components/Footer/Footer";
+import { useRouter } from 'next/navigation';
 
 const meses = {
   1: "Enero",
@@ -37,6 +38,20 @@ const Gestor = () => {
   const [idtipos, setIdTipos] = useState(null);
   const [mesSeleccionado, setMesSeleccionado] = useState(new Date().getMonth() + 1);
   const [anioSeleccionado, setAnioSeleccionado] = useState(new Date().getFullYear());
+  const [userId, setUserId] = useState(null); // Estado para almacenar el ID del usuario
+
+  const router = useRouter();
+
+  // Obtener el ID del usuario del localStorage
+  useEffect(() => {
+    const id = localStorage.getItem('userId');
+    if (id) {
+      setUserId(id);
+    } else {
+      // Redirigir al inicio de sesión si no hay userId en localStorage
+      router.push('/InicioSesion');
+    }
+  }, [router]);
 
   const handleMesChange = (nuevoMes, nuevoAnio) => {
     setMesSeleccionado(nuevoMes);
@@ -44,8 +59,8 @@ const Gestor = () => {
   };
 
   const fetchSaldos = () => {
-    if (mesSeleccionado && anioSeleccionado) {
-      axios.get(`http://localhost:3000/gestor/2/${mesSeleccionado}/${anioSeleccionado}`)
+    if (userId && mesSeleccionado && anioSeleccionado) {
+      axios.get(`http://localhost:3000/gestor/${userId}/${mesSeleccionado}/${anioSeleccionado}`)
         .then(res => {
           console.log('Fetched saldo actual:', res.data);
           const saldoActual = res.data.map(item => item['Saldo actual']);
@@ -56,18 +71,20 @@ const Gestor = () => {
   };
 
   const fetchReporte = () => {
-    axios.get(`http://localhost:3000/gestor/operaciones/2/${mesSeleccionado}/${anioSeleccionado}`)
-      .then(res => {
-        console.log('Fetched reporte:', res.data);
-        setReporte(res.data);
-      })
-      .catch(err => console.error('Error fetching reporte:', err));
+    if (userId && mesSeleccionado && anioSeleccionado) {
+      axios.get(`http://localhost:3000/gestor/operaciones/${userId}/${mesSeleccionado}/${anioSeleccionado}`)
+        .then(res => {
+          console.log('Fetched reporte:', res.data);
+          setReporte(res.data);
+        })
+        .catch(err => console.error('Error fetching reporte:', err));
+    }
   };
 
   const fetchSaldosPorTipo = async (idTipo) => {
-    if (mesSeleccionado && anioSeleccionado) {
+    if (userId && mesSeleccionado && anioSeleccionado) {
       try {
-        const res = await axios.get(`http://localhost:3000/gestor/2/${idTipo}/${mesSeleccionado}/${anioSeleccionado}`);
+        const res = await axios.get(`http://localhost:3000/gestor/${userId}/${idTipo}/${mesSeleccionado}/${anioSeleccionado}`);
         console.log(`Fetched saldoTipo data for idTipo ${idTipo}:`, res.data);
         const saldoTipo = res.data.map(item => item['Saldo actual']);
         setSaldoTipo(prevSaldoTipo => ({ ...prevSaldoTipo, [idTipo]: saldoTipo }));
@@ -78,12 +95,14 @@ const Gestor = () => {
   };
 
   useEffect(() => {
-    fetchSaldos();
-    fetchReporte();
-    fetchSaldosPorTipo(1); // Gastos
-    fetchSaldosPorTipo(2); // Ingresos
-    fetchSaldosPorTipo(3); // Ahorros
-  }, [mesSeleccionado, anioSeleccionado]);
+    if (userId) {
+      fetchSaldos();
+      fetchReporte();
+      fetchSaldosPorTipo(1); // Gastos
+      fetchSaldosPorTipo(2); // Ingresos
+      fetchSaldosPorTipo(3); // Ahorros
+    }
+  }, [userId, mesSeleccionado, anioSeleccionado]);
 
   const manejarClick = (idTipo) => {
     let motivo;
@@ -125,40 +144,40 @@ const Gestor = () => {
     }
 
     const requestData = {
-      "idperfil_fk": 2,
+      "idperfil_fk": userId,
       "idtipos_fk": tipo,
       "idsubtipo_fk": datos.subtipo,
       "importe": cantidad,
       "fecha": datos.fecha,
       "observaciones": datos.observaciones
-    }
+    };
 
     console.log('Datos a enviar:', requestData);
 
     axios.post("http://localhost:3000/gestor/addOperacion", requestData)
-    .then(response => {
-      console.log('Data inserted successfully:', response.data);
-      setReporte(prevReporte => [...prevReporte, {
-        importe: cantidad,
-        tipo: datos.motivo,
-        subtipo: datos.subtipo,
-        fecha: datos.fecha,
-        observaciones: datos.observaciones || ""
-      }]);
+      .then(response => {
+        console.log('Data inserted successfully:', response.data);
+        setReporte(prevReporte => [...prevReporte, {
+          importe: cantidad,
+          tipo: datos.motivo,
+          subtipo: datos.subtipo,
+          fecha: datos.fecha,
+          observaciones: datos.observaciones || ""
+        }]);
 
-      // Actualiza los saldos después de agregar la operación
-      fetchSaldos();
-      fetchSaldosPorTipo(1); // Gastos
-      fetchSaldosPorTipo(2); // Ingresos
-      fetchSaldosPorTipo(3); // Ahorros
-      fetchReporte();
+        // Actualiza los saldos después de agregar la operación
+        fetchSaldos();
+        fetchSaldosPorTipo(1); // Gastos
+        fetchSaldosPorTipo(2); // Ingresos
+        fetchSaldosPorTipo(3); // Ahorros
+        fetchReporte();
 
-    })
-    .catch(error => {
-      console.error('Error inserting data:', error);
-      console.log('Error details:', error.response ? error.response.data : error.message);
-    });
-    console.log(datos.motivo)
+      })
+      .catch(error => {
+        console.error('Error inserting data:', error);
+        console.log('Error details:', error.response ? error.response.data : error.message);
+      });
+    console.log(datos.motivo);
     actualizarBalance(cantidad, datos.motivo);
     cerrarPopup();
   };
@@ -196,6 +215,14 @@ const Gestor = () => {
       <section className={style.ContenedorGestor}>
         <div className={style.tituloGestor}>
           <Titulo texto={"Gestor"} />
+          <div className={style.fotoPerfilContainer}>
+            <img 
+              src="./fotoPerfil.png" 
+              alt="Perfil" 
+              className={style.fotoPerfil} 
+              onClick={() => router.push('/Perfil')} // Redirige al perfil al hacer clic en la imagen
+            />
+          </div>
         </div>
         <div className={style.MesGestor}>
           <Mes onMesChange={handleMesChange} />
@@ -239,7 +266,7 @@ const Gestor = () => {
           <Popup onClose={cerrarPopup} onSubmit={enviarDatosPopup} motivo={motivo} idtipos={idtipos} />
         )}
       </section>
-      <Footer></Footer>
+      <Footer />
     </main>
   );
 };
