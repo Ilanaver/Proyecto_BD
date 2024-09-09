@@ -90,3 +90,28 @@
     color: #007bff;
     font-weight: bold;
 }
+.fotoPerfilContainer {
+    position: absolute; /* Cambiado a posición absoluta */
+    top: 10px; /* Espacio desde la parte superior del contenedor */
+    right: 10px; /* Espacio desde el borde derecho del contenedor */
+    width: 50px; /* Tamaño pequeño para la imagen */
+    height: 50px; /* Tamaño pequeño para la imagen */
+}
+
+.fotoPerfil {
+    width: 100%; /* Asegúrate de que la imagen ocupe todo el contenedor */
+    height: 100%; /* Asegúrate de que la imagen ocupe todo el contenedor */
+    border-radius: 50%; /* Hace que la imagen tenga bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar sobre la imagen para indicar que es clickeable */
+    object-fit: cover; /* Ajusta la imagen para que se ajuste dentro del contenedor sin distorsionarse */
+}
+.Buscador button {
+    width: 100%; /* Hace que el botón ocupe todo el ancho del div */
+    height: 100%; /* Hace que el botón ocupe todo el alto del div */
+    border: none; /* Elimina el borde predeterminado del botón */
+    border-radius: 15px; /* Aplica el mismo radio de borde al botón */
+    background-color: transparent; /* Fondo transparente para el botón */
+    color: white; /* Color del texto del botón */
+    font-size: 16px; /* Ajusta el tamaño de la fuente según sea necesario */
+    cursor: pointer; /* Cambia el cursor cuando se pasa sobre el botón */
+}

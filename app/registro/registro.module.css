@@ -43,23 +43,31 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 15px;
+        gap: 5%;
     }
-    .botonRegistrarse{
+    .botonRegistrarse {
         display: flex;
         justify-content: center;
         align-items: center;
         background-color: #0F77F0;
         border-radius: 15px;
-        width: 328px;
-        height: 56px;
-        margin-top: 130px;
-        
-    
+        width: 328px; /* Ancho del div, ajusta si es necesario */
+        height: 56px; /* Alto del div, ajusta si es necesario */
+        margin: 0 auto; /* Centra el div horizontalmente */
+        margin-top: 4%;
+        margin-bottom: 4%;
+
     }
-    .botonRegistrarse a{
-        text-decoration: none;
-        color: white;
+    
+    .botonRegistrarse button {
+        width: 100%; /* Hace que el botón ocupe todo el ancho del div */
+        height: 100%; /* Hace que el botón ocupe todo el alto del div */
+        border: none; /* Elimina el borde predeterminado del botón */
+        border-radius: 15px; /* Aplica el mismo radio de borde al botón */
+        background-color: transparent; /* Fondo transparente para el botón */
+        color: white; /* Color del texto del botón */
+        font-size: 16px; /* Ajusta el tamaño de la fuente según sea necesario */
+        cursor: pointer; /* Cambia el cursor cuando se pasa sobre el botón */
     }
     
     .contenedorP{

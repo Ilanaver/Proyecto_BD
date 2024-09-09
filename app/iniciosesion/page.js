@@ -70,6 +70,9 @@ const InicioSesion = () => {
                     <div className={style.botonRegistrarse}>
                         <button type="submit">Iniciar Sesión</button>
                     </div>
+                    <div className={style.contenedorP}>
+                        <a href="./registro">¿Todavia no tienes cuenta?</a>
+                    </div>
                 </form>
                 {mensaje && <p>{mensaje}</p>} {/* Mostrar el mensaje de éxito o error */}
             </section>

@@ -1,24 +1,3 @@
-<<<<<<< HEAD
-'use client'
-import React, { useState } from "react";
-import styles from './eliminar.module.css.module.css';
-
-const DeleteForm = () => {
-  const [category, setCategory] = useState("");
-  const [title, setTitle] = useState("");
-
-  const handleCategoryChange = (event) => {
-    setCategory(event.target.value);
-  };
-
-  const handleTitleChange = (event) => {
-    setTitle(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    alert(`Se ha eliminado "${title}" de la categoría "${category}".`);
-=======
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -80,45 +59,15 @@ export default function Eliminar() {
       console.error('Error al eliminar el contenido:', error.response ? error.response.data : error.message);
       alert('Ocurrió un error al eliminar el contenido');
     }
->>>>>>> 29a2b95e794f33518fe0d0dfff49970da8a3ff11
   };
 
   return (
-    <div className={styles.container}>
-<<<<<<< HEAD
-      <h2>Eliminar Elemento</h2>
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <div className={styles.formGroup}>
-          <label htmlFor="category">Categoría</label>
-          <select id="category" value={category} onChange={handleCategoryChange} className={styles.input} required>
-            <option value="">Selecciona una categoría</option>
-            <option value="Definición de términos">Definición de términos</option>
-            <option value="Audiovisual">Audiovisual</option>
-          </select>
-        </div>
-        <div className={styles.formGroup}>
-          <label htmlFor="title">Título</label>
-          <input
-            type="text"
-            id="title"
-            value={title}
-            onChange={handleTitleChange}
-            className={styles.input}
-            placeholder="Ingresa el título a borrar"
-            required
-          />
-        </div>
-        <button type="submit" className={styles.button}>Confirmar</button>
-      </form>
-    </div>
-  );
-};
-
-export default DeleteForm;
-=======
-      <div className={styles.header}>
-        <button onClick={() => router.back()} className={styles.returnLink}>Volver</button>      
-        <Titulo texto={"Eliminar Contenido"} />
+    <div className={styles.container}>      
+    <div className={styles.header1}>
+      <button onClick={() => router.back()} className={styles.returnLink}>Volver</button>     
+    </div>  
+      <div className={styles.header2}>
+        <Titulo texto={"Eliminar Contenido"} className={styles.titulo}/>
       </div>
 
       <main className={styles.main}>
@@ -155,4 +104,3 @@ export default DeleteForm;
     </div>
   );
 }
->>>>>>> 29a2b95e794f33518fe0d0dfff49970da8a3ff11

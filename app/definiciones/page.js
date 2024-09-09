@@ -60,6 +60,14 @@ const Terminos = () => {
                 <div className={style.Titulo}>
                     <Titulo texto={"Definicion de Terminos"} />
                 </div>
+                <div className={style.fotoPerfilContainer}>
+                    <img 
+                    src="./fotoPerfil.png" 
+                    alt="Perfil" 
+                    className={style.fotoPerfil} 
+                    onClick={() => router.push('/Perfil')} // Redirige al perfil al hacer clic en la imagen
+                    />
+                </div>
                 <div className={style.ContenedorBuscador}>
                     <form className={style.Buscador} onSubmit={handleSearchSubmit}>
                         <img src="/lupa.png" alt="" />

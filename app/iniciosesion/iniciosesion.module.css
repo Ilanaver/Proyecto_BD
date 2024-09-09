@@ -1,19 +1,24 @@
 @media screen and (max-width: 550px) {
-    
-    .contenedorInicioSesion{
+    .contenedorInicioSesion {
         margin-top: 35%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
     }
-    .Titulo{
+    
+    .Titulo {
         display: flex;
         justify-content: center;
         margin-bottom: 50px;
     }
     
-    .padre{
+    .padre {
         width: 100%;
     }
 
-    .inputRegistro{
+    .inputRegistro {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -22,7 +27,7 @@
         width: 100%;
     }
     
-    .input{
+    .input {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -33,41 +38,46 @@
         border: transparent;
         border-radius: 12px;
     }
-    .input:focus{
+    
+    .input:focus {
         border: solid 1px #0F77F0;
     }
-    .contenedorInicioSesion{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 15px;
-    }
-    .botonRegistrarse{
+    
+    .botonRegistrarse {
         display: flex;
         justify-content: center;
         align-items: center;
         background-color: #0F77F0;
         border-radius: 15px;
-        width: 328px;
-        height: 56px;
-        
-    
-    }
-    .botonRegistrarse a{
-        text-decoration: none;
-        color: white;
+        width: 328px; /* Ancho del div, ajusta si es necesario */
+        height: 56px; /* Alto del div, ajusta si es necesario */
+        margin: 0 auto; /* Centra el div horizontalmente */
+        margin-top: 4%;
+        margin-bottom: 4%;
+
     }
     
-    .contenedorP{
+    .botonRegistrarse button {
+        width: 100%; /* Hace que el botón ocupe todo el ancho del div */
+        height: 100%; /* Hace que el botón ocupe todo el alto del div */
+        border: none; /* Elimina el borde predeterminado del botón */
+        border-radius: 15px; /* Aplica el mismo radio de borde al botón */
+        background-color: transparent; /* Fondo transparente para el botón */
+        color: white; /* Color del texto del botón */
+        font-size: 16px; /* Ajusta el tamaño de la fuente según sea necesario */
+        cursor: pointer; /* Cambia el cursor cuando se pasa sobre el botón */
+    }
+    
+    .contenedorP {
+
         display: flex;
         flex-direction: column;
         align-items: center;
     }
-    .contenedorP a{
+    
+    .contenedorP a {
         color: #444444;
         text-decoration: none;
     }
-    
-
 }
+ 
