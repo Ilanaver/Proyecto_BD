@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+'use client';
 import style from './contenidoaudiovisual.module.css';
 import Titulo from '../components/Titulo/Titulo';
 import Link from 'next/link'
@@ -6,7 +6,11 @@ import Link from 'next/link'
 const video = () => {
     return(
     <body>
-        <Titulo texto={"Contenido Audiovisual"}/>
+        <div className={style.navegador}>
+            <img src="./flechaatras.png" alt=""/>
+            <Titulo texto={"Contenido Audiovisual"}/>
+            <img src="./signoperfil.png" alt=""/>
+        </div>
         <Link href="./components/agregar" className={style.Agregar}>Agregar Definicion</Link>
         <Link href="./components/agregar" className={style.Agregar}>Eliminar Definicion</Link>
 
@@ -15,9 +19,10 @@ const video = () => {
                 <div className={style.tituloContenido}>
                     <h2>Ahorro</h2>
                     <a href="">Ver mas</a>
-=======
-'use client';
-
+                </div> 
+            </div>
+       </div> 
+    </body>);}             
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import style from './contvideo.module.css';
@@ -72,7 +77,6 @@ const Audiovisual = () => {
             <section className={style.contenedor}>    
                 <div className={style.tituloaudiovisual}>
                     <Titulo texto={"Contenido Audiovisual"}/>
->>>>>>> 29a2b95e794f33518fe0d0dfff49970da8a3ff11
                 </div>
                 <div className={style.contenedorContenido}>
                     {/* Renderizar dinámicamente las categorías y sus videos */}

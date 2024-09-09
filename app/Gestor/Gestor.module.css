@@ -21,6 +21,7 @@
         justify-content: center; /* Centra el título horizontalmente */
         position: relative; /* Necesario para posicionar la imagen de perfil dentro del contenedor */
         padding: 0 10px; /* Espacio horizontal alrededor del contenedor */
+        gap: 35px;
     }
 
     .balanceMensual {

@@ -1,4 +1,9 @@
 @media screen and (max-width: 600px) {
+    .navegador{
+        display: flex;
+        justify-content: center;
+        gap: 35px;
+    }
 .contenedor{
     padding-bottom: 95px;
 }
