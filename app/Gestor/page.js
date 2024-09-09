@@ -214,7 +214,8 @@ const Gestor = () => {
     <main>
       <section className={style.ContenedorGestor}>
         <div className={style.tituloGestor}>
-          <Titulo texto={"Gestor"} />
+          <img src="./flechaatras.png" alt=""/>
+          <Titulo texto={"Gestor"}/>
           <div className={style.fotoPerfilContainer}>
             <img 
               src="./fotoPerfil.png" 

@@ -52,9 +52,9 @@ const Perfil = () => {
     return (
         <>
             <div className={style.navegador}>
-                <img src="" alt=""/>
+                <img src="./flechaatras.png" alt=""/>
                 <h1>Perfil</h1>
-                <img src="" alt=""/>
+                <img src="./signoperfil.png" alt=""/>
             </div>
             <div className={style.info}>
                 <div className={style.imagen}>

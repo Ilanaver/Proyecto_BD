@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import style from './contvideo.module.css';
@@ -53,6 +52,7 @@ const Audiovisual = () => {
         <main>
             <section className={style.contenedor}>    
                 <div className={style.tituloaudiovisual}>
+                    {/*img de flechita */}
                     <Titulo texto={"Contenido Audiovisual"}/>
                 </div>
                 <div className={style.contenedorContenido}>
