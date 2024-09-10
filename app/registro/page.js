@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import axios from 'axios'; // Importar Axios
 import style from './registro.module.css';
 import Titulo from "../components/Titulo/Titulo";
+import { useRouter } from 'next/navigation'; // Importar useRouter
 
 const Registro = () => {
     // Estados para capturar los valores de los inputs
@@ -10,6 +11,7 @@ const Registro = () => {
     const [nombre, setNombre] = useState('');
     const [contraseña, setContraseña] = useState('');
     const [mensaje, setMensaje] = useState(null); // Para manejar mensajes de éxito o error
+    const router = useRouter(); // Hook para manejar la navegación
 
     // Función para manejar el envío del formulario
     const handleSubmit = async (e) => {
@@ -30,7 +32,7 @@ const Registro = () => {
                 // Si el registro es exitoso
                 setMensaje('Usuario registrado exitosamente');
                 // Aquí podrías redirigir a otra página, por ejemplo:
-                // window.location.href = './Gestor';
+                 window.location.href = './Gestor';
             } else {
                 // Si hay algún error, mostrar el mensaje
                 setMensaje(response.data.message || 'Error al registrar el usuario');
@@ -73,7 +75,7 @@ const Registro = () => {
                     </div>
                     <div className={style.contenedorInicioSesion}>
                         <div className={style.botonRegistrarse}>
-                            <button type="submit">Registrarse</button>
+                            <button type="submit" onClick={() => router.push('/iniciosesion')}>Registrarse</button>
                         </div>
                         <div className={style.contenedorP}>
                             <a href="./iniciosesion">¿Ya tenés una cuenta?</a>

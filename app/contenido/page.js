@@ -55,6 +55,14 @@ const Audiovisual = () => {
                     {/*img de flechita */}
                     <Titulo texto={"Contenido Audiovisual"}/>
                 </div>
+                <div className={style.fotoPerfilContainer}>
+                    <img 
+                    src="./fotoPerfil.png" 
+                    alt="Perfil" 
+                    className={style.fotoPerfil} 
+                    onClick={() => router.push('/Perfil')} // Redirige al perfil al hacer clic en la imagen
+                    />
+                </div>
                 <div className={style.contenedorContenido}>
                     {/* Renderizar dinámicamente las categorías y sus videos */}
                     {categories.map(category => (

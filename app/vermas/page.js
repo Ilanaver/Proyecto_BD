@@ -43,14 +43,16 @@ const VerMas = () => {
 
   return (
   <main className={styles.main}>    
-  <button onClick={() => router.back()} className={styles.returnLink}>Volver</button>      
+<div className={styles.titulo}>
 
+<div className={styles.flecha}>
+  <img onClick={() => router.back()} src="./flechaatras.png" alt=""/>
+</div>
+<Titulo texto={`Más sobre ${categoria}`} />
+
+</div>
     <div className={styles.container}>
-
-      <div className={styles.titulo}>
-      <Titulo texto={`Más sobre ${categoria}`} />
       
-      </div>
       
         {details.length === 0 ? (
           <p>No se encontraron detalles.</p>

@@ -58,9 +58,7 @@ const Terminos = () => {
         <main>
             <section className={style.contenedor}>
                 <div className={style.Titulo}>
-                    <img src="./flechaatras.png" alt=""/>
                     <Titulo texto={"Definicion de Terminos"} />
-                    <img src="./signoperfil.png" alt=""/>
                 </div>
                 <div className={style.fotoPerfilContainer}>
                     <img 

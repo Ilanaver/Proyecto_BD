@@ -41,8 +41,12 @@ const InfoVideo = () => {
 
   return (
     <div className={styles.container}>
-      <button onClick={() => router.back()} className={styles.returnLink}>Volver</button>      
-      <Titulo texto={`Información sobre el video`} />
+      <div className={styles.titulo}>
+        <div className={styles.flecha}>
+          <img onClick={() => router.back()} src="./flechaatras.png" alt=""/>
+        </div>
+        <Titulo texto={`Informacion sobre el video`} />
+      </div>
       <main className={styles.main}>
       {videoDetails.length === 0 ? (
           <p>No se encontraron detalles.</p>

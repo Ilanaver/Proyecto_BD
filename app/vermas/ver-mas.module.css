@@ -9,10 +9,6 @@
 .main {
     padding: 20px;
 }
-.titulo{
-    margin-top: -2%;
-    text-align: center;
-}
 .item {
     border: 1px solid #ddd;
     padding: 10px;
@@ -42,4 +38,19 @@
     display: inline-block;
     border: none;
 }
+.titulo {
+    display: flex;
+    align-items: center;  /* Alinea verticalmente la flecha y el texto */
+    justify-content: center; /* Centra el contenido */
+    position: relative; /* Para posicionar la flecha sin afectar el centrado del texto */
+    margin-top: -5%;
+    margin-bottom: 5%;
+    font-size: 15px;
+  }
+  
+  .flecha {
+    position: absolute;
+    left: -5%; /* Posiciona la flecha en la punta izquierda */
+  }
+  
 }

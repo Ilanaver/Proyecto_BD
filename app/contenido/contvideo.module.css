@@ -106,4 +106,20 @@
       white-space: normal; /* Allow the text to wrap to the next line */
       overflow-wrap: break-word; /* Break long words if necessary */
   }
+  
+.fotoPerfilContainer {
+    position: absolute; /* Cambiado a posición absoluta */
+    top: 10px; /* Espacio desde la parte superior del contenedor */
+    right: 10px; /* Espacio desde el borde derecho del contenedor */
+    width: 50px; /* Tamaño pequeño para la imagen */
+    height: 50px; /* Tamaño pequeño para la imagen */
+}
+
+.fotoPerfil {
+    width: 100%; /* Asegúrate de que la imagen ocupe todo el contenedor */
+    height: 100%; /* Asegúrate de que la imagen ocupe todo el contenedor */
+    border-radius: 50%; /* Hace que la imagen tenga bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar sobre la imagen para indicar que es clickeable */
+    object-fit: cover; /* Ajusta la imagen para que se ajuste dentro del contenedor sin distorsionarse */
+}
 }
