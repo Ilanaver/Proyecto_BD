@@ -3,6 +3,8 @@
         display: flex;
         justify-content: center;
         gap: 35px;
+        margin-top: 5%;
+        margin-bottom: 15%;
     }
 .contenedor{
     padding-bottom: 95px;
