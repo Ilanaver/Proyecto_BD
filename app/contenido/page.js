@@ -86,8 +86,8 @@ const Audiovisual = () => {
                         </div>
                     ))}
                 </div>
-                <Link href="./components/Agregar" className={style.Agregar}>Agregar Definicion</Link>
-                <Link href="./components/eliminar" className={style.Agregar}>Eliminar Definicion</Link>
+                <Link href="./components/Agregar" className={style.Agregar}>Agregar Video</Link>
+                <Link href="./components/eliminar" className={style.Agregar}>Eliminar Video</Link>
             </section>
             <Footer />
         </main>

@@ -54,7 +54,7 @@ const Academia = () => {
                         <p>Resolvé todas tus inquietudes</p>
                     </div>
                     <div className={style.cardarrow}>
-                       <a href="../asesor"> <img  src="/flechaderecha.png" alt="Flecha"/></a>
+                       <a href="../Asesor"> <img  src="/flechaderecha.png" alt="Flecha"/></a>
                     </div>
                 </div>
                 <div className={style.card}>

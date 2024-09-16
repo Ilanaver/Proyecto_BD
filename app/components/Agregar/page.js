@@ -51,23 +51,44 @@ export default function Agregar() {
         categoria: categoriaVideo,
       };
 
-      console.log('Datos del video enviados:', videoPayload);
-
+      console.log('Datos del video enviados (check):', {
+        titulo: title,
+        videolink: videoLink,
+        img: img,
+        descripcion: description,
+        categoria: categoriaVideo,
+      });
+      
       try {
-        const response = await axios.post('http://localhost:3000/contenido-multimedia/agregar-video', videoPayload);
-
+        const response = await axios.post(
+          'http://localhost:3000/contenido-multimedia/agregar-video',
+          videoPayload,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+      
         if (response.status === 200 || response.status === 201) {
           console.log('Video agregado con éxito:', response.data);
+          alert('Video agregado con éxito');  // Avisa al usuario que se agregó correctamente
+          // Si es necesario, redirige a otra página o limpia los campos
+          router.back(); // Redirige si es necesario
         } else {
-          console.log('Error inesperado:', response.status);
+          console.error('Error inesperado en la respuesta:', response.status);
         }
       } catch (error) {
         if (error.response) {
           console.error('Error en la solicitud:', error.response.data);
+        } else if (error.request) {
+          console.error('No se recibió respuesta del servidor:', error.request);
         } else {
-          console.error('Error en la solicitud:', error.message);
+          console.error('Error en la configuración de la solicitud:', error.message);
         }
       }
+      
+      
     } else {
       console.log('Selección inválida');
     }

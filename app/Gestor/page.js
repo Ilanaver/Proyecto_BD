@@ -49,7 +49,7 @@ const Gestor = () => {
       setUserId(id);
     } else {
       // Redirigir al inicio de sesión si no hay userId en localStorage
-      router.push('/InicioSesion');
+      router.push('/iniciosesion');
     }
   }, [router]);
 

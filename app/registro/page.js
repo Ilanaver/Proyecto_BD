@@ -32,7 +32,6 @@ const Registro = () => {
                 // Si el registro es exitoso
                 setMensaje('Usuario registrado exitosamente');
                 // Aquí podrías redirigir a otra página, por ejemplo:
-                 window.location.href = './Gestor';
             } else {
                 // Si hay algún error, mostrar el mensaje
                 setMensaje(response.data.message || 'Error al registrar el usuario');
@@ -75,7 +74,7 @@ const Registro = () => {
                     </div>
                     <div className={style.contenedorInicioSesion}>
                         <div className={style.botonRegistrarse}>
-                            <button type="submit" onClick={() => router.push('/iniciosesion')}>Registrarse</button>
+                            <button type="submit">Registrarse</button>
                         </div>
                         <div className={style.contenedorP}>
                             <a href="./iniciosesion">¿Ya tenés una cuenta?</a>

@@ -3,10 +3,13 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import style from './perfil.module.css';
 import Footer from "../components/Footer/Footer";
+import Titulo from "../components/Titulo/Titulo";
+import { useSearchParams, useRouter } from 'next/navigation';
 
 const Perfil = () => {
     const [perfilData, setPerfilData] = useState(null); // Cambiamos el estado inicial a null
     const [userId, setUserId] = useState(null);  // Almacenamos el userId aquí
+    const router = useRouter();
 
     // Verificar si estamos en el entorno del navegador
     useEffect(() => {
@@ -52,13 +55,11 @@ const Perfil = () => {
     return (
         <>
             <div className={style.navegador}>
-                <img src="./flechaatras.png" alt=""/>
-                <h1>Perfil</h1>
-                <img src="./signoperfil.png" alt=""/>
+            <Titulo texto={"Perfil"}/>
             </div>
             <div className={style.info}>
                 <div className={style.imagen}>
-                    <img src={perfilData.foto || "./fotoPerfil.png"} alt="Foto de perfil" />
+                    <img src={perfilData.foto || "./fotoPerfil.png"} alt="Foto de perfil" onClick={() => router.push('./components/FotoPerfil')}/>
                 </div>
                 <div className={style.nombre}>
                     <h2>{perfilData.usuario}</h2>

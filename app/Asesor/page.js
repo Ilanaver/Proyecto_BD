@@ -1,8 +1,9 @@
+/*'use client';
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
-import './Chat.css';
+import Titulo from '../components/Titulo/Titulo';
 
-const socket = io.connect('http://localhost:3001');
+//const socket = io.connect('http://localhost:3001');
 
 const asesor = ({ userId, asesorId }) => {
   const [message, setMessage] = useState('');
@@ -35,9 +36,7 @@ const asesor = ({ userId, asesorId }) => {
   return (
     <div className="chat-app">
       <header>
-        <img src="./flechaatras.png" alt=""/>
-        <h1>Tu asesor</h1>
-        <img src="./signoperfil.png" alt=""/>
+        <Titulo texto={"Agregar Contenido"}/>
       </header>
       <div className="chat-container">
         <div className="messages">
@@ -66,4 +65,4 @@ const asesor = ({ userId, asesorId }) => {
   );
 };
 
-export default asesor;
+export default asesor;*/
