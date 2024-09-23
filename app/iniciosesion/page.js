@@ -74,7 +74,7 @@ const InicioSesion = () => {
                         <a href="./registro">¿Todavia no tienes cuenta?</a>
                     </div>
                 </form>
-                {mensaje && <p>{mensaje}</p>} {/* Mostrar el mensaje de éxito o error */}
+                {mensaje && <p className={style.mensaje}>{mensaje}</p>} {/* Mostrar el mensaje de éxito o error */}
             </section>
         </>
     );

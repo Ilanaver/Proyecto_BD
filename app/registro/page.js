@@ -32,6 +32,7 @@ const Registro = () => {
                 // Si el registro es exitoso
                 setMensaje('Usuario registrado exitosamente');
                 // Aquí podrías redirigir a otra página, por ejemplo:
+                window.location.href = '/iniciosesion'
             } else {
                 // Si hay algún error, mostrar el mensaje
                 setMensaje(response.data.message || 'Error al registrar el usuario');

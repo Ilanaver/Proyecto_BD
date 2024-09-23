@@ -6,12 +6,14 @@ import Titulo from "../components/Titulo/Titulo";
 import style from './Terminos.module.css';
 import Link from 'next/link'
 import Footer from "../components/Footer/Footer";
+import { useRouter } from 'next/navigation';
 
 const Terminos = () => {
     const [definiciones, setDefiniciones] = useState([]);
     const [buscador, setBuscador] = useState('');
     const [resultadoBusqueda, setResultadoBusqueda] = useState([]);
     const [expandedIndices, setExpandedIndices] = useState([]); // Estado para controlar las tarjetas expandidas
+    const router = useRouter();
 
     const fetchTop6 = () => {
         axios.get("http://localhost:3000/definiciones")
@@ -57,16 +59,18 @@ const Terminos = () => {
     return (
         <main>
             <section className={style.contenedor}>
-                <div className={style.Titulo}>
-                    <Titulo texto={"Definicion de Terminos"} />
-                </div>
-                <div className={style.fotoPerfilContainer}>
-                    <img 
-                    src="./fotoPerfil.png" 
-                    alt="Perfil" 
-                    className={style.fotoPerfil} 
-                    onClick={() => router.push('/Perfil')} // Redirige al perfil al hacer clic en la imagen
-                    />
+                <div className={style.headerContainer}>
+                    <div className={style.Titulo}>
+                        <Titulo texto={"Glosario"} />
+                    </div>
+                    <div className={style.fotoPerfilContainer}>
+                        <img 
+                        src="./fotoPerfil.png" 
+                        alt="Perfil" 
+                        className={style.fotoPerfil} 
+                        onClick={() => router.push('/Perfil')} // Redirige al perfil al hacer clic en la imagen
+                        />
+                    </div>
                 </div>
                 <div className={style.ContenedorBuscador}>
                     <form className={style.Buscador} onSubmit={handleSearchSubmit}>
