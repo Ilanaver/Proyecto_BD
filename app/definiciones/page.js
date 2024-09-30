@@ -1,10 +1,10 @@
 'use client';
 
 import React, { useEffect, useState } from "react";
-import axios from 'axios'; // Asegúrate de tener axios importado
+import axios from 'axios'; 
 import Titulo from "../components/Titulo/Titulo";
 import style from './Terminos.module.css';
-import Link from 'next/link'
+import Link from 'next/link';
 import Footer from "../components/Footer/Footer";
 import { useRouter } from 'next/navigation';
 
@@ -13,8 +13,36 @@ const Terminos = () => {
     const [buscador, setBuscador] = useState('');
     const [resultadoBusqueda, setResultadoBusqueda] = useState([]);
     const [expandedIndices, setExpandedIndices] = useState([]); // Estado para controlar las tarjetas expandidas
+    const [perfilData, setPerfilData] = useState({});  // Estado para almacenar los datos del perfil, incluida la foto
+    const [userId, setUserId] = useState(null);  // Estado para almacenar el ID del usuario
     const router = useRouter();
 
+    // Obtener el ID del usuario del localStorage
+    useEffect(() => {
+        const id = localStorage.getItem('userId');
+        if (id) {
+            setUserId(id);
+            fetchPerfilData();  // Obtener los datos del perfil una vez que el ID esté disponible
+        } else {
+            // Redirigir al inicio de sesión si no hay userId en localStorage
+            router.push('/iniciosesion');
+        }
+    }, [router]);
+
+    // Obtener los datos del perfil
+    const fetchPerfilData = () => {
+        if (userId) {
+            axios.get(`http://localhost:3000/usuario/perfil/${userId}`)
+                .then(res => {
+                    const perfil = res.data[0]; // Accedemos al primer objeto del array
+                    setPerfilData(perfil); // Guardamos los datos en el estado
+                    console.log(perfil);
+                })
+                .catch(err => console.error('Error fetching perfil data:', err));
+        }
+    };
+
+    // Obtener las primeras 6 definiciones
     const fetchTop6 = () => {
         axios.get("http://localhost:3000/definiciones")
             .then(res => {
@@ -24,6 +52,7 @@ const Terminos = () => {
             .catch(err => console.error('Error fetching definiciones:', err));
     };
 
+    // Obtener las definiciones según la búsqueda
     const fetchBuscador = (titulo) => {
         axios.get(`http://localhost:3000/definiciones/${titulo}`)
             .then(res => {
@@ -51,8 +80,9 @@ const Terminos = () => {
     };
 
     useEffect(() => {
+        fetchPerfilData();
         fetchTop6();
-    }, []);
+    }, [userId]);
 
     const definicionesToShow = resultadoBusqueda.length > 0 ? resultadoBusqueda : definiciones;
 
@@ -65,10 +95,10 @@ const Terminos = () => {
                     </div>
                     <div className={style.fotoPerfilContainer}>
                         <img 
-                        src="./fotoPerfil.png" 
-                        alt="Perfil" 
-                        className={style.fotoPerfil} 
-                        onClick={() => router.push('/Perfil')} // Redirige al perfil al hacer clic en la imagen
+                          src={perfilData.foto ? perfilData.foto : "./fotoPerfil.png"}  // Usar la URL de la base de datos o una imagen predeterminada
+                          alt="Perfil" 
+                          className={style.fotoPerfil} 
+                          onClick={() => router.push('/Perfil')}  // Redirige al perfil al hacer clic en la imagen
                         />
                     </div>
                 </div>
@@ -104,10 +134,16 @@ const Terminos = () => {
                         </div>
                     ))}
                 </div>
-                <Link href="./components/Agregar" className={style.Agregar}>Agregar Definicion</Link>
-                <Link href="./components/eliminar" className={style.Agregar}>Eliminar Definicion</Link>
+
+                {/* Mostrar los botones de "Agregar Definición" y "Eliminar Definición" solo si admin es true */}
+                {perfilData.admin && (
+                    <>
+                        <Link href="./components/Agregar" className={style.Agregar}>Agregar Definición</Link>
+                        <Link href="./components/eliminar" className={style.Agregar}>Eliminar Definición</Link>
+                    </>
+                )}
             </section>
-            <Footer></Footer>
+            <Footer />
         </main>
     );
 };

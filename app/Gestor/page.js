@@ -39,6 +39,7 @@ const Gestor = () => {
   const [mesSeleccionado, setMesSeleccionado] = useState(new Date().getMonth() + 1);
   const [anioSeleccionado, setAnioSeleccionado] = useState(new Date().getFullYear());
   const [userId, setUserId] = useState(null); // Estado para almacenar el ID del usuario
+  const [perfilData, setPerfilData] = useState({});  // Estado para almacenar los datos del perfil, incluida la foto
 
   const router = useRouter();
 
@@ -52,6 +53,17 @@ const Gestor = () => {
       router.push('/iniciosesion');
     }
   }, [router]);
+
+  const fetchPerfilData = () => {
+    if (userId) {
+      axios.get(`http://localhost:3000/usuario/perfil/${userId}`)
+        .then(res => {
+          const perfil = res.data[0]; // Accedemos al primer elemento del array
+          setPerfilData(perfil); // Guardamos el primer objeto en el estado
+        })
+        .catch(err => console.error('Error fetching perfil data:', err));
+    }
+  };
 
   const handleMesChange = (nuevoMes, nuevoAnio) => {
     setMesSeleccionado(nuevoMes);
@@ -96,6 +108,7 @@ const Gestor = () => {
 
   useEffect(() => {
     if (userId) {
+      fetchPerfilData();  // Llamar la función para obtener el perfil
       fetchSaldos();
       fetchReporte();
       fetchSaldosPorTipo(1); // Gastos
@@ -217,10 +230,10 @@ const Gestor = () => {
           <Titulo texto={"Gestor"}/>
           <div className={style.fotoPerfilContainer}>
             <img 
-              src="./fotoPerfil.png" 
+              src={perfilData.foto ? perfilData.foto : "./fotoPerfil.png"}  // Usar la URL de la base de datos o una imagen por defecto
               alt="Perfil" 
               className={style.fotoPerfil} 
-              onClick={() => router.push('/Perfil')} // Redirige al perfil al hacer clic en la imagen
+              onClick={() => router.push('/Perfil')}  // Redirige al perfil al hacer clic en la imagen
             />
           </div>
         </div>

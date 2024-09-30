@@ -10,14 +10,39 @@ import Link from "next/link";
 const Audiovisual = () => {
     const [categories, setCategories] = useState([]);  // Estado para categorías dinámicas
     const [content, setContent] = useState({});
+    const [perfilData, setPerfilData] = useState({});  // Estado para almacenar los datos del perfil
+    const [userId, setUserId] = useState(null);  // Estado para almacenar el ID del usuario
     const router = useRouter();
 
+    // Obtener el ID del usuario del localStorage
     useEffect(() => {
-        // Obtener todas las categorías desde la API
+        const id = localStorage.getItem('userId');
+        if (id) {
+            setUserId(id);
+            // Obtener los datos del perfil una vez que el ID esté disponible
+        } else {
+            // Redirigir al inicio de sesión si no hay userId en localStorage
+            router.push('/iniciosesion');
+        }
+    }, [router]);
+
+    // Obtener los datos del perfil
+    const fetchPerfilData = () => {
+        if (userId) {
+            axios.get(`http://localhost:3000/usuario/perfil/${userId}`)
+                .then(res => {
+                    const perfil = res.data[0]; // Accedemos al primer objeto del array
+                    setPerfilData(perfil); // Guardamos los datos en el estado
+                })
+                .catch(err => console.error('Error fetching perfil data:', err));
+        }
+    };
+
+    // Obtener todas las categorías desde la API
+    useEffect(() => {
         axios.get('http://localhost:3000/contenido-multimedia/')
             .then(response => {
-                console.log(response.data)
-                // Extraer categorías únicas de la respuesta
+                console.log(response.data);
                 const categoriasUnicas = [...new Set(response.data.map(item => item.categoria))];
                 setCategories(categoriasUnicas);
 
@@ -48,6 +73,10 @@ const Audiovisual = () => {
         router.push(`/infoVideo?idvideo=${idvideo}`);
     };
 
+    useEffect(() => {
+        fetchPerfilData();
+    }, [userId]);    
+
     return (
         <main>
             <section className={style.contenedor}>    
@@ -57,10 +86,10 @@ const Audiovisual = () => {
                     </div>
                     <div className={style.fotoPerfilContainer}>
                         <img 
-                        src="./fotoPerfil.png" 
-                        alt="Perfil" 
-                        className={style.fotoPerfil} 
-                        onClick={() => router.push('/Perfil')} // Redirige al perfil al hacer clic en la imagen
+                          src={perfilData.foto ? perfilData.foto : "./fotoPerfil.png"}  // Usar la URL de la base de datos o una imagen predeterminada
+                          alt="Perfil" 
+                          className={style.fotoPerfil} 
+                          onClick={() => router.push('/Perfil')}  // Redirige al perfil al hacer clic en la imagen
                         />
                     </div>
                 </div>
@@ -87,8 +116,14 @@ const Audiovisual = () => {
                         </div>
                     ))}
                 </div>
-                <Link href="./components/Agregar" className={style.Agregar}>Agregar Video</Link>
-                <Link href="./components/eliminar" className={style.Agregar}>Eliminar Video</Link>
+
+                {/* Mostrar los botones de "Agregar" y "Eliminar" solo si admin es true */}
+                {perfilData.admin && (
+                    <>
+                        <Link href="./components/Agregar" className={style.Agregar}>Agregar Video</Link>
+                        <Link href="./components/eliminar" className={style.Agregar}>Eliminar Video</Link>
+                    </>
+                )}
             </section>
             <Footer />
         </main>
