@@ -64,7 +64,7 @@ const InicioSesion = () => {
                             onChange={(e) => setContraseña(e.target.value)} // Capturar la contraseña
                         />
                         <div className={style.contenedorP}>
-                            <a href="">¿Olvidaste tu contraseña?</a>
+                            <a href="./components/NuevaContrasena">¿Olvidaste tu contraseña?</a>
                         </div>
                     </div>
                     <div className={style.botonRegistrarse}>
