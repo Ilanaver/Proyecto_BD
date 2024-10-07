@@ -10,20 +10,22 @@
     .contenedorImagen{
     display: flex;
     justify-content: center;
-    margin-top: 75px;
+    margin-top: 30%;
     }
     .contenedorTexto{
     display: flex;
     justify-content: center;
-    align-items: center;
+    text-align: center;
     flex-wrap: wrap;
-    width: 363px;
+    width: 100%;
+    margin-top: 5%;
+    margin-bottom: 65%;
     }
     .ImagenPrincipal{
     width: 214px;
     height: 138px;
     }
-    .palabrasIniciio{
+    .palabrasInicio{
     color: #0F77F0;
     }
     .mismoLugar{

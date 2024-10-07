@@ -11,10 +11,10 @@ export default function Home() {
           <div className={styles.PaginaPrincipal}>
               <div className={styles.contenedorParteArriba}>
                   <div className={styles.contenedorImagen}>
-                     <img className={styles.ImagenPrincipal} src="" alt="logo pagina"/> 
+                     <img className={styles.ImagenPrincipal} src="./logo.png" alt="logo pagina"/> 
                   </div>
                   <div className={styles.contenedorTexto}>
-                      <h2> <span className={styles.palabrasInicio}>Aprendé</span>, <span className={styles.palabrasInicio}>gestioná</span> y <span className={styles.palabrasInicio}>consultá</span> en un <span className={styles.palabrasInicio}>mismo lugar</span></h2>
+                      <h2> <span className={styles.palabrasInicio}>Aprendé</span>, <span className={styles.palabrasInicio}>gestioná</span> y <span className={styles.palabrasInicio}>consultá</span> en un mismo lugar</h2>
                   </div>
                   <div className={styles.contenedorInicioSesion}>
                       <div className={styles.botonRegistrarse}>
