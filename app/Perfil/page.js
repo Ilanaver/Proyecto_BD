@@ -51,7 +51,7 @@ const Perfil = () => {
         axios.patch('http://localhost:3000/usuario/cambiar-foto-perfil', formData)
             .then(res => {
                 alert('Foto de perfil actualizada exitosamente');
-                fetchPerfilData();  // Actualizamos los datos del perfil
+                fetchPerfilData(res);  // Actualizamos los datos del perfil
                 setIsInputVisible(false);  // Ocultar el input al actualizar la imagen
             })
             .catch(err => {

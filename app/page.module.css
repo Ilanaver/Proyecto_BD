@@ -1,69 +1,94 @@
 @media screen and (max-width: 600px) {
 
-
     .PaginaPrincipal{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
     }
+
     .contenedorImagen{
-    display: flex;
-    justify-content: center;
-    margin-top: 75px;
+        display: flex;
+        justify-content: center;
+        margin-top: 75px;
     }
+
     .contenedorTexto{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    width: 363px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        width: 363px;
+        text-align: center;
     }
+
     .ImagenPrincipal{
-    width: 214px;
-    height: 138px;
+        width: 214px;
+        height: 138px;
     }
-    .palabrasIniciio{
-    color: #0F77F0;
+
+    .palabrasInicio{
+        color: #0F77F0;
     }
+
     .mismoLugar{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 5px;
     }
+
     .contenedorParteArriba{
-    margin-bottom: 180px;
+        margin-bottom: 180px;
     }
+
     .contenedorInicioSesion{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
     }
-    .botonRegistrarse{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #0F77F0;
-    border-radius: 15px;
-    width: 328px;
-    height: 56px;
-    
-    
+
+    .botonRegistrarse button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #0F77F0;
+        border-radius: 25px;
+        width: 328px;
+        height: 56px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease;
+        border: none; /* Elimina el borde por defecto */
+        color: white; /* Asegura que el texto sea blanco */
+        font-size: 18px; /* Ajusta el tamaño del texto */
+        font-weight: bold;
+        cursor: pointer;
+        padding: 0; /* Elimina el padding interno que pueda causar el recuadro */
     }
-    .botonRegistrarse a{
-        text-decoration: none;
-        color: white;
+
+    .botonRegistrarse button:hover{
+        background-color: #0056b3;
     }
+
     .contenedorP{
         display: flex;
         flex-direction: column;
         align-items: center;
     }
+
     .contenedorP a{
-            color: #444444;
-            text-decoration: none;
-        }
+        text-align: center;
+        color: #444444;
+        text-decoration: none;
+        font-size: 14px;
+        background: none;
+        border: none;
+        cursor: pointer;
     }
+
+    .contenedorP a:hover{
+        color: #0F77F0;
+    }
+}
