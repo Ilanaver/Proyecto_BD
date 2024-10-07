@@ -1,53 +1,5 @@
 @media screen and (max-width: 600px) {
 
-    .PaginaPrincipal{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-    }
-
-    .contenedorImagen{
-    display: flex;
-    justify-content: center;
-    margin-top: 75px;
-    }
-
-    .contenedorTexto{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    width: 363px;
-    }
-
-    .ImagenPrincipal{
-        width: 214px;
-        height: 138px;
-    }
-    .palabrasIniciio{
-    color: #0F77F0;
-    }
-
-    .mismoLugar{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 5px;
-    }
-
-    .contenedorParteArriba{
-        margin-bottom: 180px;
-    }
-
-    .contenedorInicioSesion{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-    }
-
     .botonRegistrarse button{
         display: flex;
         justify-content: center;
@@ -89,4 +41,70 @@
     .contenedorP a:hover{
         color: #0F77F0;
     }
+    .PaginaPrincipal{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        }
+        .contenedorImagen{
+        display: flex;
+        justify-content: center;
+        margin-top: 30%;
+        }
+        .contenedorTexto{
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        flex-wrap: wrap;
+        width: 100%;
+        margin-top: 5%;
+        margin-bottom: 65%;
+        }
+        .ImagenPrincipal{
+        width: 214px;
+        height: 138px;
+        }
+        .palabrasInicio{
+        color: #0F77F0;
+        }
+        .mismoLugar{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 5px;
+        }
+      
+        .contenedorInicioSesion{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        }
+        .botonRegistrarse{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+     
+        }
+        .boton{
+            background-color: #0F77F0;
+            border-radius: 15px;
+            width: 328px;
+            height: 56px;
+            outline: none;
+            border: none;
+            text-decoration: none;
+            color: white;
+        }
+        .contenedorP{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .contenedorP a{
+                color: #444444;
+                text-decoration: none;
+            }
 }
