@@ -37,6 +37,7 @@
         background-color: #EFEFEF;
         border: transparent;
         border-radius: 12px;
+        outline: none;
     }
     
     .input:focus {

@@ -18,11 +18,11 @@ export default function Home() {
                   </div>
                   <div className={styles.contenedorInicioSesion}>
                       <div className={styles.botonRegistrarse}>
-                          <a href="registro">Registrarse</a>
+                          <a href="registro"><button className={styles.boton}>Registrarse</button></a>
                       </div>
                       <div className={styles.contenedorP}>
                           <a href="#">¿Ya tenés una cuneta?</a>
-                          <a href="./InicioSesion">InicioSesion</a>
+                          <a href="./iniciosesion">InicioSesion</a>
                       </div>
                   </div>
               </div>

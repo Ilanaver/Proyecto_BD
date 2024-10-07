@@ -47,7 +47,7 @@ const Academia = () => {
                 </div>
                 <div className={style.card}>
                     <div className={style.cardimg}>
-                        <img src="/asesor.png" alt="Tu asesor"/>
+                        <img src="./Asesor.png" alt="Tu asesor"/>
                     </div>
                     <div className={style.cardcontent}>
                         <h3>Tu asesor</h3>

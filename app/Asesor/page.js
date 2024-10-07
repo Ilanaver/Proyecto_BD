@@ -1,37 +1,44 @@
-/*'use client';
-import React, { useState, useEffect } from 'react';
+'use client';
+import React, { useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client';
-<<<<<<< HEAD:app/Asesor/page.js
 import Titulo from '../components/Titulo/Titulo';
-=======
 import styles from './asesor.module.css';
->>>>>>> 6b0b41aaf02eb93f734123b7c9c4ca92ed51a292:app/Asesor/Asesor.js
-
-//const socket = io.connect('http://localhost:3001');
 
 const asesor = ({ userId, asesorId }) => {
   const [message, setMessage] = useState('');
   const [chat, setChat] = useState([]);
+  const socket = useRef();
 
   useEffect(() => {
-    socket.on('receiveMessage', (data) => {
+    socket.current = io('http://localhost:3001', {
+      transports: ['websocket'],
+    });
+
+    socket.current.on('connect', () => {
+      console.log('Conectado al servidor de socket');
+    });
+
+    socket.current.on('receiveMessage', (data) => {
       setChat((prev) => [...prev, data]);
     });
 
     return () => {
-      socket.off('receiveMessage');
+      if (socket.current) {
+        socket.current.off('receiveMessage');
+        socket.current.disconnect();
+      }
     };
   }, []);
 
   const sendMessage = () => {
-    if (message) {
+    if (message && socket.current) {
       const data = {
         senderId: userId,
         receiverId: asesorId,
         message: message,
-        senderType: 'user', 
+        senderType: 'user',
       };
-      socket.emit('sendMessage', data);
+      socket.current.emit('sendMessage', data);
       setChat((prev) => [...prev, data]);
       setMessage('');
     }
@@ -39,34 +46,29 @@ const asesor = ({ userId, asesorId }) => {
 
   return (
     <div className={styles.chatapp}>
-      <header>
+      <div className={styles.contenedorTitulo}>
         <Titulo texto={"Agregar Contenido"}/>
-      </header>
-      <div className={styleschat-container}>
-        <div className={stylesmessages}>
+      </div>
+      <div className={styles.chatContainer}>
+        <div className={styles.messages}>
           {chat.map((msg, index) => (
-            <div
-              key={index}
-              className={`styles.message ${
-                msg.senderType === 'user' ? 'sent' : 'received' 
-              }`}
-            >
-              <p>{msg.message}</p>
+            <div key={index} className={styles.message }>
+              <p className={styles.mensaje}>{msg.message}</p>
             </div>
           ))}
         </div>
-        <div className={styles.input-area}>
+        <div className={styles.inputArea}>
           <input
             type="text"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Mensaje..."
           />
-          <button className={styles.send-btn} onClick={sendMessage}>➤</button>
+          <button className={styles.sendBtn} onClick={sendMessage}>➤</button>
         </div>
       </div>
     </div>
   );
 };
 
-export default asesor;*/
+export default asesor;

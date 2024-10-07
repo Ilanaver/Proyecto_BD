@@ -34,9 +34,7 @@
     justify-content: center;
     margin-top: 5px;
     }
-    .contenedorParteArriba{
-    margin-bottom: 180px;
-    }
+  
     .contenedorInicioSesion{
     display: flex;
     flex-direction: column;
@@ -48,14 +46,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #0F77F0;
-    border-radius: 15px;
-    width: 328px;
-    height: 56px;
-    
-    
+ 
     }
-    .botonRegistrarse a{
+    .boton{
+        background-color: #0F77F0;
+        border-radius: 15px;
+        width: 328px;
+        height: 56px;
+        outline: none;
+        border: none;
         text-decoration: none;
         color: white;
     }

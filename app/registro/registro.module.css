@@ -34,6 +34,7 @@
         background-color: #EFEFEF;
         border: transparent;
         border-radius: 12px;
+        outline: none;
     }
     .input:focus{
         border: solid 1px #0F77F0;
@@ -44,6 +45,7 @@
         justify-content: center;
         align-items: center;
         gap: 5%;
+        margin-top: 10%;
     }
     .botonRegistrarse {
         display: flex;

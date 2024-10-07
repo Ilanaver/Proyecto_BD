@@ -4,7 +4,7 @@
     
     
     
-    .chat-container {
+    .chatContainer {
         width: 100%;
         height: 100%;
         background-color: white;
@@ -15,9 +15,7 @@
         position: relative;
     }
     
-<<<<<<< HEAD
-=======
-    header {
+    .contenedorTitulo {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -26,14 +24,6 @@
         border-bottom: 1px solid #ddd;
         margin-top: 5%;
         margin-bottom: 15%;
-    }
->>>>>>> 6b0b41aaf02eb93f734123b7c9c4ca92ed51a292
-    
-    
-    .back-btn, .profile-btn {
-        background: none;
-        border: none;
-        font-size: 24px;
     }
     
     .messages {
@@ -46,6 +36,9 @@
     
     .message {
         margin-bottom: 10px;
+    }
+    .mensaje{
+        background-color: rgb(145, 142, 142);
     }
     
     .received {
@@ -61,45 +54,34 @@
     }
     
     /* Input area */
-    .input-area {
+    .inputArea {
         display: flex;
         padding: 10px;
         background-color: white;
         border-top: 1px solid #ddd;
+        position: fixed; 
+        bottom: 0; 
+        left: 0;
+        width: 100%;
+        padding: 10px;
+        align-items: center;
+        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); 
+        z-index: 10; 
     }
-    
-    .input-area input {
+    .inputArea input {
         flex: 1;
         padding: 10px;
-        border: 1px solid #ddd;
+        border: 1px solid #007bff;
         border-radius: 20px;
         margin-right: 10px;
+        outline: none;
     }
     
-    .send-btn {
+    .sendBtn {
         background: none;
         border: none;
         font-size: 24px;
         color: #007bff;
         cursor: pointer;
     }
-    
-    .bottom-nav {
-        display: flex;
-        justify-content: space-around;
-        padding: 10px;
-        background-color: white;
-        border-top: 1px solid #ddd;
-    }
-    
-    .nav-item {
-        font-size: 16px;
-        color: #666;
-        text-decoration: none;
-    }
-    
-    .nav-item.active {
-        color: #007bff;
-    }
-    
     }
