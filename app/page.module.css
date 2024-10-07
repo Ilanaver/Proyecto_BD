@@ -8,27 +8,25 @@
     }
 
     .contenedorImagen{
-        display: flex;
-        justify-content: center;
-        margin-top: 75px;
+    display: flex;
+    justify-content: center;
+    margin-top: 75px;
     }
 
     .contenedorTexto{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-        width: 363px;
-        text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 363px;
     }
 
     .ImagenPrincipal{
         width: 214px;
         height: 138px;
     }
-
-    .palabrasInicio{
-        color: #0F77F0;
+    .palabrasIniciio{
+    color: #0F77F0;
     }
 
     .mismoLugar{
