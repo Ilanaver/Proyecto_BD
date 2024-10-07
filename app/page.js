@@ -1,3 +1,4 @@
+'use client'
 import Image from "next/image";
 import './page.module.css';
 import Link from "next/link";
@@ -18,11 +19,10 @@ export default function Home() {
                   </div>
                   <div className={styles.contenedorInicioSesion}>
                       <div className={styles.botonRegistrarse}>
-                          <a href="registro"><button className={styles.boton}>Registrarse</button></a>
+                        <button type="submit" onClick={() => window.location.href = '/registro'}>Registrarse</button>
                       </div>
                       <div className={styles.contenedorP}>
-                          <a href="#">¿Ya tenés una cuneta?</a>
-                          <a href="./iniciosesion">InicioSesion</a>
+                          <a href="./iniciosesion">¿Ya tenés una cuenta? <br /> InicioSesion</a>
                       </div>
                   </div>
               </div>

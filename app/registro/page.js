@@ -29,10 +29,14 @@ const Registro = () => {
             const response = await axios.post('http://localhost:3000/usuario/registro', usuario);
 
             if (response.status === 201) {
-                // Si el registro es exitoso
+                const idPerfil = response.data.idperfil;
+                // Si el registro es exitoso, guardar el ID del perfil en localStorage
+                localStorage.setItem('userId', idPerfil);
+                
                 setMensaje('Usuario registrado exitosamente');
-                // Aquí podrías redirigir a otra página, por ejemplo:
-                window.location.href = '/iniciosesion'
+                
+                // Redirigir a la página principal o la que desees, no hace falta iniciar sesión nuevamente
+                router.push('/Gestor'); // Redirigir a la página del Gestor o la que corresponda
             } else {
                 // Si hay algún error, mostrar el mensaje
                 setMensaje(response.data.message || 'Error al registrar el usuario');
