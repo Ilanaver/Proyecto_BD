@@ -42,7 +42,7 @@ const Academia = () => {
                         <p>Aprendé algo nuevo todos los días</p>
                     </div>
                     <div className={style.cardarrow}>
-                       <a href="../#"><img  src="/flechaderecha.png" alt="Flecha"/></a> 
+                       <a href="./diaria"><img  src="/flechaderecha.png" alt="Flecha"/></a> 
                     </div>
                 </div>
                 <div className={style.card}>
