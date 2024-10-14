@@ -47,7 +47,7 @@ const asesor = ({ userId, asesorId }) => {
   return (
     <div className={styles.chatapp}>
       <div className={styles.contenedorTitulo}>
-        <Titulo texto={"Agregar Contenido"}/>
+        <Titulo texto={"Tu Asesor"}/>
       </div>
       <div className={styles.chatContainer}>
         <div className={styles.messages}>

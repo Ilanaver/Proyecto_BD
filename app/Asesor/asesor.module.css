@@ -35,10 +35,19 @@
     }
     
     .message {
+        border-radius: 10px;
+        display: inline-block;
+        max-width: 100%;
+        word-wrap: break-word; 
         margin-bottom: 10px;
+        
     }
     .mensaje{
-        background-color: rgb(145, 142, 142);
+        width: 50%;
+        background-color: rgb(180, 176, 176);
+        border-radius: 8px;
+        padding: 4%;
+
     }
     
     .received {
