@@ -8,9 +8,8 @@ import { useRouter } from 'next/navigation';
 import Link from "next/link";
 import Subtitulo from "../components/Subtitulo/Subtitulo";
 
-const diara = () => {
-
-    const [perfilData, setPerfilData] = useState();  // Estado para almacenar los datos del perfil
+const Diara = () => {
+    const [perfilData, setPerfilData] = useState({});  // Estado para almacenar los datos del perfil
     const [userId, setUserId] = useState(null);  // Estado para almacenar el ID del usuario
     const router = useRouter();
     
@@ -29,7 +28,6 @@ const diara = () => {
         const id = localStorage.getItem('userId');
         if (id) {
             setUserId(id);
-            // Obtener los datos del perfil una vez que el ID esté disponible
         } else {
             // Redirigir al inicio de sesión si no hay userId en localStorage
             router.push('/iniciosesion');
@@ -49,7 +47,7 @@ const diara = () => {
                     </div>
                     <div className={styles.fotoPerfilContainer}>
                         <img 
-                            src={"./fotoPerfil.png"}  // Usar la URL de la base de datos o una imagen predeterminada
+                            src={perfilData.foto ? perfilData.foto : "./fotoPerfil.png"}  // Usar la URL de la base de datos o una imagen predeterminada
                             alt="Perfil" 
                             className={styles.fotoPerfil} 
                             onClick={() => router.push('/Perfil')}  // Redirige al perfil al hacer clic en la imagen
@@ -82,4 +80,4 @@ const diara = () => {
     );
 };
 
-export default diara;
+export default Diara;
