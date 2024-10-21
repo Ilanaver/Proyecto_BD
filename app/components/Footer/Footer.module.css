@@ -10,8 +10,9 @@
 
     .footerPagina {
         display: flex;
-        justify-content: space-evenly;
+        justify-content: center;
         text-decoration: none;
+        gap: 15%;
         margin: 0;
         padding: 10px 0;
     }
@@ -19,14 +20,13 @@
     .navegadorFooter {
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
         list-style: none;
         color: #787878;
     }
     
     .navegadorFooter img {
-        width: 65px;
+        width: 55px;
         height: 50px;
     }
 }
