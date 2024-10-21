@@ -23,7 +23,7 @@ const Academia = () => {
                 </div>
                 <div className={style.card}>
                     <div className={style.cardimg}>
-                       <a href="./definicion"> <img src="/contenidoaudiovisual.png" alt="Contenido Audiovisual"/></a>
+                       <img src="/contenidoaudiovisual.png" alt="Contenido Audiovisual"/>
                     </div>
                     <div className={style.cardcontent}>
                         <h3>Contenido Audiovisual</h3>
