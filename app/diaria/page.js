@@ -9,19 +9,30 @@ import Link from "next/link";
 import Subtitulo from "../components/Subtitulo/Subtitulo";
 
 const Diara = () => {
-    const [perfilData, setPerfilData] = useState({});  // Estado para almacenar los datos del perfil
-    const [userId, setUserId] = useState(null);  // Estado para almacenar el ID del usuario
+    const [perfilData, setPerfilData] = useState({});
+    const [userId, setUserId] = useState(null);
+    const [lecciones, setLecciones] = useState([]);
     const router = useRouter();
-    
+
+    // Obtener el perfil del usuario
     const fetchPerfilData = () => {
         if (userId) {
             axios.get(`http://localhost:3000/usuario/perfil/${userId}`)
                 .then(res => {
-                    const perfil = res.data[0]; // Accedemos al primer objeto del array
-                    setPerfilData(perfil); // Guardamos los datos en el estado
+                    const perfil = res.data[0];
+                    setPerfilData(perfil);
                 })
                 .catch(err => console.error('Error fetching perfil data:', err));
         }
+    };
+
+    // Obtener lecciones diarias por fecha
+    const fetchLeccionesByFecha = (fecha) => {
+        axios.get(`http://localhost:3000/leccion-diaria/${fecha}`)
+            .then(res => {
+                setLecciones(res.data);
+            })
+            .catch(err => console.error('Error fetching lecciones:', err));
     };
 
     useEffect(() => {
@@ -29,16 +40,17 @@ const Diara = () => {
         if (id) {
             setUserId(id);
         } else {
-            // Redirigir al inicio de sesión si no hay userId en localStorage
             router.push('/iniciosesion');
         }
     }, [router]);
 
     useEffect(() => {
         fetchPerfilData();
+        const today = new Date().toISOString().split('T')[0];
+        fetchLeccionesByFecha(today);
     }, [userId]);
 
-    return(
+    return (
         <>
             <section>
                 <div className={styles.headerContainer}>
@@ -47,33 +59,40 @@ const Diara = () => {
                     </div>
                     <div className={styles.fotoPerfilContainer}>
                         <img 
-                            src={perfilData.foto ? perfilData.foto : "./fotoPerfil.png"}  // Usar la URL de la base de datos o una imagen predeterminada
+                            src={perfilData.foto ? perfilData.foto : "./fotoPerfil.png"}
                             alt="Perfil" 
                             className={styles.fotoPerfil} 
-                            onClick={() => router.push('/Perfil')}  // Redirige al perfil al hacer clic en la imagen
+                            onClick={() => router.push('/Perfil')}
                         />
                     </div>
                 </div>
+                
+                {/* Mostrar lecciones diarias */}
                 <div className={styles.contenedortarjetas}>
-                    <div className={styles.cards}>
-                        <Subtitulo texto={"Lección 1"}/>
-                        <Link href="https://forms.gle/PxGmZ7DoSsXvrvDi7" passHref>
-                            <button className={styles.boton}>Ir a la lección diaria</button>
-                        </Link>
-                    </div>
-                    <div className={styles.cards}>
-                        <Subtitulo texto={"Lección 2"}/>
-                        <Link href="https://forms.gle/mUJuCemviN8zqWap8" passHref>
-                            <button className={styles.boton}>Ir a la lección diaria</button>
-                        </Link>
-                    </div>
-                    <div className={styles.cards}>
-                        <Subtitulo texto={"Lección 3"}/>
-                        <Link href="https://forms.gle/GgqxQHJpAAKrN6Cr6" passHref>
-                            <button className={styles.boton}>Ir a la lección diaria</button>
-                        </Link>
-                    </div>
+                    {lecciones.map((leccion, index) => (
+                        <div className={styles.cards} key={index}>
+                            <Subtitulo texto={leccion.titulo} />
+                            <p>{leccion.descripcion}</p>
+                            <Link href={leccion.contenido} passHref>
+                                <button className={styles.boton}>Ir a la lección diaria</button>
+                            </Link>
+                        </div>
+                    ))}
                 </div>
+
+                {/* Tres botones para agregar, actualizar, eliminar */}
+                <div className={styles.botonContainer}>
+                    <button className={styles.botonAccion} onClick={() => router.push('/leccionmanager')}>
+                        Agregar Lección
+                    </button>
+                    <button className={styles.botonAccion} onClick={() => router.push('/leccionmanager')}>
+                        Actualizar Lección
+                    </button>
+                    <button className={styles.botonAccion} onClick={() => router.push('/leccionmanager')}>
+                        Eliminar Lección
+                    </button>
+                </div>
+
                 <Footer />
             </section>
         </>
