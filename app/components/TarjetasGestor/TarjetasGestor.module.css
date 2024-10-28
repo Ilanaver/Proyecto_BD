@@ -22,6 +22,7 @@
     }
     .imagenIngresos{
         width: 100px;
+        height: 100%;
     }
     .Infotarjetas{
         display: flex;

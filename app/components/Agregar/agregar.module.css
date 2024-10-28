@@ -1,85 +1,125 @@
-@media (max-width: 600px) {
-  .container {
-      padding: 1rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #f5f7fa;
-  }
-  .returnLink {
-    font-size: 1rem;
-    color: #fff;
-    background-color: #3278FB;
-    padding: 10px 10px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s, transform 0.3s;
-    display: inline-block;
-    border: none;
-}
-  .header {
-      width: 100%;
-      text-align: left;
-      margin-bottom: 20px;
-  }
+@media screen and (max-width: 550px) {
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
 
-  .formContainer {
-      background-color: #ffffff;
-      padding: 15px;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 100%;
-  }
+    .header {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        padding: 10px;
+    }
+    .contenedorLink{
+        font-size: 1rem;
+        color: #fff;
+        background-color: #3278FB;
+        padding: 10px 10px;
+        border-radius: 5px;
+        text-decoration: none;
+        display: inline-block;
 
-  .inputGroup {
-      margin-bottom: 15px;
-  }
+    }
 
-  .inputGroup label {
-      display: block;
-      margin-bottom: 5px;
-      color: #555;
-      font-weight: 500;
-  }
+    .returnLink {
+        align-self: flex-start;
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: transparent;
+        border: none;
+        outline: none;
+    }
 
-  .input, .textarea, .select {
-      width: 100%;
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      box-sizing: border-box;
-      font-size: 1rem;
-      color: #333;
-  }
 
-  .textarea {
-      height: 100px;
-      resize: vertical;
-  }
+    .Titulo {
+        margin-top: 20px; /* Espacio entre el botón de volver y el título */
+        color: black;
+        font-size: 20px;
+        text-align: center;
+        width: 100%;
+    }
 
-  .button {
-      background-color: #3278FB;
-      color: #ffffff;
-      border: none;
-      padding: 10px;
-      border-radius: 8px;
-      cursor: pointer;
-      width: 100%;
-      font-size: 1rem;
-      transition: background-color 0.3s, color 0.3s;
-      font-weight: bold;
-      box-shadow: 0 4px 10px rgba(50, 120, 251, 0.2);
-  }
+    .main {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+    }
 
-  .button:hover {
-      background-color: #275fb3;
-      color: #ffffff;
-  }
+    .formContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 20px;
+    }
 
-  
+    .inputAgregar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 15px;
+    }
 
-  
+    .inputGroup {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 328px; /* Ajusta el ancho máximo para alinear con el botón */
+        gap: 8px;
+    }
+
+    .input, .textarea, .select, .button {
+        width: 100%; /* Todos los elementos ocuparán el ancho total del contenedor */
+        padding: 10px;
+        border-radius: 12px;
+        border: 1px solid #EFEFEF;
+        background-color: #EFEFEF;
+        outline: none;
+        text-align: center;
+    }
+
+    .input, .textarea, .select {
+        border: solid 2px #0F77F0;
+    }
+
+    .textarea {
+        min-height: 100px;
+        resize: vertical;
+    }
+
+    .button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #0F77F0;
+        border-radius: 15px;
+        width: 328px;
+        height: 56px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        border: none;
+    }
+
+    .accessDenied {
+        text-align: center;
+        color: #444444;
+    }
+
+    .accessDenied h2 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .accessDenied p {
+        font-size: 16px;
+    }
 }

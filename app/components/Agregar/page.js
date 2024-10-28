@@ -114,18 +114,22 @@ export default function Agregar() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <button onClick={() => router.back()} className={styles.returnLink}>Volver</button>      
-        <Titulo texto={"Agregar Contenido"} />
+        <div className={styles.contenedorLink}>
+          <button onClick={() => router.back()} className={styles.returnLink}>Volver</button>
+        </div>      
+        <Titulo className={styles.Titulo} texto={"Agregar Contenido"} />
       </div>
 
       <main className={styles.main}>
         {isAdmin ? ( // Condición para mostrar el formulario o el mensaje
           <div className={styles.formContainer}>
+            <div className={styles.inputAgregar}>
             <div className={styles.inputGroup}>
               <label htmlFor="category">Seleccione una opción:</label>
               <select id="category" value={category} onChange={(e) => setCategory(e.target.value)} className={styles.select}>
                 <option value="definicion">Definición de términos</option>
                 <option value="audiovisual">Audiovisual</option>
+                <option value="diaria">Leccion diaria</option>
               </select>
             </div>
 
@@ -201,6 +205,32 @@ export default function Agregar() {
                 />
               </div>
             )}
+            {category === 'diaria' && (
+              <>
+                <div className={styles.inputGroup}>
+                  <label htmlFor="videoLink">Enlace del video</label>
+                  <input
+                    type="text"
+                    id="videoLink"
+                    placeholder="Ingrese el enlace del video aquí"
+                    value={videoLink}
+                    onChange={(e) => setVideoLink(e.target.value)}
+                    className={styles.input}
+                  />
+                </div>
+                <div className={styles.inputGroup}>
+                  <label htmlFor="description">Descripción</label>
+                  <textarea
+                    id="description"
+                    placeholder="Ingrese la descripción aquí"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    className={styles.textarea}
+                  />
+                </div>
+              </>
+            )}
+            </div>
 
             <button onClick={addContent} className={styles.button}>Agregar Contenido</button>
           </div>
