@@ -47,6 +47,7 @@ const Diara = () => {
     useEffect(() => {
         fetchPerfilData();
         const today = new Date().toISOString().split('T')[0];
+        console.log(today)
         fetchLeccionesByFecha(today);
     }, [userId]);
 
