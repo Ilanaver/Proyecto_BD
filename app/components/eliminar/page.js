@@ -84,11 +84,11 @@ export default function Eliminar() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.header1}>
-        <button onClick={() => router.back()} className={styles.returnLink}>Volver</button>
-      </div>
-      <div className={styles.header2}>
-        <Titulo texto={"Eliminar Contenido"} className={styles.titulo} />
+      <div className={styles.header}>
+        <div className={styles.contenedorLink}>
+          <button onClick={() => router.back()} className={styles.returnLink}>Volver</button>
+        </div>      
+        <Titulo className={styles.Titulo} texto={"Eliminar Contenido"} />
       </div>
 
       <main className={styles.main}>
@@ -99,6 +99,7 @@ export default function Eliminar() {
               <select id="category" value={category} onChange={(e) => setCategory(e.target.value)} className={styles.select}>
                 <option value="definicion">Definición de términos</option>
                 <option value="audiovisual">Audiovisual</option>
+                <option value="diaria">Leccion diaria</option>
               </select>
             </div>
 
@@ -113,6 +114,11 @@ export default function Eliminar() {
                 <option value="">Seleccione...</option>
                 {contentList.map((item, index) => (
                   <option key={index} value={category === 'definicion' ? item.idtermino : item.idvideo}>
+                    {item.titulo}
+                  </option>
+                ))}
+                 {contentList.map((item, index) => (
+                  <option key={index} value={category === 'diaria' ? item.idtermino : item.idvideo}>
                     {item.titulo}
                   </option>
                 ))}

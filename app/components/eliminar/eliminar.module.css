@@ -1,107 +1,115 @@
-@media (max-width: 600px) {
-    .container {
-      padding: 1rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-      background-color: #f5f7fa;
-      min-height: 100vh;
-    }
-    .header1 {
-      width: 100%;
-      text-align: left;
-    }
-    .header2 {
-      width: 100%;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-  
-    .returnLink {
-      text-align: left;
-      font-size: 1rem;
-      color: #fff;
-      background-color: #3278FB;
-      padding: 10px 10px;
-      border-radius: 5px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background-color 0.3s, transform 0.3s;
-      display: inline-block;
-      border: none;
-      text-align: left;
-    }
-  
-    .formContainer {
-      background-color: #ffffff;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      width: 90%;
-      max-width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      margin-top: 20px;
-      margin-bottom: auto;
-      overflow-y: auto; /* Añadido */
-      max-height: 60vh; /* Añadido */
-    }
-  
-    .inputGroup {
-      margin-bottom: 15px;
-    }
-  
-    .inputGroup label {
-      display: block;
-      margin-bottom: 5px;
-      color: #555;
-      font-weight: 500;
-      font-size: 0.9rem;
-    }
-  
-    .input, .textarea, .select {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      box-sizing: border-box;
-      font-size: 1rem;
-      color: #333;
-      background-color: #f9f9f9;
-    }
-  
-    .textarea {
-      height: 100px;
-      resize: vertical;
-    }
-  
-    .select {
-      max-height: 150px; /* Añadido */
-      overflow-y: auto; /* Añadido */
-    }
-  
-    .button {
-      background-color: #3278FB;
-      color: #ffffff;
-      border: none;
-      padding: 10px;
-      border-radius: 8px;
-      cursor: pointer;
-      width: 100%;
-      font-size: 1rem;
-      transition: background-color 0.3s, color 0.3s, transform 0.2s;
-      font-weight: bold;
-      box-shadow: 0 4px 10px rgba(50, 120, 251, 0.2);
-      text-align: center;
-      margin-top: 10px;
-    }
-  
-    .button:hover {
-      background-color: #275fb3;
-      color: #ffffff;
-      transform: scale(1.05);
-    }
-  }
-  
+/* Estilos principales para el contenedor y headers */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 10px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding: 10px;
+}
+.contenedorLink{
+  font-size: 1rem;
+  color: #fff;
+  background-color: #3278FB;
+  padding: 10px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+
+}
+
+.returnLink {
+  align-self: flex-start;
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+/* Main y form container */
+.main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: 400px;
+  width: 100%;
+  padding: 20px;
+  border: 1px solid #EFEFEF;
+  border-radius: 12px;
+  background-color: #FFFFFF;
+}
+
+/* Grupos de inputs y selectores */
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+}
+
+.label {
+  font-size: 16px;
+  color: black;
+  align-self: flex-start;
+  margin-bottom: 5px;
+}
+
+.select, .button {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #EFEFEF;
+  background-color: #EFEFEF;
+  outline: none;
+  font-size: 16px;
+  text-align: center;
+}
+
+.select, .button {
+  border:solid 2px #0F77F0;
+}
+
+/* Estilo específico para el botón de eliminar */
+.button {
+  background-color: #0F77F0;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+}
+
+/* Estilo de mensaje de acceso denegado */
+.accessDenied {
+  text-align: center;
+  color: #444444;
+  padding: 20px;
+}
+
+.accessDenied h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.accessDenied p {
+  font-size: 16px;
+}
