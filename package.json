@@ -9,11 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "apexcharts": "^3.41.0",
     "axios": "^1.7.2",
     "jspdf": "^2.5.1",
     "mssql": "^10.0.2",
     "next": "^14.2.5",
     "react": "^18.3.1",
+    "react-apexcharts": "^1.5.0",
     "react-dom": "^18.3.1",
     "socket.io": "^4.7.5",
     "socket.io-client": "^4.7.5"

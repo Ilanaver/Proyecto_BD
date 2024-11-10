@@ -150,8 +150,6 @@ const Gestor = () => {
       tipo = 2;
     } else if (datos.motivo === "gastos") {
       tipo = 1;
-      // Convertir la cantidad a negativa para gastos
-      cantidad = -Math.abs(datos.cantidad);
     } else {
       tipo = 3;
     }
@@ -259,7 +257,7 @@ const Gestor = () => {
             altText="imagen gastos"
             titulo="Gastos"
             onAgregar={manejarClick}
-            balanceInicial={saldoTipo[1] == 0 ? 0 : saldoTipo[1]}
+            balanceInicial={saldoTipo[1] == 0 ? 0 : `-${saldoTipo[1]}`}
           />
           <TarjetasGestor
             id={3}

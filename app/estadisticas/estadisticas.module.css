@@ -1,0 +1,141 @@
+/* /estadisticas.module.css */
+.estadisticasContainer{
+    padding-bottom: 95px;
+}/* Card contenedor principal */
+/* Card contenedor principal */
+.card {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #fff;
+}
+
+/* Contenedor para los botones de selección (Gastos/Ingesos) */
+.selectorContainer {
+    display: flex;
+    justify-content: left;  /* Alinea los botones a la izquierda */
+    gap: 10px; /* Espaciado entre los botones */
+}
+
+/* Estilo para los botones de selección */
+.selectorButton {
+    padding: 6px 12px;
+    font-size: 14px;  /* Tamaño más pequeño */
+    border: 2px solid #2196F3;
+    background-color: #fff;
+    color: #2196F3;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Efecto de hover para los botones */
+.selectorButton:hover {
+    background-color: #2196F3;
+    color: #fff;
+}
+
+/* Estilo cuando el botón está seleccionado */
+.selected {
+    background-color: #2196F3;
+    color: #fff;
+}
+
+/* Estilo para el encabezado de la card */
+.cardHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.cardHeader h2 {
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+}
+
+/* Contenedor del gráfico, centrado y espacio reservado para el gráfico */
+.chartContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    min-height: 250px; /* Reserva espacio para el gráfico */
+    text-align: center;
+    position: relative;
+}
+
+/* Espacio reservado para el gráfico cuando está cargando */
+.chartContainer .loader {
+    position: absolute; /* Ubicamos el loader en el centro del espacio reservado */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    color: #555;
+    width: 100%;
+    height: 100%;
+}
+
+/* Animación de spinner */
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-top: 4px solid #2196F3;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+}
+
+/* Animación de rotación del spinner */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Contenedor para mostrar el promedio */
+.cardContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* Texto que muestra el promedio */
+.promedioText {
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Contenedor del loader (cargando) */
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    color: #555;
+}
+
+/* Estilo adicional para asegurar que la card se vea bien */
+.cardContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 150px;
+    padding: 20px;
+}
+
+/* Fondo cuando no hay datos */
+.promedioText.noData {
+    font-size: 20px;
+    font-weight: normal;
+    color: #888;
+    text-align: center;
+}
