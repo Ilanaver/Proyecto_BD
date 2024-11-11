@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ReactApexChart from "react-apexcharts";
 import styles from '../estadisticas.module.css';
+import Spinner from "./Spinner";
 
 const SaldoPorMes = () => {
     const [tipo, setTipo] = useState(1); // 1 para ingresos, 2 para gastos
@@ -163,7 +164,7 @@ const SaldoPorMes = () => {
                 <h2>{tipo === 1 ? "Gastos por Mes" : "Ingresos por Mes"}</h2>
             </div>
             {loading ? (
-                <div className={styles.loader}>Cargando...</div>  // Indicador de carga
+                <Spinner />
             ) : (
                 <div className={styles.chartContainer}>
                     <ReactApexChart
@@ -174,6 +175,7 @@ const SaldoPorMes = () => {
                     />
                 </div>
             )}
+
         </div>
     );
 };

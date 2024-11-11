@@ -3,22 +3,23 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from '../estadisticas.module.css'; // Aquí pueden estar tus estilos personalizados
 import Spinner from "./Spinner";
-const PromedioDiario = () => {
-    const [tipo, setTipo] = useState(1); // 1 para gastos, 2 para ingresos
-    const [promedio, setPromedio] = useState(null); // Promedio diario
-    const [loading, setLoading] = useState(true); // Carga
 
-    // Obtener los datos del promedio diario de la API
-    const fetchPromedioDiario = async () => {
+const Top3Categorias = () => {
+    const [tipo, setTipo] = useState(1); // 1 para gastos, 2 para ingresos
+    const [categorias, setCategorias] = useState([]); // Almacena las 3 categorías
+    const [loading, setLoading] = useState(true); // Indicador de carga
+
+    // Obtener los datos de las top 3 categorías de la API
+    const fetchTop3Categorias = async () => {
         try {
             setLoading(true);  // Indicador de carga activado
             const userId = localStorage.getItem('userId'); // ID del usuario almacenado en localStorage
             const mes = new Date().getMonth() + 1; // Mes actual
             const ano = new Date().getFullYear(); // Año actual
-            const response = await axios.get(`http://localhost:3000/estadisticas/promedioDiario/${userId}/${tipo}/${mes}/${ano}`);
+            const response = await axios.get(`http://localhost:3000/estadisticas/top3cat/${userId}/${tipo}/${mes}/${ano}`);
             const data = response.data;
 
-            setPromedio(data); // Asignamos el promedio recibido de la API
+            setCategorias(data); // Asignamos las categorías recibidas de la API
         } catch (error) {
             console.error("Error fetching data:", error);
         } finally {
@@ -26,9 +27,9 @@ const PromedioDiario = () => {
         }
     };
 
-    // Usamos useEffect para obtener el promedio al montar el componente
+    // Usamos useEffect para obtener las top 3 categorías al montar el componente
     useEffect(() => {
-        fetchPromedioDiario();
+        fetchTop3Categorias();
     }, [tipo]); // Se vuelve a cargar si el tipo cambia
 
     const handleSelectChange = (selectedTipo) => {
@@ -52,24 +53,29 @@ const PromedioDiario = () => {
                 </button>
             </div>
             <div className={styles.cardHeader}>
-                <h2>{tipo === 1 ? "Promedio Diario de Gastos" : "Promedio Diario de Ingresos"}</h2>
+                <h2>{tipo === 1 ? "Top 3 Categorías de Gastos" : "Top 3 Categorías de Ingresos"}</h2>
             </div>
             <div className={styles.cardContent}>
                 {loading ? (
                     <Spinner />
                 ) : (
-                    <div className={styles.promedioContainer}>
-                        <p className={styles.promedioText}>
-                            {promedio !== null && promedio !== undefined
-                                ? `$${promedio}`
-                                : 'No hay datos disponibles'}
-                        </p>
+                    <div className={styles.top3Container}>
+                        {categorias.length > 0 ? (
+                            <ul className={styles.top3List}>
+                                {categorias.map((categoria, index) => (
+                                    <li key={index} className={styles.top3Item}>
+                                        <strong>{categoria.categoria}:</strong> ${categoria.total}
+                                    </li>
+                                ))}
+                            </ul>
+                        ) : (
+                            <p>No hay datos disponibles para mostrar.</p>
+                        )}
                     </div>
                 )}
-
             </div>
         </div>
     );
 };
 
-export default PromedioDiario;
+export default Top3Categorias;
