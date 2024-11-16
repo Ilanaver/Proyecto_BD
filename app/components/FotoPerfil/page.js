@@ -6,7 +6,7 @@ import Titulo from '../Titulo/Titulo';
 import Footer from '../Footer/Footer';
 import { useRouter } from 'next/navigation';
 
-export default function FotoPerfil() {
+const FotoPerfil = () => {
   const [newPhotoUrl, setNewPhotoUrl] = useState(''); // Para URL de nueva foto
   const [newPhotoFile, setNewPhotoFile] = useState(null); // Para archivo de nueva foto
   const [previewImage, setPreviewImage] = useState(''); // Previsualización de la nueva imagen
@@ -122,4 +122,6 @@ export default function FotoPerfil() {
       <Footer />
     </div>
   );
-}
+};
+
+export default FotoPerfil;

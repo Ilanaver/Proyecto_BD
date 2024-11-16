@@ -7,7 +7,7 @@ import Titulo from '../Titulo/Titulo';
 import Footer from '../Footer/Footer';
 import { useRouter } from 'next/navigation';
 
-export default function CambiarContraseña() {
+const CambiarContraseña = () => {
     const [userId, setUserId] = useState(null);
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
@@ -94,12 +94,12 @@ export default function CambiarContraseña() {
     return (
         <>
             <div className={styles.container}>
-            <div className={styles.header1}>
-      <button onClick={() => router.back()} className={styles.returnLink}>Volver</button>     
-    </div>  
-      <div className={styles.header2}>
-        <Titulo texto={"Cambiar Contraseña"} className={styles.titulo}/>
-      </div>
+                <div className={styles.header1}>
+                    <button onClick={() => router.back()} className={styles.returnLink}>Volver</button>
+                </div>  
+                <div className={styles.header2}>
+                    <Titulo texto={"Cambiar Contraseña"} className={styles.titulo}/>
+                </div>
                 
                 <form className={styles.form} onSubmit={handleSubmit}>
                     <div className={styles.inputGroup}>
@@ -145,4 +145,6 @@ export default function CambiarContraseña() {
             <Footer />
         </>
     );
-}
+};
+
+export default CambiarContraseña;

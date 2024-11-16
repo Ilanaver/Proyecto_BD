@@ -7,7 +7,7 @@ import Titulo from '../Titulo/Titulo';
 import Footer from '../Footer/Footer';
 import { useRouter } from 'next/navigation';
 
-export default function Eliminar() {
+const Eliminar = () => {
   const [category, setCategory] = useState('definicion');
   const [contentList, setContentList] = useState([]);
   const [selectedItem, setSelectedItem] = useState('');
@@ -137,4 +137,6 @@ export default function Eliminar() {
       <Footer />
     </div>
   );
-}
+};
+
+export default Eliminar;

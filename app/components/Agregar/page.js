@@ -8,7 +8,7 @@ import Titulo from '../Titulo/Titulo';
 import Footer from '../Footer/Footer';
 import { useRouter } from 'next/navigation';
 
-export default function Agregar() {
+const Agregar = () => {
   const [category, setCategory] = useState('definicion');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -24,7 +24,7 @@ export default function Agregar() {
       const userId = localStorage.getItem('userId');
       if (userId) {
         try {
-          const response = await axios.get(`https://backmoneyminds.onrender.com/usuario/perfil/${userId}`); // Cambio aquí
+          const response = await axios.get(`https://backmoneyminds.onrender.com/usuario/perfil/${userId}`);
           const perfil = response.data[0]; // Accedemos al primer objeto del array
           setIsAdmin(perfil.admin); // Establecemos si el usuario es admin
         } catch (error) {
@@ -48,7 +48,7 @@ export default function Agregar() {
       console.log('Datos enviados:', payload);
 
       try {
-        const response = await axios.post('https://backmoneyminds.onrender.com/definiciones/agregar-definicion', payload); // Cambio aquí
+        const response = await axios.post('https://backmoneyminds.onrender.com/definiciones/agregar-definicion', payload);
 
         if (response.status === 200 || response.status === 201) {
           console.log('Definición agregada con éxito:', response.data);
@@ -78,10 +78,10 @@ export default function Agregar() {
         descripcion: description,
         categoria: categoriaVideo,
       });
-      
+
       try {
         const response = await axios.post(
-          'https://backmoneyminds.onrender.com/contenido-multimedia/agregar-video', // Cambio aquí
+          'https://backmoneyminds.onrender.com/contenido-multimedia/agregar-video',
           videoPayload,
           {
             headers: {
@@ -89,10 +89,10 @@ export default function Agregar() {
             },
           }
         );
-      
+
         if (response.status === 200 || response.status === 201) {
           console.log('Video agregado con éxito:', response.data);
-          alert('Video agregado con éxito');  // Avisa al usuario que se agregó correctamente
+          alert('Video agregado con éxito');
           router.back(); // Redirige si es necesario
         } else {
           console.error('Error inesperado en la respuesta:', response.status);
@@ -121,115 +121,115 @@ export default function Agregar() {
       </div>
 
       <main className={styles.main}>
-        {isAdmin ? ( // Condición para mostrar el formulario o el mensaje
+        {isAdmin ? (
           <div className={styles.formContainer}>
             <div className={styles.inputAgregar}>
-            <div className={styles.inputGroup}>
-              <label htmlFor="category">Seleccione una opción:</label>
-              <select id="category" value={category} onChange={(e) => setCategory(e.target.value)} className={styles.select}>
-                <option value="definicion">Definición de términos</option>
-                <option value="audiovisual">Audiovisual</option>
-                <option value="diaria">Leccion diaria</option>
-              </select>
-            </div>
-
-            <div className={styles.inputGroup}>
-              <label htmlFor="title">Título</label>
-              <input
-                type="text"
-                id="title"
-                placeholder="Ingrese el título aquí"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                className={styles.input}
-              />
-            </div>
-
-            {category === 'audiovisual' && (
-              <>
-                <div className={styles.inputGroup}>
-                  <label htmlFor="videoLink">Enlace del video</label>
-                  <input
-                    type="text"
-                    id="videoLink"
-                    placeholder="Ingrese el enlace del video aquí"
-                    value={videoLink}
-                    onChange={(e) => setVideoLink(e.target.value)}
-                    className={styles.input}
-                  />
-                </div>
-                <div className={styles.inputGroup}>
-                  <label htmlFor="img">Imagen</label>
-                  <input
-                    type="text"
-                    id="img"
-                    placeholder="Ingrese la URL de la imagen aquí"
-                    value={img}
-                    onChange={(e) => setImg(e.target.value)}
-                    className={styles.input}
-                  />
-                </div>
-                <div className={styles.inputGroup}>
-                  <label htmlFor="description">Descripción</label>
-                  <textarea
-                    id="description"
-                    placeholder="Ingrese la descripción aquí"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    className={styles.textarea}
-                  />
-                </div>
-                <div className={styles.inputGroup}>
-                  <label htmlFor="categoriaVideo">Categoría del video</label>
-                  <input
-                    type="text"
-                    id="categoriaVideo"
-                    placeholder="Ingrese la categoría del video aquí"
-                    value={categoriaVideo}
-                    onChange={(e) => setCategoriaVideo(e.target.value)}
-                    className={styles.input}
-                  />
-                </div>
-              </>
-            )}
-
-            {category === 'definicion' && (
               <div className={styles.inputGroup}>
-                <label htmlFor="content">Contenido</label>
-                <textarea
-                  id="content"
-                  placeholder="Ingrese el contenido aquí"
-                  value={content}
-                  onChange={(e) => setContent(e.target.value)}
-                  className={styles.textarea}
+                <label htmlFor="category">Seleccione una opción:</label>
+                <select id="category" value={category} onChange={(e) => setCategory(e.target.value)} className={styles.select}>
+                  <option value="definicion">Definición de términos</option>
+                  <option value="audiovisual">Audiovisual</option>
+                  <option value="diaria">Leccion diaria</option>
+                </select>
+              </div>
+
+              <div className={styles.inputGroup}>
+                <label htmlFor="title">Título</label>
+                <input
+                  type="text"
+                  id="title"
+                  placeholder="Ingrese el título aquí"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  className={styles.input}
                 />
               </div>
-            )}
-            {category === 'diaria' && (
-              <>
+
+              {category === 'audiovisual' && (
+                <>
+                  <div className={styles.inputGroup}>
+                    <label htmlFor="videoLink">Enlace del video</label>
+                    <input
+                      type="text"
+                      id="videoLink"
+                      placeholder="Ingrese el enlace del video aquí"
+                      value={videoLink}
+                      onChange={(e) => setVideoLink(e.target.value)}
+                      className={styles.input}
+                    />
+                  </div>
+                  <div className={styles.inputGroup}>
+                    <label htmlFor="img">Imagen</label>
+                    <input
+                      type="text"
+                      id="img"
+                      placeholder="Ingrese la URL de la imagen aquí"
+                      value={img}
+                      onChange={(e) => setImg(e.target.value)}
+                      className={styles.input}
+                    />
+                  </div>
+                  <div className={styles.inputGroup}>
+                    <label htmlFor="description">Descripción</label>
+                    <textarea
+                      id="description"
+                      placeholder="Ingrese la descripción aquí"
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
+                      className={styles.textarea}
+                    />
+                  </div>
+                  <div className={styles.inputGroup}>
+                    <label htmlFor="categoriaVideo">Categoría del video</label>
+                    <input
+                      type="text"
+                      id="categoriaVideo"
+                      placeholder="Ingrese la categoría del video aquí"
+                      value={categoriaVideo}
+                      onChange={(e) => setCategoriaVideo(e.target.value)}
+                      className={styles.input}
+                    />
+                  </div>
+                </>
+              )}
+
+              {category === 'definicion' && (
                 <div className={styles.inputGroup}>
-                  <label htmlFor="videoLink">Enlace del video</label>
-                  <input
-                    type="text"
-                    id="videoLink"
-                    placeholder="Ingrese el enlace del video aquí"
-                    value={videoLink}
-                    onChange={(e) => setVideoLink(e.target.value)}
-                    className={styles.input}
-                  />
-                </div>
-                <div className={styles.inputGroup}>
-                  <label htmlFor="description">Descripción</label>
+                  <label htmlFor="content">Contenido</label>
                   <textarea
-                    id="description"
-                    placeholder="Ingrese la descripción aquí"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
+                    id="content"
+                    placeholder="Ingrese el contenido aquí"
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
                     className={styles.textarea}
                   />
                 </div>
-              </>
-            )}
+              )}
+              {category === 'diaria' && (
+                <>
+                  <div className={styles.inputGroup}>
+                    <label htmlFor="videoLink">Enlace del video</label>
+                    <input
+                      type="text"
+                      id="videoLink"
+                      placeholder="Ingrese el enlace del video aquí"
+                      value={videoLink}
+                      onChange={(e) => setVideoLink(e.target.value)}
+                      className={styles.input}
+                    />
+                  </div>
+                  <div className={styles.inputGroup}>
+                    <label htmlFor="description">Descripción</label>
+                    <textarea
+                      id="description"
+                      placeholder="Ingrese la descripción aquí"
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
+                      className={styles.textarea}
+                    />
+                  </div>
+                </>
+              )}
             </div>
 
             <button onClick={addContent} className={styles.button}>Agregar Contenido</button>
@@ -244,4 +244,6 @@ export default function Agregar() {
       <Footer />
     </div>
   );
-}
+};
+
+export default Agregar;
