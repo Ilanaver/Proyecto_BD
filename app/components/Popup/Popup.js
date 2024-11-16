@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styles from './Popup.module.css'
+import styles from './Popup.module.css';
 import Subtitulo from '../Subtitulo/Subtitulo';
 import axios from 'axios';
 
@@ -12,7 +12,7 @@ const Popup = ({ onClose, onSubmit, motivo, idtipos }) => {
 
   useEffect(() => {
     if (idtipos) {
-      axios.get(`http://localhost:3000/gestor/subtipos/${idtipos}`)
+      axios.get(`https://backmoneyminds.onrender.com/gestor/subtipos/${idtipos}`) // URL actualizada a producción
         .then(res => {
           setSubtipos(res.data);
         })

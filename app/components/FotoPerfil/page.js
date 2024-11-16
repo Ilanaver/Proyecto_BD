@@ -48,7 +48,7 @@ export default function FotoPerfil() {
 
     try {
       const response = await axios.put(
-        `http://localhost:3000/usuario/perfil/cambiar-foto/${userId}`,
+        `https://backmoneyminds.onrender.com/usuario/perfil/cambiar-foto/${userId}`, // Cambié la URL aquí
         formData,
         {
           headers: {

@@ -17,7 +17,7 @@ const LeccionManager = () => {
 
     // Agregar lección
     const addLeccion = () => {
-        axios.post('http://localhost:3000/leccion-diaria/agregar-leccion', leccionData)
+        axios.post('https://backmoneyminds.onrender.com/leccion-diaria/agregar-leccion', leccionData)
             .then(res => {
                 console.log('Lección agregada:', res.data);
                 setLeccionData({ titulo: '', descripcion: '', contenido: '', fecha: '' });
@@ -28,7 +28,7 @@ const LeccionManager = () => {
 
     // Actualizar lección
     const updateLeccion = () => {
-        axios.patch(`http://localhost:3000/leccion-diaria/actualizar-leccion/${leccionId}`, {
+        axios.patch(`https://backmoneyminds.onrender.com/leccion-diaria/actualizar-leccion/${leccionId}`, {
             fieldName: 'descripcion',
             fieldValue: leccionData.descripcion
         })
@@ -43,7 +43,7 @@ const LeccionManager = () => {
 
     // Eliminar lección
     const deleteLeccion = () => {
-        axios.delete(`http://localhost:3000/leccion-diaria/deleteleccion/${leccionId}`)
+        axios.delete(`https://backmoneyminds.onrender.com/leccion-diaria/deleteleccion/${leccionId}`)
             .then(res => {
                 console.log('Lección eliminada:', res.data);
                 setLeccionId('');

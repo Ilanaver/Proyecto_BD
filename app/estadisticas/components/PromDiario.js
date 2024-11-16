@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from '../estadisticas.module.css'; // Aquí pueden estar tus estilos personalizados
 import Spinner from "./Spinner";
+
 const PromedioDiario = () => {
     const [tipo, setTipo] = useState(1); // 1 para gastos, 2 para ingresos
     const [promedio, setPromedio] = useState(null); // Promedio diario
@@ -15,7 +16,7 @@ const PromedioDiario = () => {
             const userId = localStorage.getItem('userId'); // ID del usuario almacenado en localStorage
             const mes = new Date().getMonth() + 1; // Mes actual
             const ano = new Date().getFullYear(); // Año actual
-            const response = await axios.get(`http://localhost:3000/estadisticas/promedioDiario/${userId}/${tipo}/${mes}/${ano}`);
+            const response = await axios.get(`https://backmoneyminds.onrender.com/estadisticas/promedioDiario/${userId}/${tipo}/${mes}/${ano}`);
             const data = response.data;
 
             setPromedio(data); // Asignamos el promedio recibido de la API
@@ -66,7 +67,6 @@ const PromedioDiario = () => {
                         </p>
                     </div>
                 )}
-
             </div>
         </div>
     );

@@ -19,7 +19,7 @@ export default function Eliminar() {
       const userId = localStorage.getItem('userId');
       if (userId) {
         try {
-          const response = await axios.get(`http://localhost:3000/usuario/perfil/${userId}`);
+          const response = await axios.get(`https://backmoneyminds.onrender.com/usuario/perfil/${userId}`); // Cambio aquí
           const perfil = response.data[0]; // Accedemos al primer objeto del array
           setIsAdmin(perfil.admin); // Establecemos si el usuario es admin
         } catch (error) {
@@ -40,9 +40,9 @@ export default function Eliminar() {
       try {
         let response;
         if (category === 'definicion') {
-          response = await axios.get('http://localhost:3000/definiciones/todas');
+          response = await axios.get('https://backmoneyminds.onrender.com/definiciones/todas'); // Cambio aquí
         } else if (category === 'audiovisual') {
-          response = await axios.get('http://localhost:3000/contenido-multimedia/todos');
+          response = await axios.get('https://backmoneyminds.onrender.com/contenido-multimedia/todos'); // Cambio aquí
         }
         setContentList(response.data);
       } catch (error) {
@@ -63,9 +63,9 @@ export default function Eliminar() {
     try {
       let response;
       if (category === 'definicion') {
-        response = await axios.delete(`http://localhost:3000/definiciones/deleteTermino/${selectedItem}`);
+        response = await axios.delete(`https://backmoneyminds.onrender.com/definiciones/deleteTermino/${selectedItem}`); // Cambio aquí
       } else if (category === 'audiovisual') {
-        response = await axios.delete(`http://localhost:3000/contenido-multimedia/borrar-video/${selectedItem}`);
+        response = await axios.delete(`https://backmoneyminds.onrender.com/contenido-multimedia/borrar-video/${selectedItem}`); // Cambio aquí
       }
 
       if (response.status === 200) {
@@ -117,7 +117,7 @@ export default function Eliminar() {
                     {item.titulo}
                   </option>
                 ))}
-                 {contentList.map((item, index) => (
+                {contentList.map((item, index) => (
                   <option key={index} value={category === 'diaria' ? item.idtermino : item.idvideo}>
                     {item.titulo}
                   </option>

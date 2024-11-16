@@ -1,4 +1,3 @@
-// /components/SaldoPorMes.js
 'use client';
 import React, { useState, useEffect } from "react";
 import axios from "axios";
@@ -23,7 +22,7 @@ const SaldoPorMes = () => {
             setLoading(true); // Activar indicador de carga
             const userId = localStorage.getItem('userId'); 
             const ano = new Date().getFullYear();
-            const response = await axios.get(`http://localhost:3000/estadisticas/saldoMeses/${userId}/${tipo}/${ano}`);
+            const response = await axios.get(`https://backmoneyminds.onrender.com/estadisticas/saldoMeses/${userId}/${tipo}/${ano}`); // URL actualizada aquí
             const data = response.data;
 
             // Convertir los números de los meses en nombres de meses
@@ -74,7 +73,7 @@ const SaldoPorMes = () => {
         },
         xaxis: {
             categories: months,  // Usamos los nombres de los meses en el eje X
-            position: 'bottom',  // Colocamos las etiquetas de los meses en la parte inferior
+            position: 'bottom',  // Colocamos las etiquetas de los meses en el parte inferior
             axisBorder: {
                 show: false,
             },
@@ -169,7 +168,7 @@ const SaldoPorMes = () => {
                 <div className={styles.chartContainer}>
                     <ReactApexChart
                         options={saldoMesesOptions}
-                        series={[{ name: 'Saldo', data: saldoMesesData }]}
+                        series={[{ name: 'Saldo', data: saldoMesesData }] }
                         type="bar"
                         height={350}
                     />

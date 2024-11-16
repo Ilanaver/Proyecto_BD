@@ -21,7 +21,8 @@ const RecuperarContrasena = () => {
     }
 
     try {
-      const response = await axios.get(`http://localhost:3000/usuario/recuperar-contrasena/${email}`);
+      // Cambio la URL de localhost a la de la API en producción
+      const response = await axios.get(`https://backmoneyminds.onrender.com/usuario/recuperar-contrasena/${email}`);
 
       if (response.status === 200) {
         // Aquí asumimos que si se recibe un id, significa que el email existe

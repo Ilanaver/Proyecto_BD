@@ -24,7 +24,7 @@ const InicioSesion = () => {
 
         try {
             // Enviar solicitud POST al backend usando Axios
-            const response = await axios.post('http://localhost:3000/usuario/login', usuario);
+            const response = await axios.post('https://backmoneyminds.onrender.com/usuario/login', usuario);
 
             if (response.status === 200) {
                 const userId = response.data.userId;

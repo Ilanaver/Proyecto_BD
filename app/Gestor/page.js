@@ -56,7 +56,7 @@ const Gestor = () => {
 
   const fetchPerfilData = () => {
     if (userId) {
-      axios.get(`http://localhost:3000/usuario/perfil/${userId}`)
+      axios.get(`https://backmoneyminds.onrender.com/usuario/perfil/${userId}`)
         .then(res => {
           const perfil = res.data[0]; // Accedemos al primer elemento del array
           setPerfilData(perfil); // Guardamos el primer objeto en el estado
@@ -72,7 +72,7 @@ const Gestor = () => {
 
   const fetchSaldos = () => {
     if (userId && mesSeleccionado && anioSeleccionado) {
-      axios.get(`http://localhost:3000/gestor/${userId}/${mesSeleccionado}/${anioSeleccionado}`)
+      axios.get(`https://backmoneyminds.onrender.com/gestor/${userId}/${mesSeleccionado}/${anioSeleccionado}`)
         .then(res => {
           console.log('Fetched saldo actual:', res.data);
           const saldoActual = res.data.map(item => item['Saldo actual']);
@@ -84,7 +84,7 @@ const Gestor = () => {
 
   const fetchReporte = () => {
     if (userId && mesSeleccionado && anioSeleccionado) {
-      axios.get(`http://localhost:3000/gestor/operaciones/${userId}/${mesSeleccionado}/${anioSeleccionado}`)
+      axios.get(`https://backmoneyminds.onrender.com/gestor/operaciones/${userId}/${mesSeleccionado}/${anioSeleccionado}`)
         .then(res => {
           console.log('Fetched reporte:', res.data);
           setReporte(res.data);
@@ -96,7 +96,7 @@ const Gestor = () => {
   const fetchSaldosPorTipo = async (idTipo) => {
     if (userId && mesSeleccionado && anioSeleccionado) {
       try {
-        const res = await axios.get(`http://localhost:3000/gestor/${userId}/${idTipo}/${mesSeleccionado}/${anioSeleccionado}`);
+        const res = await axios.get(`https://backmoneyminds.onrender.com/gestor/${userId}/${idTipo}/${mesSeleccionado}/${anioSeleccionado}`);
         console.log(`Fetched saldoTipo data for idTipo ${idTipo}:`, res.data);
         const saldoTipo = res.data.map(item => item['Saldo actual']);
         setSaldoTipo(prevSaldoTipo => ({ ...prevSaldoTipo, [idTipo]: saldoTipo }));
@@ -165,7 +165,7 @@ const Gestor = () => {
 
     console.log('Datos a enviar:', requestData);
 
-    axios.post("http://localhost:3000/gestor/addOperacion", requestData)
+    axios.post("https://backmoneyminds.onrender.com/gestor/addOperacion", requestData)
       .then(response => {
         console.log('Data inserted successfully:', response.data);
         setReporte(prevReporte => [...prevReporte, {
@@ -240,7 +240,7 @@ const Gestor = () => {
         </div>
         <div className={style.balanceMensual}>
           <Subtitulo texto={"Balance Mensual"} />
-          <h2>{saldo == 0 ? '$0' : `$${saldo}`}</h2>
+          <h2>{saldo === 0 ? '$0' : `$${saldo}`}</h2>
         </div>
         <div className={style.tarjetasGestor}>
           <TarjetasGestor
@@ -249,7 +249,7 @@ const Gestor = () => {
             altText="imagen ingresos"
             titulo="Ingresos"
             onAgregar={manejarClick}
-            balanceInicial={saldoTipo[2] == 0 ? 0 : saldoTipo[2]}
+            balanceInicial={saldoTipo[2] === 0 ? 0 : saldoTipo[2]}
           />
           <TarjetasGestor
             id={1}
@@ -257,7 +257,7 @@ const Gestor = () => {
             altText="imagen gastos"
             titulo="Gastos"
             onAgregar={manejarClick}
-            balanceInicial={saldoTipo[1] == 0 ? 0 : `-${saldoTipo[1]}`}
+            balanceInicial={saldoTipo[1] === 0 ? 0 : `-${saldoTipo[1]}`}
           />
           <TarjetasGestor
             id={3}
@@ -265,7 +265,7 @@ const Gestor = () => {
             altText="imagen ahorros"
             titulo="Ahorros"
             onAgregar={manejarClick}
-            balanceInicial={saldoTipo[3] == 0 ? 0 : saldoTipo[3]}
+            balanceInicial={saldoTipo[3] === 0 ? 0 : saldoTipo[3]}
           />
         </div>
         <div className={style.botonReporteMensual}>

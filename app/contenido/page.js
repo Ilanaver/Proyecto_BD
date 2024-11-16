@@ -29,7 +29,7 @@ const Audiovisual = () => {
     // Obtener los datos del perfil
     const fetchPerfilData = () => {
         if (userId) {
-            axios.get(`http://localhost:3000/usuario/perfil/${userId}`)
+            axios.get(`https://backmoneyminds.onrender.com/usuario/perfil/${userId}`)
                 .then(res => {
                     const perfil = res.data[0]; // Accedemos al primer objeto del array
                     setPerfilData(perfil); // Guardamos los datos en el estado
@@ -40,7 +40,7 @@ const Audiovisual = () => {
 
     // Obtener todas las categorías desde la API
     useEffect(() => {
-        axios.get('http://localhost:3000/contenido-multimedia/')
+        axios.get('https://backmoneyminds.onrender.com/contenido-multimedia/')
             .then(response => {
                 console.log(response.data);
                 const categoriasUnicas = [...new Set(response.data.map(item => item.categoria))];
@@ -48,7 +48,7 @@ const Audiovisual = () => {
 
                 // Para cada categoría, obtener los videos correspondientes
                 categoriasUnicas.forEach(category => {
-                    axios.get(`http://localhost:3000/contenido-multimedia/${category}`)
+                    axios.get(`https://backmoneyminds.onrender.com/contenido-multimedia/${category}`)
                         .then(response => {
                             setContent(prevContent => ({
                                 ...prevContent,
@@ -75,7 +75,7 @@ const Audiovisual = () => {
 
     useEffect(() => {
         fetchPerfilData();
-    }, [userId]);    
+    }, [userId]);
 
     return (
         <main>

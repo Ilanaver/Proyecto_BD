@@ -32,7 +32,7 @@ const Terminos = () => {
     // Obtener los datos del perfil
     const fetchPerfilData = () => {
         if (userId) {
-            axios.get(`http://localhost:3000/usuario/perfil/${userId}`)
+            axios.get(`https://backmoneyminds.onrender.com/usuario/perfil/${userId}`)
                 .then(res => {
                     const perfil = res.data[0]; // Accedemos al primer objeto del array
                     setPerfilData(perfil); // Guardamos los datos en el estado
@@ -44,7 +44,7 @@ const Terminos = () => {
 
     // Obtener las primeras 6 definiciones
     const fetchTop6 = () => {
-        axios.get("http://localhost:3000/definiciones")
+        axios.get("https://backmoneyminds.onrender.com/definiciones")
             .then(res => {
                 console.log('Fetched definiciones:', res.data);
                 setDefiniciones(res.data); // Guarda las definiciones
@@ -54,7 +54,7 @@ const Terminos = () => {
 
     // Obtener las definiciones según la búsqueda
     const fetchBuscador = (titulo) => {
-        axios.get(`http://localhost:3000/definiciones/${titulo}`)
+        axios.get(`https://backmoneyminds.onrender.com/definiciones/${titulo}`)
             .then(res => {
                 console.log('Fetched busqueda:', res.data);
                 setResultadoBusqueda(res.data); 

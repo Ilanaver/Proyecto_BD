@@ -26,7 +26,7 @@ const Registro = () => {
 
         try {
             // Enviar solicitud POST al backend usando Axios
-            const response = await axios.post('http://localhost:3000/usuario/registro', usuario);
+            const response = await axios.post('https://backmoneyminds.onrender.com/usuario/registro', usuario);
 
             if (response.status === 201) {
                 const idPerfil = response.data.idperfil;

@@ -17,7 +17,7 @@ const Diara = () => {
     // Obtener el perfil del usuario
     const fetchPerfilData = () => {
         if (userId) {
-            axios.get(`http://localhost:3000/usuario/perfil/${userId}`)
+            axios.get(`https://backmoneyminds.onrender.com/usuario/perfil/${userId}`)
                 .then(res => {
                     const perfil = res.data[0];
                     setPerfilData(perfil);
@@ -28,7 +28,7 @@ const Diara = () => {
 
     // Obtener lecciones diarias por fecha
     const fetchLeccionesByFecha = (fecha) => {
-        axios.get(`http://localhost:3000/leccion-diaria/${fecha}`)
+        axios.get(`https://backmoneyminds.onrender.com/leccion-diaria/${fecha}`)
             .then(res => {
                 setLecciones(res.data);
             })
@@ -47,7 +47,7 @@ const Diara = () => {
     useEffect(() => {
         fetchPerfilData();
         const today = new Date().toISOString().split('T')[0];
-        console.log(today)
+        console.log(today);
         fetchLeccionesByFecha(today);
     }, [userId]);
 

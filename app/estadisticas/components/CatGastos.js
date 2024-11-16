@@ -1,4 +1,3 @@
-// /components/CatGastos.js
 'use client';
 import React, { useState, useEffect } from "react";
 import axios from "axios";
@@ -16,7 +15,7 @@ const CatGastos = () => {
             const userId = localStorage.getItem('userId'); 
             const mes = new Date().getMonth() + 1; // Mes actual
             const ano = new Date().getFullYear(); // Año actual
-            const response = await axios.get(`http://localhost:3000/estadisticas/catgastos/${userId}/${tipo}/${mes}/${ano}`);
+            const response = await axios.get(`https://backmoneyminds.onrender.com/estadisticas/catgastos/${userId}/${tipo}/${mes}/${ano}`);
             const data = response.data;
 
             const series = data.map(item => item.total_categoria);

@@ -18,7 +18,7 @@ const VerMas = () => {
 
   useEffect(() => {
     if (categoria) {
-      axios.get(`http://localhost:3000/contenido-multimedia/ver-mas/${categoria}`)
+      axios.get(`https://backmoneyminds.onrender.com/contenido-multimedia/ver-mas/${categoria}`)
         .then(response => {
           setDetails(response.data);
           setLoading(false);

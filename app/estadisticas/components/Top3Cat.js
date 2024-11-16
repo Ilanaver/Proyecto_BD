@@ -16,7 +16,7 @@ const Top3Categorias = () => {
             const userId = localStorage.getItem('userId'); // ID del usuario almacenado en localStorage
             const mes = new Date().getMonth() + 1; // Mes actual
             const ano = new Date().getFullYear(); // Año actual
-            const response = await axios.get(`http://localhost:3000/estadisticas/top3cat/${userId}/${tipo}/${mes}/${ano}`);
+            const response = await axios.get(`https://backmoneyminds.onrender.com/estadisticas/top3cat/${userId}/${tipo}/${mes}/${ano}`); // URL actualizada aquí
             const data = response.data;
 
             setCategorias(data); // Asignamos las categorías recibidas de la API

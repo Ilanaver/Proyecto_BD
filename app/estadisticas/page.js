@@ -1,4 +1,3 @@
-// /page.js
 'use client';
 import React, { useEffect, useState } from "react";
 import CatGastos from './components/CatGastos';
@@ -11,7 +10,6 @@ import Titulo from "../components/Titulo/Titulo";
 import PromedioDiario from './components/PromDiario';
 import Top3Categorias from "./components/Top3Cat";
 import { useRouter } from 'next/navigation';
-
 
 const Estadisticas = () => {
     const [perfilData, setPerfilData] = useState({});  // Estado para almacenar los datos del perfil, incluida la foto
@@ -31,7 +29,7 @@ const Estadisticas = () => {
 
     const fetchPerfilData = () => {
         if (userId) {
-          axios.get(`http://localhost:3000/usuario/perfil/${userId}`)
+          axios.get(`https://backmoneyminds.onrender.com/usuario/perfil/${userId}`) // URL actualizada aquí
             .then(res => {
               const perfil = res.data[0]; // Accedemos al primer elemento del array
               setPerfilData(perfil); // Guardamos el primer objeto en el estado
@@ -45,6 +43,7 @@ const Estadisticas = () => {
           fetchPerfilData();
         }
     }, [userId])  
+
     return (
         <section>
             <div className={styles.tituloGestor}>
@@ -66,9 +65,7 @@ const Estadisticas = () => {
                 <PromedioDiario />
             </div>
             <Footer />
-
         </section>
-        
     );
 };
 

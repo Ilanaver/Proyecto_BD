@@ -7,7 +7,6 @@ import Titulo from '../Titulo/Titulo';
 import Footer from '../Footer/Footer';
 import { useRouter } from 'next/navigation';
 
-
 export default function CambiarContraseña() {
     const [userId, setUserId] = useState(null);
     const [currentPassword, setCurrentPassword] = useState('');
@@ -33,7 +32,7 @@ export default function CambiarContraseña() {
     // Función para enviar el PATCH a la API
     const cambiarContraseña = () => {
         if (userId) {
-            axios.patch('http://localhost:3000/usuario/cambiar-contrasena', {
+            axios.patch('https://backmoneyminds.onrender.com/usuario/cambiar-contrasena', { // Cambio aquí
                 idperfil: userId, // Convertimos el userId a número
                 contraseñaActual: currentPassword,
                 nuevaContraseña: newPassword

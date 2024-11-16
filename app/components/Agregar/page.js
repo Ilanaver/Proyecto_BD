@@ -24,7 +24,7 @@ export default function Agregar() {
       const userId = localStorage.getItem('userId');
       if (userId) {
         try {
-          const response = await axios.get(`http://localhost:3000/usuario/perfil/${userId}`);
+          const response = await axios.get(`https://backmoneyminds.onrender.com/usuario/perfil/${userId}`); // Cambio aquí
           const perfil = response.data[0]; // Accedemos al primer objeto del array
           setIsAdmin(perfil.admin); // Establecemos si el usuario es admin
         } catch (error) {
@@ -48,7 +48,7 @@ export default function Agregar() {
       console.log('Datos enviados:', payload);
 
       try {
-        const response = await axios.post('http://localhost:3000/definiciones/agregar-definicion', payload);
+        const response = await axios.post('https://backmoneyminds.onrender.com/definiciones/agregar-definicion', payload); // Cambio aquí
 
         if (response.status === 200 || response.status === 201) {
           console.log('Definición agregada con éxito:', response.data);
@@ -81,7 +81,7 @@ export default function Agregar() {
       
       try {
         const response = await axios.post(
-          'http://localhost:3000/contenido-multimedia/agregar-video',
+          'https://backmoneyminds.onrender.com/contenido-multimedia/agregar-video', // Cambio aquí
           videoPayload,
           {
             headers: {

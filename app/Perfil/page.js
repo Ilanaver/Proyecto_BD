@@ -23,7 +23,7 @@ const Perfil = () => {
 
     const fetchPerfilData = () => {
         if (userId) {
-            axios.get(`http://localhost:3000/usuario/perfil/${userId}`)
+            axios.get(`https://backmoneyminds.onrender.com/usuario/perfil/${userId}`)
                 .then(res => {
                     const perfil = res.data[0]; // Accedemos al primer elemento del array
                     setPerfilData(perfil); // Guardamos el primer objeto en el estado
@@ -48,7 +48,7 @@ const Perfil = () => {
             foto: newImageUrl  // Enviar la URL en lugar de un archivo
         };
 
-        axios.patch('http://localhost:3000/usuario/cambiar-foto-perfil', formData)
+        axios.patch('https://backmoneyminds.onrender.com/usuario/cambiar-foto-perfil', formData)
             .then(res => {
                 alert('Foto de perfil actualizada exitosamente');
                 fetchPerfilData(res);  // Actualizamos los datos del perfil

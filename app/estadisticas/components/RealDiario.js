@@ -20,7 +20,7 @@ const ApexChart = () => {
             const userId = localStorage.getItem('userId');
             const mes = new Date().getMonth() + 1; // Mes actual (1-12)
             const ano = new Date().getFullYear(); // Año actual
-            const response = await axios.get(`http://localhost:3000/estadisticas/diamayor/${userId}/${tipo}/${mes}/${ano}`);
+            const response = await axios.get(`https://backmoneyminds.onrender.com/estadisticas/diamayor/${userId}/${tipo}/${mes}/${ano}`);
             const data = response.data;
 
             // Obtener el monto del día de mayor ingreso/gasto
@@ -45,7 +45,7 @@ const ApexChart = () => {
             const userId = localStorage.getItem('userId');
             const mes = new Date().getMonth() + 1; // Mes actual (1-12)
             const ano = new Date().getFullYear(); // Año actual
-            const response = await axios.get(`http://localhost:3000/estadisticas/realDiario/${userId}/${tipo}/${mes}/${ano}`);
+            const response = await axios.get(`https://backmoneyminds.onrender.com/estadisticas/realDiario/${userId}/${tipo}/${mes}/${ano}`);
             const data = response.data;
 
             if (data && data.length > 0) {
