@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import {React, useState } from 'react';
 import axios from 'axios';
 import styles from './nuevacontrasena.module.css'; // Crea este archivo CSS para los estilos
 import Titulo from '../Titulo/Titulo'; // Asumiendo que tienes este componente

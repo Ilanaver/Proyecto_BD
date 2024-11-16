@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Titulo from '../components/Titulo/Titulo'; // Ajusta la ruta según tu estructura
 import Footer from '../components/Footer/Footer'; // Ajusta la ruta según tu estructura

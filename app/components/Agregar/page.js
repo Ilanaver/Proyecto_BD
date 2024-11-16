@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import {React, useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from './agregar.module.css';
 import Link from 'next/link';
