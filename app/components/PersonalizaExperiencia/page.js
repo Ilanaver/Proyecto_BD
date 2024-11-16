@@ -1,5 +1,5 @@
 import react from "react";
-import styles from './personaliza:module.css'
+import styles from './personaliza.module.css'
 
 
 
