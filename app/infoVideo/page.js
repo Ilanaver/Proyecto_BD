@@ -16,6 +16,11 @@ const InfoVideo = () => {
   const [videoDetails, setVideoDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isClient, setIsClient] = useState(false); // Verifica si es cliente
+
+  useEffect(() => {
+    setIsClient(true); // Esto asegura que el código solo se ejecute en el cliente
+  }, []);
 
   useEffect(() => {
     const fetchVideoDetails = async () => {
@@ -36,8 +41,14 @@ const InfoVideo = () => {
       }
     };
 
-    fetchVideoDetails();
+    if (idvideo) {
+      fetchVideoDetails();
+    }
   }, [idvideo]);
+
+  if (!isClient) {
+    return null; // Renderiza null o un loading spinner mientras el cliente se carga
+  }
 
   if (loading) return <p>Cargando...</p>;
   if (error) return <p>{error}</p>;

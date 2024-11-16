@@ -15,6 +15,11 @@ const VerMas = () => {
   const [details, setDetails] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isClient, setIsClient] = useState(false); // Verificación de si es cliente
+
+  useEffect(() => {
+    setIsClient(true); // Asegura que la lógica solo se ejecute en el cliente
+  }, []);
 
   useEffect(() => {
     if (categoria) {
@@ -38,22 +43,23 @@ const VerMas = () => {
     router.push(`/infoVideo?idvideo=${idvideo}`);
   };
 
+  // Si no es el cliente, no renderizamos nada hasta que el componente se haya montado
+  if (!isClient) {
+    return null; // O bien, un indicador de carga o un spinner
+  }
+
   if (loading) return <p>Cargando...</p>;
   if (error) return <p>{error}</p>;
 
   return (
-  <main className={styles.main}>    
-<div className={styles.titulo}>
-
-<div className={styles.flecha}>
-  <img onClick={() => router.back()} src="./flechaatras.png" alt=""/>
-</div>
-<Titulo texto={`Más sobre ${categoria}`} />
-
-</div>
-    <div className={styles.container}>
-      
-      
+    <main className={styles.main}>    
+      <div className={styles.titulo}>
+        <div className={styles.flecha}>
+          <img onClick={() => router.back()} src="./flechaatras.png" alt="Volver" />
+        </div>
+        <Titulo texto={`Más sobre ${categoria}`} />
+      </div>
+      <div className={styles.container}>
         {details.length === 0 ? (
           <p>No se encontraron detalles.</p>
         ) : (
@@ -65,9 +71,8 @@ const VerMas = () => {
             </div>
           ))
         )}
-      
       </div>
-      <Footer></Footer>
+      <Footer />
     </main>
   );
 };
