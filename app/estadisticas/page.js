@@ -10,31 +10,33 @@ import Titulo from "../components/Titulo/Titulo";
 import PromedioDiario from './components/PromDiario';
 import Top3Categorias from "./components/Top3Cat";
 import { useRouter } from 'next/navigation';
+import dynamic from 'next/dynamic';
+
+// Desactiva el prerenderizado estático
+export const dynamic = 'force-dynamic';
 
 const Estadisticas = () => {
-    const [perfilData, setPerfilData] = useState({});  // Estado para almacenar los datos del perfil, incluida la foto
-    const [userId, setUserId] = useState(null); // Estado para almacenar el ID del usuario
+    const [perfilData, setPerfilData] = useState({});  
+    const [userId, setUserId] = useState(null); 
     const router = useRouter();
 
     useEffect(() => {
-        // Asegurarse de que se ejecuta solo en el cliente
-        const id = typeof window !== 'undefined' ? localStorage.getItem('userId') : null;
+        // Solo accede al localStorage en el cliente
+        const id = localStorage.getItem('userId');
         if (id) {
             setUserId(id);
         } else {
-            // Redirigir al inicio de sesión si no hay userId en localStorage
             router.push('/iniciosesion');
         }
     }, [router]);
 
     useEffect(() => {
-        // Solo fetch si existe userId
         const fetchPerfilData = async () => {
             try {
                 if (userId) {
-                    const res = await axios.get(`https://backmoneyminds.onrender.com/usuario/perfil/${userId}`); // URL actualizada aquí
-                    const perfil = res.data[0]; // Accedemos al primer elemento del array
-                    setPerfilData(perfil); // Guardamos el primer objeto en el estado
+                    const res = await axios.get(`https://backmoneyminds.onrender.com/usuario/perfil/${userId}`);
+                    const perfil = res.data[0];
+                    setPerfilData(perfil);
                 }
             } catch (err) {
                 console.error('Error fetching perfil data:', err);
@@ -43,7 +45,6 @@ const Estadisticas = () => {
         fetchPerfilData();
     }, [userId]);
 
-    // Muestra un indicador de carga mientras se espera el ID del usuario
     if (!userId) {
         return <div>Cargando...</div>;
     }
@@ -54,10 +55,10 @@ const Estadisticas = () => {
                 <Titulo texto={"Estadisticas"} />
                 <div className={styles.fotoPerfilContainer}>
                     <img 
-                        src={perfilData.foto ? perfilData.foto : "./fotoPerfil.png"}  // Usar la URL de la base de datos o una imagen por defecto
+                        src={perfilData.foto ? perfilData.foto : "./fotoPerfil.png"}  
                         alt="Perfil" 
                         className={styles.fotoPerfil} 
-                        onClick={() => router.push('/Perfil')}  // Redirige al perfil al hacer clic en la imagen
+                        onClick={() => router.push('/Perfil')}  
                     />
                 </div>
             </div>
