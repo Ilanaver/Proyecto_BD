@@ -12,16 +12,19 @@ import Top3Categorias from "./components/Top3Cat";
 import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
 
-// Renombramos la exportación para evitar conflictos
+// Desactiva el prerenderizado estático
 export const dynamicConfig = 'force-dynamic';
 
 const Estadisticas = () => {
     const [perfilData, setPerfilData] = useState({});  
     const [userId, setUserId] = useState(null); 
+    const [isClient, setIsClient] = useState(false);  // Nueva variable de estado para detectar si estamos en el cliente
     const router = useRouter();
 
     useEffect(() => {
-        // Solo accede al localStorage en el cliente
+        // Detecta cuando estamos en el cliente (browser)
+        setIsClient(true);
+
         const id = localStorage.getItem('userId');
         if (id) {
             setUserId(id);
@@ -45,7 +48,7 @@ const Estadisticas = () => {
         fetchPerfilData();
     }, [userId]);
 
-    if (!userId) {
+    if (!userId || !isClient) {  // Asegura que el render solo se haga en el cliente
         return <div>Cargando...</div>;
     }
 
