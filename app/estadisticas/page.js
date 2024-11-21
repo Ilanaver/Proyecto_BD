@@ -12,8 +12,8 @@ import Top3Categorias from "./components/Top3Cat";
 import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
 
-// Desactiva el prerenderizado estático
-export const dynamic = 'force-dynamic';
+// Renombramos la exportación para evitar conflictos
+export const dynamicConfig = 'force-dynamic';
 
 const Estadisticas = () => {
     const [perfilData, setPerfilData] = useState({});  
