@@ -1,30 +1,27 @@
 'use client';
 import React, { useEffect, useState } from "react";
-import CatGastos from './components/CatGastos';
-import SaldoPorMes from './components/SaldoPorMes';
-import RealDiarioChart from "./components/RealDiario";
-import styles from './estadisticas.module.css'; 
+import dynamic from 'next/dynamic';  // Import dynamic
 import axios from "axios";
 import Footer from "../components/Footer/Footer";
 import Titulo from "../components/Titulo/Titulo";
-import PromedioDiario from './components/PromDiario';
-import Top3Categorias from "./components/Top3Cat";
 import { useRouter } from 'next/navigation';
-import dynamic from 'next/dynamic';
+import styles from './estadisticas.module.css';
 
-// Desactiva el prerenderizado estático
-export const dynamicConfig = 'force-dynamic';
+// Dynamically load components that depend on client-side functionality
+const CatGastos = dynamic(() => import('./components/CatGastos'), { ssr: false });
+const SaldoPorMes = dynamic(() => import('./components/SaldoPorMes'), { ssr: false });
+const RealDiarioChart = dynamic(() => import("./components/RealDiario"), { ssr: false });
+const PromedioDiario = dynamic(() => import('./components/PromDiario'), { ssr: false });
+const Top3Categorias = dynamic(() => import("./components/Top3Cat"), { ssr: false });
 
 const Estadisticas = () => {
     const [perfilData, setPerfilData] = useState({});  
     const [userId, setUserId] = useState(null); 
-    const [isClient, setIsClient] = useState(false);  // Nueva variable de estado para detectar si estamos en el cliente
+    const [isClient, setIsClient] = useState(false);  
     const router = useRouter();
 
     useEffect(() => {
-        // Detecta cuando estamos en el cliente (browser)
         setIsClient(true);
-
         const id = localStorage.getItem('userId');
         if (id) {
             setUserId(id);
@@ -48,7 +45,7 @@ const Estadisticas = () => {
         fetchPerfilData();
     }, [userId]);
 
-    if (!userId || !isClient) {  // Asegura que el render solo se haga en el cliente
+    if (!userId || !isClient) {  
         return <div>Cargando...</div>;
     }
 

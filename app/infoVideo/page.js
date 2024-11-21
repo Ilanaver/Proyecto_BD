@@ -11,7 +11,7 @@ import styles from './infoVideo.module.css'; // Ajusta la ruta según tu estruct
 const InfoVideo = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const idvideo = searchParams.get('idvideo');
+  const idvideo = searchParams.get('idvideo'); // Obtener idvideo desde los parámetros de la URL
 
   const [videoDetails, setVideoDetails] = useState(null);
   const [loading, setLoading] = useState(true);
