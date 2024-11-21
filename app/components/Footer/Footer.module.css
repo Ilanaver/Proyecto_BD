@@ -1,4 +1,4 @@
-@media screen and (max-width: 550px) {
+
     .footerFixed {
         position: fixed;
         bottom: 0;
@@ -31,4 +31,4 @@
         width: 25px;  /* Reducir el tamaño de los íconos */
         height: 20px;  /* Ajusta la altura proporcionalmente */
     }
-}
+
