@@ -1,12 +1,12 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
 import axios from 'axios';
-import Titulo from '../components/Titulo/Titulo'; // Ajusta la ruta según tu estructura
-import Footer from '../components/Footer/Footer'; // Ajusta la ruta según tu estructura
-import styles from './infoVideo.module.css'; // Ajusta la ruta según tu estructura
+import Titulo from '../components/Titulo/Titulo';
+import Footer from '../components/Footer/Footer';
+import styles from './infoVideo.module.css';
 
 const InfoVideo = () => {
   const router = useRouter();
@@ -16,7 +16,7 @@ const InfoVideo = () => {
   const [videoDetails, setVideoDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [isClient, setIsClient] = useState(false); // Verifica si es cliente
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setIsClient(true); // Esto asegura que el código solo se ejecute en el cliente
@@ -83,4 +83,10 @@ const InfoVideo = () => {
   );
 };
 
-export default InfoVideo;
+const InfoVideoWithSuspense = () => (
+  <Suspense fallback={<p>Loading...</p>}>
+    <InfoVideo />
+  </Suspense>
+);
+
+export default InfoVideoWithSuspense;

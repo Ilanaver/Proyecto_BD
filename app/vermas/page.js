@@ -1,50 +1,46 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
 import axios from 'axios';
-import Titulo from '../components/Titulo/Titulo'; // Ajusta la ruta según tu estructura
-import Footer from '../components/Footer/Footer'; // Ajusta la ruta según tu estructura
+import Titulo from '../components/Titulo/Titulo';
+import Footer from '../components/Footer/Footer';
 import { useSearchParams, useRouter } from 'next/navigation';
-import styles from './ver-mas.module.css'; // Ajusta la ruta según tu estructura
+import styles from './ver-mas.module.css';
 
 const VerMas = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const categoria = searchParams.get('categoria'); // Obtener la categoría desde los parámetros de la URL
+  const categoria = searchParams.get('categoria');
 
-  const [details, setDetails] = useState([]); // Detalles de los videos
-  const [loading, setLoading] = useState(true); // Estado de carga
-  const [error, setError] = useState(null); // Estado de error
+  const [details, setDetails] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Fetch los detalles del contenido
   useEffect(() => {
     if (!categoria || categoria === 'undefined') {
       setError('Categoría no especificada.');
       setLoading(false);
-      return;  // Si no hay categoría válida, no hacemos la solicitud
+      return;
     }
 
-    // Realizamos la solicitud para obtener los detalles de la categoría
     axios.get(`https://backmoneyminds.onrender.com/contenido-multimedia/ver-mas/${categoria}`)
       .then(response => {
-        setDetails(response.data); // Guardamos los datos obtenidos
-        setLoading(false); // Indicamos que la carga ha terminado
+        setDetails(response.data);
+        setLoading(false);
       })
       .catch(error => {
         console.error('Error fetching data:', error); 
         setError('Error al cargar los datos.');
-        setLoading(false); // Indicamos que la carga ha terminado con error
+        setLoading(false);
       });
   }, [categoria]);
 
-  // Función para manejar el clic en las imágenes de los videos
   const handleImageClick = (idvideo) => {
-    // Comprobamos si idvideo está definido antes de redirigir
     if (idvideo) {
-      console.log('ID Video:', idvideo);  // Verificamos que idvideo tiene un valor válido
-      router.push(`/infoVideo?idvideo=${idvideo}`); // Redirigimos a la página del video
+      console.log('ID Video:', idvideo);  
+      router.push(`/infoVideo?idvideo=${idvideo}`);
     } else {
-      console.error('ID de video no encontrado'); // Imprimimos el error en la consola si idvideo es undefined
+      console.error('ID de video no encontrado');
     }
   };
 
@@ -67,7 +63,7 @@ const VerMas = () => {
             <div key={index} className={styles.item} onClick={() => handleImageClick(item.idvideo)}>
               <h2>{item.titulo}</h2>
               <img
-                src={item.img || "https://media.tycsports.com/files/2024/09/01/761460/river-vs-independiente_416x234.webp?v=1"}  // Usa la imagen de la API si existe
+                src={item.img || "https://media.tycsports.com/files/2024/09/01/761460/river-vs-independiente_416x234.webp?v=1"}
                 alt={item.titulo}
                 className={styles.image}
               />
@@ -81,4 +77,10 @@ const VerMas = () => {
   );
 };
 
-export default VerMas;
+const VerMasWithSuspense = () => (
+  <Suspense fallback={<p>Loading...</p>}>
+    <VerMas />
+  </Suspense>
+);
+
+export default VerMasWithSuspense;
