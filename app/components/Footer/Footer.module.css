@@ -28,7 +28,7 @@
     }
 
     .navegadorFooter img {
-        width: 45px;  /* Reducir el tamaño de los íconos */
-        height: 40px;  /* Ajusta la altura proporcionalmente */
+        width: 25px;  /* Reducir el tamaño de los íconos */
+        height: 20px;  /* Ajusta la altura proporcionalmente */
     }
 }
