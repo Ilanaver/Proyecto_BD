@@ -127,7 +127,6 @@ const Perfil = () => {
             <div className={style.cerrarSesion}>
                 <a href="./iniciosesion" className={style.h3}>Cerrar Sesión</a>
             </div>
-            <Footer />
         </>
     );
 };
