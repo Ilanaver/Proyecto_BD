@@ -219,9 +219,18 @@ const Gestor = () => {
   doc.text('Reporte Mensual', 14, 22);
 
   doc.setFontSize(12);
-  
-  reporte.forEach((item, index) => {
-    // Si el siguiente texto supera el límite de la página
+
+  reporte.forEach((item) => {
+    // Cambiar el color dependiendo del tipo
+    if (item.tipo.toLowerCase() === 'gasto') {
+      doc.setTextColor(255, 0, 0); // Rojo
+    } else if (item.tipo.toLowerCase() === 'ingreso') {
+      doc.setTextColor(0, 128, 0); // Verde
+    } else {
+      doc.setTextColor(0, 0, 0); // Negro por defecto
+    }
+
+    // Verificar si se necesita una nueva página
     if (y + lineHeight > pageHeight - 10) {
       doc.addPage(); // Crear una nueva página
       y = marginTop; // Reiniciar la posición en la nueva página
