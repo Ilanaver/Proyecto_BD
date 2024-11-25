@@ -68,8 +68,7 @@
     display: flex;
     justify-content: center;
     color: red;
-    margin-top: 5%;  /* Reducir el margen para que no quede tan abajo */
-    text-align: center;  /* Asegura que el texto esté centrado */
+    margin-top: 15%;
 }
 
 /* Estilos para el input de URL y botón */
@@ -107,24 +106,26 @@
     .navegador {
         display: flex;
         justify-content: center;
-        gap: 20px;  /* Reducir el gap para dispositivos pequeños */
+        gap: 35px;
     }
 
     .info {
         display: flex;
         flex-direction: column;
-        gap: 15px;  /* Reducir el espacio entre los elementos */
     }
 
     .imagen {
-        margin-top: 5%;  /* Reducir el margen superior */
+        display: flex;
+        justify-content: center;
+        margin-top: 10%;
+        margin-bottom: 5%;
     }
 
     .nombre {
         display: flex;
         align-items: center;
         flex-direction: column;
-        margin-bottom: 5%;  /* Reducir el espacio inferior */
+        margin-bottom: 10%;
     }
 
     .mail {
@@ -136,41 +137,45 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 15px;  /* Reducir el espacio entre los elementos */
+        gap: 20px; 
     }
 
     .opciones {
         display: flex;
-        gap: 15px;  /* Reducir el espacio entre las opciones */
+        gap: 20px;
         max-width: 250px;
-        width: 90%;  /* Hacer que las opciones tengan un tamaño más adecuado */
+        width: 70%;
     }
 
     .opciones img {
-        width: 25px;  /* Reducir el tamaño de los iconos en pantallas pequeñas */
-        height: 25px;
+        width: 27px;
+        height: 30px;
+        border-radius: 20%;
+        background-color: #d0e8ff;
+        padding: 10px;
     }
 
     .h3 {
-        font-size: 0.9rem;  /* Reducir el tamaño de fuente en pantallas pequeñas */
+        font-size: 1rem;
+        font-weight: normal;
     }
 
     .cerrarSesion {
         display: flex;
         justify-content: center;
         color: red;
-        margin-top: 5%;  /* Reducir el margen para que no quede tan abajo */
+        margin-top: 15%;
     }
 
     .inputContainer {
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-top: 15px;  /* Reducir el margen superior */
+        margin-top: 20px;
     }
 
     .inputContainer input {
-        max-width: 90%;  /* Evitar que el input sea demasiado grande */
+        margin-bottom: 10px;
     }
 
     .inputContainer button {
