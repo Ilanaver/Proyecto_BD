@@ -236,7 +236,7 @@ const Gestor = () => {
       y = marginTop; // Reiniciar la posición en la nueva página
     }
 
-    doc.text(`Importe: ${item.importe}, Tipo: ${item.tipo}, Subtipo: ${item.subtipo}`, 14, y);
+    doc.text(`Importe: ${item.importe}, Tipo: ${item.tipo}, Subtipo: ${item.subtipo}, Fecha: ${item.fecha}`, 14, y);
     y += lineHeight; // Avanzar a la siguiente línea
   });
 
