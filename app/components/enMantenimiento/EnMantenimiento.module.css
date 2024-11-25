@@ -1,0 +1,68 @@
+/* Contenedor principal */
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px 20px; /* Padding en los lados y la parte inferior, pero no en la parte superior */
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Contenido principal */
+.contenido {
+    max-width: 600px;
+    padding: 20px;
+    background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Imagen con animación */
+.imagen {
+    max-width: 80%;
+    height: auto;
+    margin: 20px 0;
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Mensaje principal */
+.mensaje {
+    font-size: 20px;
+    color: #333333;
+    font-weight: 600;
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+/* Mensaje adicional */
+.mensajeAdicional {
+    font-size: 16px;
+    color: #555555;
+    margin-top: 10px;
+    line-height: 1.6;
+}
+
+/* Enlace con estilo */
+.enlace {
+    color: #1d4ed8;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.enlace:hover {
+    text-decoration: underline;
+}
+
+/* Animación flotante para la imagen */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}

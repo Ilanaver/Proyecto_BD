@@ -1,8 +1,8 @@
 import React from 'react';
 import EnMantenimiento from '../components/enMantenimiento/enMantenimiento';
 
-const Asesor = () => {
-    return <EnMantenimiento pagina="Asesor Chat Bot" />;
+const Inversor = () => {
+    return <EnMantenimiento pagina="Bot Inversor" />;
 };
 
-export default Asesor;
+export default Inversor;

@@ -47,7 +47,6 @@ const Diara = () => {
     useEffect(() => {
         fetchPerfilData();
         const today = new Date().toISOString().split('T')[0];
-        console.log(today);
         fetchLeccionesByFecha(today);
     }, [userId]);
 
@@ -81,18 +80,20 @@ const Diara = () => {
                     ))}
                 </div>
 
-                {/* Tres botones para agregar, actualizar, eliminar */}
-                <div className={styles.botonContainer}>
-                    <button className={styles.botonAccion} onClick={() => router.push('/leccionmanager')}>
-                        Agregar Lección
-                    </button>
-                    <button className={styles.botonAccion} onClick={() => router.push('/leccionmanager')}>
-                        Actualizar Lección
-                    </button>
-                    <button className={styles.botonAccion} onClick={() => router.push('/leccionmanager')}>
-                        Eliminar Lección
-                    </button>
-                </div>
+                {/* Mostrar botones solo si el usuario es admin */}
+                {perfilData.admin && (
+                    <div className={styles.botonContainer}>
+                        <button className={styles.botonAccion} onClick={() => router.push('/leccionmanager')}>
+                            Agregar Lección
+                        </button>
+                        <button className={styles.botonAccion} onClick={() => router.push('/leccionmanager')}>
+                            Actualizar Lección
+                        </button>
+                        <button className={styles.botonAccion} onClick={() => router.push('/leccionmanager')}>
+                            Eliminar Lección
+                        </button>
+                    </div>
+                )}
 
                 <Footer />
             </section>
