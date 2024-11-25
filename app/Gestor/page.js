@@ -222,7 +222,7 @@ const Gestor = () => {
 
   reporte.forEach((item) => {
     // Cambiar el color dependiendo del tipo
-    if (item.tipo.toLowerCase() === 'gasto') {
+    if (item.tipo.toLowerCase() === 'gastos') {
       doc.setTextColor(255, 0, 0); // Rojo
     } else if (item.tipo.toLowerCase() === 'ingreso') {
       doc.setTextColor(0, 128, 0); // Verde
