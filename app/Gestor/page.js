@@ -208,18 +208,32 @@ const Gestor = () => {
   };
 
   const generarReportePDF = () => {
-    const doc = new jsPDF();
+  const doc = new jsPDF();
+  const pageHeight = doc.internal.pageSize.height; // Altura de la página
+  const marginTop = 40; // Margen superior inicial
+  const lineHeight = 10; // Altura de cada línea
+  let y = marginTop; // Posición inicial en el eje Y
 
-    doc.setFontSize(18);
-    doc.text('Reporte Mensual', 14, 22);
+  // Encabezado
+  doc.setFontSize(18);
+  doc.text('Reporte Mensual', 14, 22);
 
-    doc.setFontSize(12);
-    reporte.forEach((item, index) => {
-      doc.text(`Importe: ${item.importe}, Tipo: ${item.tipo}, Subtipo: ${item.subtipo}`, 14, 40 + index * 10);
-    });
+  doc.setFontSize(12);
+  
+  reporte.forEach((item, index) => {
+    // Si el siguiente texto supera el límite de la página
+    if (y + lineHeight > pageHeight - 10) {
+      doc.addPage(); // Crear una nueva página
+      y = marginTop; // Reiniciar la posición en la nueva página
+    }
 
-    doc.save(`Reporte_Mensual_${meses[mesSeleccionado]}_${anioSeleccionado}.pdf`);
-  };
+    doc.text(`Importe: ${item.importe}, Tipo: ${item.tipo}, Subtipo: ${item.subtipo}`, 14, y);
+    y += lineHeight; // Avanzar a la siguiente línea
+  });
+
+  // Guardar el archivo PDF
+  doc.save(`Reporte_Mensual_${meses[mesSeleccionado]}_${anioSeleccionado}.pdf`);
+};
 
   return (
     <main>
