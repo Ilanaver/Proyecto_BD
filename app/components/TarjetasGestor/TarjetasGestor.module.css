@@ -19,13 +19,16 @@
     }
     .signoMas{
         cursor: pointer;
+        margin-left: auto;
     }
     .imagenIngresos{
         width: 100px;
         height: 100%;
     }
     .Infotarjetas{
+        width: 100%;
         display: flex;
+        justify-content: space-between;
         align-items: center;
         margin-left: 40px;
         gap: 5px;
@@ -40,6 +43,6 @@
     .contenido{
         display:flex;
         flex-direction: column;
-        width: 200px;
+        width: 100%;
     }
 }

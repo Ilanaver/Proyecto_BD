@@ -1,89 +1,173 @@
-/* Gestor.module.css */
+/* Estilos generales para todos los tamaños */
+.ContenedorGestor {
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 95px;
+    max-width: 1200px;
+    position: relative; /* Necesario para posicionar la foto de perfil */
+}
 
-/* Estilos generales para la pantalla móvil */
+.tituloGestor {
+    display: flex;
+    align-items: center; /* Alinea verticalmente el título */
+    width: 100%; /* Asegúrate de que el contenedor ocupe todo el ancho disponible */
+    justify-content: center; /* Centra el título horizontalmente */
+    padding: 20px; /* Espaciado interno para separarlo del borde */
+    box-sizing: border-box;
+    margin-top: 7%;
+}
+
+.balanceMensual {
+    margin: 20px 0; /* Espaciado superior e inferior */
+    text-align: center;
+}
+
+.balanceMensual h2 {
+    margin: 10px 0; /* Espaciado interno para el texto */
+}
+
+.MesGestor {
+    display: flex;
+    padding: 5px 10px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    border: 1px solid black;
+    width: fit-content;
+    height: 30px;
+    margin: 20px 0; /* Espaciado superior e inferior */
+}
+
+.MesGestor a {
+    text-decoration: none;
+    color: black;
+}
+
+.tarjetasGestor {
+    display: grid;
+    gap: 20px; /* Espacio entre tarjetas */
+    width: 100%; /* Ocupa todo el ancho disponible */
+    max-width: 1200px; /* Límite máximo para pantallas grandes */
+    margin: 20px 0; /* Espaciado superior e inferior */
+    padding: 0 20px; /* Espaciado interno */
+    box-sizing: border-box;
+}
+
+.tarjetasGestor button {
+    display: flex;
+    justify-content: center; /* Centra el signo más dentro del botón */
+    align-items: center; /* Asegura la alineación vertical */
+    width: 50px; /* Ancho fijo para el botón */
+    height: 50px; /* Altura fija para el botón */
+    font-size: 1.5rem; /* Tamaño adecuado para el signo más */
+    border-radius: 50%; /* Hace el botón redondo */
+    background-color: #0F77F0; /* Color de fondo para destacarlo */
+    color: white; /* Color del signo más */
+    border: none; /* Sin bordes adicionales */
+    cursor: pointer; /* Indica que es clickeable */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para resaltarlo */
+}
+
+.tarjetasGestor button:hover {
+    background-color: #0056b3; /* Cambia el color al pasar el mouse */
+}
+
+.tarjetasGestor button:focus {
+    outline: none; /* Sin borde de enfoque */
+    box-shadow: 0 0 8px #0F77F0; /* Agrega un brillo al enfocarse */
+}
+
+/* Ajustes responsivos */
 @media screen and (max-width: 550px) {
-    .logoPagina {
-        width: 100px;
-        height: 50px;
+    .tarjetasGestor button {
+        width: 40px; /* Reduce el tamaño en pantallas muy pequeñas */
+        height: 40px;
+        font-size: 1.2rem; /* Ajusta el tamaño del texto */
     }
+}
 
-    .ContenedorGestor {
-        margin: 2%;        
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding-bottom: 95px;
+/* Ajustes para pantallas pequeñas y horizontales */
+@media screen and (max-width: 750px) and (orientation: landscape) {
+    .tarjetasGestor button {
+        width: 35px; /* Botón más pequeño */
+        height: 35px;
+        font-size: 1rem; /* Tamaño del signo más reducido */
     }
+}
 
+.botonReporteMensual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0; /* Espaciado superior e inferior */
+    width: 90%; /* Adaptable al tamaño de la pantalla */
+    max-width: 300px; /* Límite máximo */
+    height: 50px;
+    border: 2px solid #0F77F0;
+    border-radius: 16px;
+    cursor: pointer;
+}
+
+.botonReporteMensual a {
+    text-decoration: none;
+    color: black;
+}
+
+/* Contenedor para la imagen de perfil */
+.fotoPerfilContainer {
+    position: absolute; /* Posiciona la foto de perfil dentro del ContenedorGestor */
+    top: 10px; /* Espaciado desde la parte superior */
+    right: 10px; /* Espaciado desde el borde derecho */
+    width: 50px; /* Tamaño pequeño para la imagen */
+    height: 50px; /* Tamaño pequeño para la imagen */
+}
+
+.fotoPerfil {
+    width: 100%; /* Asegúrate de que la imagen ocupe todo el contenedor */
+    height: 100%; /* Asegúrate de que la imagen ocupe todo el contenedor */
+    border-radius: 50%; /* Hace que la imagen tenga bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar sobre la imagen para indicar que es clickeable */
+    object-fit: cover; /* Ajusta la imagen para que se ajuste dentro del contenedor sin distorsionarse */
+}
+
+/* Para pantallas pequeñas */
+@media screen and (max-width: 550px) {
     .tituloGestor {
-        display: flex;
-        align-items: center; /* Alinea verticalmente el título y la imagen de perfil */
-        width: 100%; /* Asegúrate de que el contenedor ocupe todo el ancho disponible */
-        justify-content: center; /* Centra el título horizontalmente */
-        position: relative; /* Necesario para posicionar la imagen de perfil dentro del contenedor */
-        padding: 0 10px; /* Espacio horizontal alrededor del contenedor */
-        gap: 35px;
+        justify-content: center; /* Centra el título */
     }
 
-    .balanceMensual {
-        margin-top: 10px;
-        margin-bottom: 25px;
-    }
-
-    .balanceMensual h2 {
-        display: flex;
-        justify-content: center;
-    }
-
-    .MesGestor {
-        display: flex;
-        padding: 3px;
-        justify-content: center;
-        align-items: center;
-        border-radius: 8px;
-        border: 1px solid black;
-        width: fit-content;
-        height: 25px;
-        margin-top: 5%;
-    }
-
-    .MesGestor a {
-        text-decoration: none;
-        color: black;
+    .tarjetasGestor {
+        grid-template-columns: 1fr; /* Una sola columna */
     }
 
     .botonReporteMensual {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 50px;
-        width: 250px;
-        height: 50px;
-        border: 2px solid #0F77F0;
-        border-radius: 16px;
-        margin-bottom: 50px;
-        cursor: pointer;
+        width: 100%; /* Ocupa todo el ancho disponible */
+    }
+}
+
+/* Para pantallas medianas */
+@media screen and (min-width: 551px) and (max-width: 1024px) {
+    .tarjetasGestor {
+        grid-template-columns: repeat(2, 1fr); /* Dos columnas */
     }
 
-    .botonReporteMensual a {
-        text-decoration: none;
-        color: black;
+    .botonReporteMensual {
+        width: 70%;
+        max-width: 300px;
+    }
+}
+
+/* Para pantallas grandes */
+@media screen and (min-width: 1025px) {
+    .tarjetasGestor {
+        grid-template-columns: repeat(3, 1fr); /* Tres columnas */
     }
 
-    /* Contenedor para la imagen de perfil */
-    .fotoPerfilContainer {
-        position: absolute; /* Cambiado a posición absoluta */
-        top: 10px; /* Espacio desde la parte superior del contenedor */
-        right: 10px; /* Espacio desde el borde derecho del contenedor */
-        width: 50px; /* Tamaño pequeño para la imagen */
-        height: 50px; /* Tamaño pequeño para la imagen */
-    }
-
-    .fotoPerfil {
-        width: 100%; /* Asegúrate de que la imagen ocupe todo el contenedor */
-        height: 100%; /* Asegúrate de que la imagen ocupe todo el contenedor */
-        border-radius: 50%; /* Hace que la imagen tenga bordes redondeados */
-        cursor: pointer; /* Cambia el cursor al pasar sobre la imagen para indicar que es clickeable */
-        object-fit: cover; /* Ajusta la imagen para que se ajuste dentro del contenedor sin distorsionarse */
+    .botonReporteMensual {
+        width: 50%;
+        max-width: 300px;
     }
 }
