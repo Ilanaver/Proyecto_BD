@@ -1,110 +1,36 @@
 @media screen and (max-width: 600px) {
 
-    .botonRegistrarse button{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #0F77F0;
-        border-radius: 25px;
-        width: 328px;
-        height: 56px;
-        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-        transition: background-color 0.3s ease;
-        border: none; /* Elimina el borde por defecto */
-        color: white; /* Asegura que el texto sea blanco */
-        font-size: 18px; /* Ajusta el tamaño del texto */
-        font-weight: bold;
-        cursor: pointer;
-        padding: 0; /* Elimina el padding interno que pueda causar el recuadro */
-    }
-
-    .botonRegistrarse button:hover{
-        background-color: #0056b3;
-    }
-
-    .contenedorP{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .contenedorP a{
-        text-align: center;
-        color: #444444;
-        text-decoration: none;
-        font-size: 14px;
-        background: none;
-        border: none;
-        cursor: pointer;
-    }
-
-    .contenedorP a:hover{
-        color: #0F77F0;
-    }
-    .PaginaPrincipal{
+    .PaginaPrincipal {
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        }
-        .contenedorImagen{
-        display: flex;
-        justify-content: center;
-        margin-top: 30%;
-        }
-        .contenedorTexto{
-        display: flex;
-        justify-content: center;
-        text-align: center;
-        flex-wrap: wrap;
-        width: 100%;
-        margin-top: 5%;
-        margin-bottom: 65%;
-        }
-        .ImagenPrincipal{
-        width: 214px;
-        height: 138px;
-        }
-        .palabrasInicio{
-        color: #0F77F0;
-        }
-        .mismoLugar{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 5px;
-        }
+        height: 100vh; /* Ajusta para que ocupe toda la pantalla */
+        background-color: #f0f0f0; /* Fondo claro para la pantalla de carga */
+      }
       
-        .contenedorInicioSesion{
+      .contenedorParteArriba {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 10px;
-        }
-        .botonRegistrarse{
+        gap: 20px;
+      }
+      
+      .contenedorImagen {
         display: flex;
         justify-content: center;
-        align-items: center;
-     
-        }
-        .boton{
-            background-color: #0F77F0;
-            border-radius: 15px;
-            width: 328px;
-            height: 56px;
-            outline: none;
-            border: none;
-            text-decoration: none;
-            color: white;
-        }
-        .contenedorP{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .contenedorP a{
-                color: #444444;
-                text-decoration: none;
-            }
+      }
+      
+      .ImagenPrincipal {
+        width: 150px; /* Tamaño reducido del logo */
+        height: auto;
+      }
+      
+      .contenedorTexto {
+        text-align: center;
+        color: #0F77F0; /* Color azul del texto */
+        font-size: 18px;
+        font-weight: bold;
+      }
 }
