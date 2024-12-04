@@ -38,18 +38,16 @@ const Gestor = () => {
   const [idtipos, setIdTipos] = useState(null);
   const [mesSeleccionado, setMesSeleccionado] = useState(new Date().getMonth() + 1);
   const [anioSeleccionado, setAnioSeleccionado] = useState(new Date().getFullYear());
-  const [userId, setUserId] = useState(null); // Estado para almacenar el ID del usuario
-  const [perfilData, setPerfilData] = useState({});  // Estado para almacenar los datos del perfil, incluida la foto
+  const [userId, setUserId] = useState(null);
+  const [perfilData, setPerfilData] = useState({});
 
   const router = useRouter();
 
-  // Obtener el ID del usuario del localStorage
   useEffect(() => {
     const id = localStorage.getItem('userId');
     if (id) {
       setUserId(id);
     } else {
-      // Redirigir al inicio de sesión si no hay userId en localStorage
       router.push('/iniciosesion');
     }
   }, [router]);
@@ -58,8 +56,8 @@ const Gestor = () => {
     if (userId) {
       axios.get(`https://backmoneyminds.onrender.com/usuario/perfil/${userId}`)
         .then(res => {
-          const perfil = res.data[0]; // Accedemos al primer elemento del array
-          setPerfilData(perfil); // Guardamos el primer objeto en el estado
+          const perfil = res.data[0];
+          setPerfilData(perfil);
         })
         .catch(err => console.error('Error fetching perfil data:', err));
     }
@@ -74,9 +72,11 @@ const Gestor = () => {
     if (userId && mesSeleccionado && anioSeleccionado) {
       axios.get(`https://backmoneyminds.onrender.com/gestor/${userId}/${mesSeleccionado}/${anioSeleccionado}`)
         .then(res => {
-          console.log('Fetched saldo actual:', res.data);
-          const saldoActual = res.data.map(item => item['Saldo actual']);
-          setSaldo(saldoActual);
+          const saldoActual = res.data.map(item => {
+            const saldoSinFormato = parseFloat(item['Saldo actual']);
+            return saldoSinFormato.toLocaleString('es-ES');
+          });
+          setSaldo(saldoActual[0] || 0); // Usar el primer elemento o 0 si no existe
         })
         .catch(err => console.error('Error fetching saldo actual:', err));
     }
@@ -85,10 +85,7 @@ const Gestor = () => {
   const fetchReporte = () => {
     if (userId && mesSeleccionado && anioSeleccionado) {
       axios.get(`https://backmoneyminds.onrender.com/gestor/operaciones/${userId}/${mesSeleccionado}/${anioSeleccionado}`)
-        .then(res => {
-          console.log('Fetched reporte:', res.data);
-          setReporte(res.data);
-        })
+        .then(res => setReporte(res.data))
         .catch(err => console.error('Error fetching reporte:', err));
     }
   };
@@ -97,9 +94,11 @@ const Gestor = () => {
     if (userId && mesSeleccionado && anioSeleccionado) {
       try {
         const res = await axios.get(`https://backmoneyminds.onrender.com/gestor/${userId}/${idTipo}/${mesSeleccionado}/${anioSeleccionado}`);
-        console.log(`Fetched saldoTipo data for idTipo ${idTipo}:`, res.data);
-        const saldoTipo = res.data.map(item => item['Saldo actual']);
-        setSaldoTipo(prevSaldoTipo => ({ ...prevSaldoTipo, [idTipo]: saldoTipo }));
+        const saldoTipo = res.data.map(item => {
+          const saldoSinFormato = parseFloat(item['Saldo actual']);
+          return saldoSinFormato.toLocaleString('es-ES');
+        });
+        setSaldoTipo(prevSaldoTipo => ({ ...prevSaldoTipo, [idTipo]: saldoTipo[0] || 0 }));
       } catch (err) {
         console.error(`Error fetching saldoTipo data for idTipo ${idTipo}:`, err);
       }
@@ -108,153 +107,69 @@ const Gestor = () => {
 
   useEffect(() => {
     if (userId) {
-      fetchPerfilData();  // Llamar la función para obtener el perfil
+      fetchPerfilData();
       fetchSaldos();
       fetchReporte();
-      fetchSaldosPorTipo(1); // Gastos
-      fetchSaldosPorTipo(2); // Ingresos
-      fetchSaldosPorTipo(3); // Ahorros
+      fetchSaldosPorTipo(1);
+      fetchSaldosPorTipo(2);
+      fetchSaldosPorTipo(3);
     }
   }, [userId, mesSeleccionado, anioSeleccionado]);
 
   const manejarClick = (idTipo) => {
-    let motivo;
-    if (idTipo === 1) {
-      motivo = 'gastos';
-    } else if (idTipo === 2) {
-      motivo = 'ingresos';
-    } else if (idTipo === 3) {
-      motivo = 'ahorros';
-    }
-    setMotivo(motivo);
-    setIdTipos(idTipo); // Set the idtipos for the selected option
+    const motivos = { 1: 'gastos', 2: 'ingresos', 3: 'ahorros' };
+    setMotivo(motivos[idTipo]);
+    setIdTipos(idTipo);
     setMostrarPopup(true);
-  };
-
-  const enviarDatosPopup = (datos) => {
-    console.log('Cantidad:', datos.cantidad);
-    console.log('Motivo:', datos.motivo);
-    console.log('Subtipo:', datos.subtipo);
-    console.log('Fecha:', datos.fecha);
-    console.log('Observaciones:', datos.observaciones);
-
-    if (!datos.cantidad || !datos.motivo || !datos.subtipo || !datos.fecha) {
-      console.error('Faltan datos en el formulario');
-      return;
-    }
-
-    let tipo = null;
-    let cantidad = datos.cantidad;
-
-    if (datos.motivo === "ingresos") {
-      tipo = 2;
-    } else if (datos.motivo === "gastos") {
-      tipo = 1;
-    } else {
-      tipo = 3;
-    }
-
-    const requestData = {
-      "idperfil_fk": userId,
-      "idtipos_fk": tipo,
-      "idsubtipo_fk": datos.subtipo,
-      "importe": cantidad,
-      "fecha": datos.fecha,
-      "observaciones": datos.observaciones
-    };
-
-    console.log('Datos a enviar:', requestData);
-
-    axios.post("https://backmoneyminds.onrender.com/gestor/addOperacion", requestData)
-      .then(response => {
-        console.log('Data inserted successfully:', response.data);
-        setReporte(prevReporte => [...prevReporte, {
-          importe: cantidad,
-          tipo: datos.motivo,
-          subtipo: datos.subtipo,
-          fecha: datos.fecha,
-          observaciones: datos.observaciones || ""
-        }]);
-
-        // Actualiza los saldos después de agregar la operación
-        fetchSaldos();
-        fetchSaldosPorTipo(1); // Gastos
-        fetchSaldosPorTipo(2); // Ingresos
-        fetchSaldosPorTipo(3); // Ahorros
-        fetchReporte();
-
-      })
-      .catch(error => {
-        console.error('Error inserting data:', error);
-        console.log('Error details:', error.response ? error.response.data : error.message);
-      });
-    console.log(datos.motivo);
-    actualizarBalance(cantidad, datos.motivo);
-    cerrarPopup();
   };
 
   const cerrarPopup = () => {
     setMostrarPopup(false);
   };
 
-  const actualizarBalance = (cantidad, motivo) => {
-    if (motivo.toLowerCase() === 'ingresos') {
-      setIngresos(prevIngresos => prevIngresos + cantidad);
-    } else if (motivo.toLowerCase() === 'gastos') {
-      setGastos(prevGastos => prevGastos + cantidad);
-    } else if (motivo.toLowerCase() === 'ahorros') {
-      setAhorros(prevAhorros => prevAhorros + cantidad);
-    }
-  };
-
   const generarReportePDF = () => {
-  const doc = new jsPDF();
-  const pageHeight = doc.internal.pageSize.height; // Altura de la página
-  const marginTop = 40; // Margen superior inicial
-  const lineHeight = 10; // Altura de cada línea
-  let y = marginTop; // Posición inicial en el eje Y
+    const doc = new jsPDF();
+    const pageHeight = doc.internal.pageSize.height;
+    const marginTop = 40;
+    const lineHeight = 10;
+    let y = marginTop;
 
-  // Encabezado
-  doc.setFontSize(18);
-  doc.text('Reporte Mensual', 14, 22);
+    doc.setFontSize(18);
+    doc.text('Reporte Mensual', 14, 22);
 
-  doc.setFontSize(12);
+    doc.setFontSize(12);
+    reporte.forEach((item) => {
+      if (item.tipo.toLowerCase() === 'gastos') {
+        doc.setTextColor(255, 0, 0);
+      } else if (item.tipo.toLowerCase() === 'ingreso') {
+        doc.setTextColor(0, 128, 0);
+      } else {
+        doc.setTextColor(0, 0, 0);
+      }
 
-  reporte.forEach((item) => {
-    // Cambiar el color dependiendo del tipo
-    if (item.tipo.toLowerCase() === 'gastos') {
-      doc.setTextColor(255, 0, 0); // Rojo
-    } else if (item.tipo.toLowerCase() === 'ingreso') {
-      doc.setTextColor(0, 128, 0); // Verde
-    } else {
-      doc.setTextColor(0, 0, 0); // Negro por defecto
-    }
+      if (y + lineHeight > pageHeight - 10) {
+        doc.addPage();
+        y = marginTop;
+      }
 
-    // Verificar si se necesita una nueva página
-    if (y + lineHeight > pageHeight - 10) {
-      doc.addPage(); // Crear una nueva página
-      y = marginTop; // Reiniciar la posición en la nueva página
-    }
+      doc.text(`Importe: ${item.importe}, Tipo: ${item.tipo}, Subtipo: ${item.subtipo}, Fecha: ${item.fecha}`, 14, y);
+      y += lineHeight;
+    });
 
-    doc.text(`Importe: ${item.importe}, Tipo: ${item.tipo}, Subtipo: ${item.subtipo}, Fecha: ${item.fecha}`, 14, y);
-    y += lineHeight; // Avanzar a la siguiente línea
-  });
-
-  // Guardar el archivo PDF
-  doc.save(`Reporte_Mensual_${meses[mesSeleccionado]}_${anioSeleccionado}.pdf`);
-};
+    doc.save(`Reporte_Mensual_${meses[mesSeleccionado]}_${anioSeleccionado}.pdf`);
+  };
 
   return (
     <main>
       <section className={style.ContenedorGestor}>
         <div className={style.tituloGestor}>
-          <Titulo texto={"Gestor"}/>
+          <Titulo texto={"Gestor"} />
           <div className={style.fotoPerfilContainer}>
-            <img 
-              src={perfilData.foto ? perfilData.foto : "./fotoPerfil.png"}  // Usar la URL de la base de datos o una imagen por defecto
-              alt="Perfil" 
-              className={style.fotoPerfil} 
-              onClick={() => router.push('/Perfil')}  // Redirige al perfil al hacer clic en la imagen
+            <img
+              src={perfilData.foto ? perfilData.foto : "./fotoPerfil.png"}
+              alt="Perfil"
+              className={style.fotoPerfil}
+              onClick={() => router.push('/Perfil')}
             />
           </div>
         </div>
@@ -263,7 +178,7 @@ const Gestor = () => {
         </div>
         <div className={style.balanceMensual}>
           <Subtitulo texto={"Balance Mensual"} />
-          <h2>{saldo === 0 ? '$0' : `$${saldo}`}</h2>
+          <h2>{`$${saldo}`}</h2>
         </div>
         <div className={style.tarjetasGestor}>
           <TarjetasGestor
@@ -272,7 +187,7 @@ const Gestor = () => {
             altText="imagen ingresos"
             titulo="Ingresos"
             onAgregar={manejarClick}
-            balanceInicial={saldoTipo[2] === 0 ? 0 : saldoTipo[2]}
+            balanceInicial={` ${saldoTipo[2]}`}
           />
           <TarjetasGestor
             id={1}
@@ -280,7 +195,7 @@ const Gestor = () => {
             altText="imagen gastos"
             titulo="Gastos"
             onAgregar={manejarClick}
-            balanceInicial={saldoTipo[1] === 0 ? 0 : `-${saldoTipo[1]}`}
+            balanceInicial={`-${saldoTipo[1]}`}
           />
           <TarjetasGestor
             id={3}
@@ -288,7 +203,7 @@ const Gestor = () => {
             altText="imagen ahorros"
             titulo="Ahorros"
             onAgregar={manejarClick}
-            balanceInicial={saldoTipo[3] === 0 ? 0 : saldoTipo[3]}
+            balanceInicial={`${saldoTipo[3]}`}
           />
         </div>
         <div className={style.botonReporteMensual}>
@@ -297,7 +212,7 @@ const Gestor = () => {
           </a>
         </div>
         {mostrarPopup && (
-          <Popup onClose={cerrarPopup} onSubmit={enviarDatosPopup} motivo={motivo} idtipos={idtipos} />
+          <Popup onClose={cerrarPopup} motivo={motivo} />
         )}
       </section>
       <Footer />
