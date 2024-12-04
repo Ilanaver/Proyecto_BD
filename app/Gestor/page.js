@@ -8,6 +8,7 @@ import Subtitulo from "../components/Subtitulo/Subtitulo";
 import Mes from "../components/Mes/Mes";
 import Popup from "../components/Popup/Popup";
 import jsPDF from 'jspdf';
+import * as XLSX from 'xlsx'; // Importar biblioteca para Excel
 import Footer from "../components/Footer/Footer";
 import { useRouter } from 'next/navigation';
 
@@ -40,6 +41,7 @@ const Gestor = () => {
   const [anioSeleccionado, setAnioSeleccionado] = useState(new Date().getFullYear());
   const [userId, setUserId] = useState(null);
   const [perfilData, setPerfilData] = useState({});
+  const [mostrarOpcionesDescarga, setMostrarOpcionesDescarga] = useState(false); // Nueva variable de estado
 
   const router = useRouter();
 
@@ -76,7 +78,7 @@ const Gestor = () => {
             const saldoSinFormato = parseFloat(item['Saldo actual']);
             return saldoSinFormato.toLocaleString('es-ES');
           });
-          setSaldo(saldoActual[0] || 0); // Usar el primer elemento o 0 si no existe
+          setSaldo(saldoActual[0] || 0);
         })
         .catch(err => console.error('Error fetching saldo actual:', err));
     }
@@ -159,6 +161,34 @@ const Gestor = () => {
     doc.save(`Reporte_Mensual_${meses[mesSeleccionado]}_${anioSeleccionado}.pdf`);
   };
 
+  const generarReporteExcel = () => {
+    const datosExcel = reporte.map(item => ({
+      Fecha: item.fecha,
+      Importe: item.importe,
+      Tipo: item.tipo,
+      Subtipo: item.subtipo,
+    }));
+
+    const hoja = XLSX.utils.json_to_sheet(datosExcel);
+    const libro = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(libro, hoja, `Reporte_${meses[mesSeleccionado]}`);
+
+    XLSX.writeFile(libro, `Reporte_Mensual_${meses[mesSeleccionado]}_${anioSeleccionado}.xlsx`);
+  };
+
+  const mostrarOpciones = () => {
+    setMostrarOpcionesDescarga(true); // Mostrar opciones al hacer clic
+  };
+
+  const descargarReporte = (tipo) => {
+    if (tipo === "pdf") {
+      generarReportePDF();
+    } else if (tipo === "excel") {
+      generarReporteExcel();
+    }
+    setMostrarOpcionesDescarga(false); // Cerrar el menú después de la descarga
+  };
+
   return (
     <main>
       <section className={style.ContenedorGestor}>
@@ -207,10 +237,16 @@ const Gestor = () => {
           />
         </div>
         <div className={style.botonReporteMensual}>
-          <a onClick={generarReportePDF}>
-            Descargar Reporte Mensual
-          </a>
+          <a onClick={mostrarOpciones}>Descargar Reporte</a>
         </div>
+
+        {mostrarOpcionesDescarga && (
+          <div className={style.opcionesDescarga}>
+            <button onClick={() => descargarReporte("pdf")}>PDF</button>
+            <button onClick={() => descargarReporte("excel")}>Excel</button>
+          </div>
+        )}
+
         {mostrarPopup && (
           <Popup onClose={cerrarPopup} motivo={motivo} />
         )}
