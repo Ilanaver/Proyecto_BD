@@ -124,9 +124,79 @@ const Gestor = () => {
     setIdTipos(idTipo);
     setMostrarPopup(true);
   };
+  const enviarDatosPopup = (datos) => {
+    console.log('Cantidad:', datos.cantidad);
+    console.log('Motivo:', datos.motivo);
+    console.log('Subtipo:', datos.subtipo);
+    console.log('Fecha:', datos.fecha);
+    console.log('Observaciones:', datos.observaciones);
+
+    if (!datos.cantidad || !datos.motivo || !datos.subtipo || !datos.fecha) {
+      console.error('Faltan datos en el formulario');
+      return;
+    }
+
+    let tipo = null;
+    let cantidad = datos.cantidad;
+
+    if (datos.motivo === "ingresos") {
+      tipo = 2;
+    } else if (datos.motivo === "gastos") {
+      tipo = 1;
+    } else {
+      tipo = 3;
+    }
+
+    const requestData = {
+      "idperfil_fk": userId,
+      "idtipos_fk": tipo,
+      "idsubtipo_fk": datos.subtipo,
+      "importe": cantidad,
+      "fecha": datos.fecha,
+      "observaciones": datos.observaciones
+    };
+
+    console.log('Datos a enviar:', requestData);
+
+    axios.post("https://backmoneyminds.onrender.com/gestor/addOperacion", requestData)
+      .then(response => {
+        console.log('Data inserted successfully:', response.data);
+        setReporte(prevReporte => [...prevReporte, {
+          importe: cantidad,
+          tipo: datos.motivo,
+          subtipo: datos.subtipo,
+          fecha: datos.fecha,
+          observaciones: datos.observaciones || ""
+        }]);
+
+        // Actualiza los saldos después de agregar la operación
+        fetchSaldos();
+        fetchSaldosPorTipo(1); // Gastos
+        fetchSaldosPorTipo(2); // Ingresos
+        fetchSaldosPorTipo(3); // Ahorros
+        fetchReporte();
+
+      })
+      .catch(error => {
+        console.error('Error inserting data:', error);
+        console.log('Error details:', error.response ? error.response.data : error.message);
+      });
+    console.log(datos.motivo);
+    actualizarBalance(cantidad, datos.motivo);
+    cerrarPopup();
+  };
 
   const cerrarPopup = () => {
     setMostrarPopup(false);
+  };
+  const actualizarBalance = (cantidad, motivo) => {
+    if (motivo.toLowerCase() === 'ingresos') {
+      setIngresos(prevIngresos => prevIngresos + cantidad);
+    } else if (motivo.toLowerCase() === 'gastos') {
+      setGastos(prevGastos => prevGastos + cantidad);
+    } else if (motivo.toLowerCase() === 'ahorros') {
+      setAhorros(prevAhorros => prevAhorros + cantidad);
+    }
   };
 
   const generarReportePDF = () => {
@@ -177,8 +247,9 @@ const Gestor = () => {
   };
 
   const mostrarOpciones = () => {
-    setMostrarOpcionesDescarga(true); // Mostrar opciones al hacer clic
-  };
+  setMostrarOpcionesDescarga(prevEstado => !prevEstado); // Alterna entre mostrar y ocultar
+};
+
 
   const descargarReporte = (tipo) => {
     if (tipo === "pdf") {
@@ -248,7 +319,7 @@ const Gestor = () => {
         )}
 
         {mostrarPopup && (
-          <Popup onClose={cerrarPopup} motivo={motivo} />
+          <Popup onClose={cerrarPopup} onSubmit={enviarDatosPopup} motivo={motivo} idtipos={idtipos} />
         )}
       </section>
       <Footer />
