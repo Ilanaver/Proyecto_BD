@@ -76,7 +76,7 @@ const Popup = ({ onClose, onSubmit, motivo, idtipos }) => {
               onChange={(e) => setObservaciones(e.target.value)}
             />
           </div>
-          <button type="submit">Agregar</button>
+          <button type="submit" className={styles.boton}>Agregar</button>
         </form>
       </div>
     </div>
