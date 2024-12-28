@@ -1,83 +1,28 @@
-import React, { useEffect, useState } from 'react';
-import styles from './Popup.module.css';
-import Subtitulo from '../Subtitulo/Subtitulo';
-import axios from 'axios';
+import React, { useState } from 'react';
+import Transaccion from '../../Transaccion/page.js'
+import Cuenta from '../../Cuenta/page.js'
 
-const Popup = ({ onClose, onSubmit, motivo, idtipos }) => {
-  const [cantidad, setCantidad] = useState('');
-  const [subtipos, setSubtipos] = useState([]);
-  const [subtipo, setSubtipo] = useState('');
-  const [fecha, setFecha] = useState('');
-  const [observaciones, setObservaciones] = useState('');
+const Popup = ({ viewToShow, onClose, onSubmit, motivo, idtipos }) => {
+  const [view, setView] = useState(viewToShow);
 
-  useEffect(() => {
-    if (idtipos) {
-      axios.get(`https://backmoneyminds.onrender.com/gestor/subtipos/${idtipos}`) // URL actualizada a producción
-        .then(res => {
-          setSubtipos(res.data);
-        })
-        .catch(err => console.error('Error fetching subtipos:', err));
-    }
-  }, [idtipos]);
-
-  const manejarEnvio = (e) => {
-    e.preventDefault();
-    onSubmit({ cantidad: parseFloat(cantidad), motivo, subtipo, fecha, observaciones });
-  };
+  // Actualiza la vista cuando cambia el prop
+  React.useEffect(() => {
+    setView(viewToShow);
+  }, [viewToShow]);
 
   return (
-    <div className={styles.contenedorPopup}>
-      <div className={styles.popup}>
-        <button className={styles.cerrar} onClick={onClose}>
-          &times;
-        </button>
-        <div className={styles.encabezado}>
-          <Subtitulo texto={`Agregar ${motivo}`} />
-        </div>
-        <form onSubmit={manejarEnvio}>
-          <div className={styles.campo}>
-            <label>Cantidad</label>
-            <input
-              type="number"
-              step="0.01"
-              value={cantidad}
-              onChange={(e) => setCantidad(e.target.value)}
-              required
-            />
-          </div>
-          <div className={styles.campo}>
-            <label>Subtipo</label>
-            <select
-              value={subtipo}
-              onChange={(e) => setSubtipo(e.target.value)}
-              required
-            >
-              <option value="">Seleccionar subtipo</option>
-              {subtipos.map(sub => (
-                <option key={sub.idsubtipo} value={sub.idsubtipo}>
-                  {sub.Subtipo}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className={styles.campo}>
-            <label>Fecha</label>
-            <input
-              type="date"
-              value={fecha}
-              onChange={(e) => setFecha(e.target.value)}
-              required
-            />
-          </div>
-          <div className={styles.campo}>
-            <label>Observaciones</label>
-            <textarea
-              value={observaciones}
-              onChange={(e) => setObservaciones(e.target.value)}
-            />
-          </div>
-          <button type="submit" className={styles.boton}>Agregar</button>
-        </form>
+    <div className="popup">
+      <div className="popup-content">
+        {view === 'transaccion' ? (
+          <Transaccion 
+            onClose={onClose} 
+            onSubmit={onSubmit} 
+            motivo={motivo} 
+            idtipos={idtipos} 
+          />
+        ) : (
+          <Cuenta />
+        )}
       </div>
     </div>
   );

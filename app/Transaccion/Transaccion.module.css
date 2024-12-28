@@ -1,0 +1,105 @@
+/* Popup.module.css */
+
+.contenedorPopup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo con sombra */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Asegura que el popup esté encima de todo */
+  }
+  .encabezado{
+    padding: 5%;
+  }
+  .popup {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 4%;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+  }
+  
+  .cerrar {
+    position: absolute;
+    top: 2%;
+    right: 2%;
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+  .campo {
+    margin-bottom: 15px;
+  }
+  
+  .campo label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .campo input,
+  .campo select,
+  .campo textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  .boton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .boton:hover {
+    background-color: #0056b3;
+  }
+  .campo {
+    appearance: none; /* Elimina el estilo por defecto del navegador */
+    -webkit-appearance: none; /* Soporte para navegadores basados en WebKit */
+    -moz-appearance: none; /* Soporte para Firefox */
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 100%;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    
+  }
+  
+  .campo :focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none; /* Elimina el borde por defecto al enfocar */
+  }
+  
+  .campo :hover {
+    border-color: #0056b3;
+  }
+  
+  /* Agregar un ícono de flecha personalizado */
+  .campo select {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="%23999" height="20" viewBox="0 0 24 24" width="20"><path d="M7 10l5 5 5-5z"></path></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px;
+  }
+  
+  /* Para navegadores que no soportan `appearance` */
+  .campo select::-ms-expand {   
+    display: none; /* Oculta la flecha predeterminada en IE */
+  }
+  
