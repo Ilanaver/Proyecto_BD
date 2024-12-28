@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect, useState } from 'react';
 import styles from './Transaccion.module.css';
 import Subtitulo from '../components/Subtitulo/Subtitulo';
