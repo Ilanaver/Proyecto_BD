@@ -66,11 +66,16 @@ export default function CuentasPage() {
           }
         );
         setCuentas((prevCuentas) =>
-          prevCuentas.map((cuenta) =>
-            cuenta.idcuenta === idCuentaPrincipal
-              ? { ...cuenta, [formData.campo]: formData[formData.campo] }
-              : cuenta
-          )
+          prevCuentas.map((cuenta) => {
+            if (cuenta.idcuenta === idCuentaPrincipal) {
+              const updatedCuenta = { ...cuenta, [formData.campo]: formData[formData.campo] };
+              if (formData.campo === 'saldo_inicial') {
+                updatedCuenta.saldo_actual = parseFloat(formData.saldo_inicial);
+              }
+              return updatedCuenta;
+            }
+            return cuenta;
+          })
         );
         alert('Cuenta actualizada con éxito');
       } catch (error) {
@@ -127,12 +132,8 @@ export default function CuentasPage() {
 
   const handleDelete = async (idcuenta) => {
     try {
-      // Primera petición DELETE
       await axios.delete(`https://backmoneyminds.onrender.com/cuenta/deleteGestor/${idcuenta}`);
-      // Segunda petición DELETE
       await axios.delete(`https://backmoneyminds.onrender.com/cuenta/deleteCuenta/${idcuenta}`);
-      
-      // Eliminar la cuenta del estado local
       setCuentas((prevCuentas) => prevCuentas.filter((cuenta) => cuenta.idcuenta !== idcuenta));
       alert('Cuenta eliminada con éxito');
     } catch (error) {
@@ -151,7 +152,6 @@ export default function CuentasPage() {
   const handleSeleccionarCuentaPrincipal = (cuenta) => {
     setCuentaPrincipal(cuenta.nombre);
     setIdCuentaPrincipal(cuenta.idcuenta);
-    // Aquí enviamos la cuenta principal al gestor
     localStorage.setItem('cuentaPrincipal', JSON.stringify({ idcuenta: cuenta.idcuenta, nombre: cuenta.nombre }));
     alert(`Cuenta principal seleccionada: ${cuenta.nombre}`);
   };
