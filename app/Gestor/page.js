@@ -47,8 +47,9 @@
     const [cuentaNombre, setCuentaNombre] = useState("Ninguna cuenta seleccionada");
     const [cuentaId, setcuentaId] = useState(null);
     const [reloadFlag, setReloadFlag] = useState(false);
+    const [cuentas, setCuentas] = useState([]);
 
-
+    
     useEffect(() => {
       const id = localStorage.getItem('userId');
       if (id) {
@@ -81,6 +82,15 @@
           .catch(err => console.error('Error fetching perfil data:', err));
       }
     };
+    const fetchCuentas = () => {
+      if (userId) {
+        axios.get(`https://backmoneyminds.onrender.com/cuenta/todas/${userId}`)
+          .then(res => {
+            setCuentas(res.data);
+          })
+          .catch(err => console.error('Error fetching cuentas:', err));
+      }
+    };
 
     const handleMesChange = (nuevoMes, nuevoAnio) => {
       setMesSeleccionado(nuevoMes);
@@ -107,13 +117,31 @@
     };
     
 
-    const fetchReporte = () => {
+    const fetchReporte = async () => {
       if (userId && mesSeleccionado && anioSeleccionado) {
-        axios.get(`https://backmoneyminds.onrender.com/gestor/operaciones/${userId}/${mesSeleccionado}/${anioSeleccionado}`)
-          .then(res => setReporte(res.data))
-          .catch(err => console.error('Error fetching reporte:', err));
+        try {
+          const operacionesPorCuenta = await Promise.all(
+            cuentas.map(cuenta =>
+              axios.get(`https://backmoneyminds.onrender.com/gestor/operaciones/${userId}/${mesSeleccionado}/${anioSeleccionado}/${cuenta.idcuenta}`)
+            )
+          );
+    
+          // Combina las operaciones de todas las cuentas
+          const todasLasOperaciones = operacionesPorCuenta.flatMap((res, index) => 
+            res.data.map(operacion => ({
+              ...operacion, // Copia las propiedades de la operación
+              nombreCuenta: cuentas[index].nombre // Añade el nombre de la cuenta correspondiente
+            }))
+          );
+    
+          setReporte(todasLasOperaciones);
+        } catch (err) {
+          console.error('Error fetching operaciones:', err);
+        }
       }
     };
+    
+    
 
     const fetchSaldosPorTipo = async (idTipo) => {
       if (userId && mesSeleccionado && anioSeleccionado) {
@@ -132,6 +160,7 @@
     useEffect(() => {
       if (userId) {
         fetchPerfilData();
+        fetchCuentas(); // Llama a fetchCuentas aquí
         fetchSaldos();
         fetchReporte();
         fetchSaldosPorTipo(1);
@@ -215,7 +244,12 @@
       actualizarBalance(cantidad, datos.motivo);
       cerrarPopup();
     };
-
+    useEffect(() => {
+      if (cuentas.length > 0) {
+        fetchReporte();
+      }
+    }, [cuentas, mesSeleccionado, anioSeleccionado]);
+    
     const cerrarPopup = () => {
       setMostrarPopup(false);
       setViewToShow(null); // Restablece la vista
@@ -243,12 +277,14 @@
       const marginTop = 40;
       const lineHeight = 10;
       let y = marginTop;
-
+    
+      // Título del reporte
       doc.setFontSize(18);
       doc.text('Reporte Mensual', 14, 22);
-
+        
       doc.setFontSize(12);
       reporte.forEach((item) => {
+        // Estilo de texto basado en el tipo de operación
         if (item.tipo.toLowerCase() === 'gastos') {
           doc.setTextColor(255, 0, 0);
         } else if (item.tipo.toLowerCase() === 'ingreso') {
@@ -256,21 +292,31 @@
         } else {
           doc.setTextColor(0, 0, 0);
         }
-
+    
+        // Control para agregar nuevas páginas si es necesario
         if (y + lineHeight > pageHeight - 10) {
           doc.addPage();
           y = marginTop;
         }
-
-        doc.text(`Importe: ${item.importe}, Tipo: ${item.tipo}, Subtipo: ${item.subtipo}, Fecha: ${item.fecha}`, 14, y);
+    
+        // Detalles de cada transacción
+        doc.text(
+          `Cuenta: ${item.nombreCuenta}, Importe: ${item.importe}, Tipo: ${item.tipo}, Subtipo: ${item.subtipo}, Fecha: ${item.fecha}`,
+          14,
+          y
+        );
+      
         y += lineHeight;
       });
-
+    
+      // Guarda el archivo
       doc.save(`Reporte_Mensual_${meses[mesSeleccionado]}_${anioSeleccionado}.pdf`);
     };
+    
 
     const generarReporteExcel = () => {
       const datosExcel = reporte.map(item => ({
+        Cuenta: item.nombreCuenta,
         Fecha: item.fecha,
         Importe: item.importe,
         Tipo: item.tipo,
