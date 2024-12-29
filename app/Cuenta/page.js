@@ -158,10 +158,7 @@ export default function CuentasPage() {
 
   return (
     <div>
-      <div className={styles.balanceMensual}>
-        <h2>{cuentaPrincipal || 'Seleccione una cuenta principal'}</h2>
-        <h2>{`$${idCuentaPrincipal ? cuentas.find((c) => c.idcuenta === idCuentaPrincipal)?.saldo_actual.toFixed(2) : 0}`}</h2>
-      </div>
+      
 
       {mostrarPopup && (
         <div className={styles.contenedorPopup}>
