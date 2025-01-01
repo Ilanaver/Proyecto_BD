@@ -182,6 +182,11 @@
       setViewToShow("cuenta");    
       setMostrarPopup(true); // Muestra el Popup
     };
+    const manejarClickOperaciones = () => {
+      console.log("Abriendo Popup de Operaciones");
+      setViewToShow("operaciones");    
+      setMostrarPopup(true); // Muestra el Popup
+    };
     const enviarDatosPopup = (datos) => {
       console.log('Cantidad:', datos.cantidad);
       console.log('Motivo:', datos.motivo);
@@ -364,7 +369,7 @@
           <div className={style.balanceMensual}>
             <h2 onClick={manejarClickBalanceMensual}>{cuentaNombre}</h2>
             <Subtitulo texto={"Balance Mensual"} />
-            <h2>{`$${saldo}`}</h2>
+            <h2 onClick={manejarClickOperaciones}>{`$${saldo}`}</h2>
           </div>
           <div className={style.tarjetasGestor}>
             <TarjetasGestor

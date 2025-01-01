@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './cuenta.module.css';
 
-export default function CuentasPage() {
+export default function CuentasPage({onClose}) {
   const [mostrarPopup, setMostrarPopup] = useState(true);
   const [cuentas, setCuentas] = useState([]);
   const [userId, setUserId] = useState(null);
@@ -163,12 +163,9 @@ export default function CuentasPage() {
       {mostrarPopup && (
         <div className={styles.contenedorPopup}>
           <div className={styles.popup}>
-            <button
-              className={styles.cerrar}
-              onClick={() => setMostrarPopup(false)}
-            >
-              &times;
-            </button>
+          <button className={styles.cerrar} onClick={onClose}>
+            &times;
+          </button>
             <h2 className={styles.encabezado}>Lista de Cuentas</h2>
             <div>
               {cuentas.map((cuenta) => (
@@ -253,7 +250,6 @@ export default function CuentasPage() {
                       value={formData.banco}
                       onChange={handleInputChange}
                       placeholder="Banco (e.g., Nacion)"
-                      required
                     />
                     <textarea
                       name="descripcion"
