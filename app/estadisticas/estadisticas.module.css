@@ -11,6 +11,8 @@
     justify-content: center; /* Centra el título horizontalmente */
     position: relative; /* Necesario para posicionar la imagen de perfil dentro del contenedor */
     gap: 35px;
+    margin-top: 5%;
+    padding: 3%;
 } 
 
 /* Card contenedor principal */
@@ -144,7 +146,6 @@
 /* Foto de perfil */
 .fotoPerfilContainer {
     position: absolute; /* Cambiado a posición absoluta */
-    top: 10px; /* Espacio desde la parte superior del contenedor */
     right: 10px; /* Espacio desde el borde derecho del contenedor */
     width: 50px; /* Tamaño pequeño para la imagen */
     height: 50px; /* Tamaño pequeño para la imagen */
