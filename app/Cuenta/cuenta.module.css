@@ -20,8 +20,12 @@
         padding: 4%;
         width: 90%;
         max-width: 400px;
+        height: 50vh; /* Define una altura fija */
+        max-height: 80vh; /* Evita que crezca más allá del viewport */
+        overflow-y: auto; /* Activa la scrollbar cuando el contenido excede la altura */
         position: relative;
-    }
+      }
+      
     
     .cerrar {
         position: absolute;
