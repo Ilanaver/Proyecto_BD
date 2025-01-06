@@ -6,6 +6,8 @@ const OperacionesTipoPage = ({onClose}) => {
   const [operaciones, setOperaciones] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [idtipos, setTipo] = useState(1); // 1 para gastos, 2 para ingresos
+  
   const [cuentaNombre, setCuentaNombre] = useState("Ninguna cuenta seleccionada");
   const [cuentaId, setCuentaId] = useState(null);
 
@@ -27,7 +29,6 @@ const OperacionesTipoPage = ({onClose}) => {
 
       try {
         const idusuario = localStorage.getItem("userId");
-        const idtipos = 2; // Cambia este valor según el tipo deseado (1: Gastos, 2: Ingresos, 3: Ahorros)
         const mes = new Date().getMonth() + 1; // Mes actual
         const ano = new Date().getFullYear(); // Año actual
 
@@ -49,18 +50,36 @@ const OperacionesTipoPage = ({onClose}) => {
     };
 
     fetchOperaciones();
-  }, [cuentaId]); // Este efecto depende de cuentaId
+  }, [cuentaId, idtipos]); // Este efecto depende de cuentaId
 
   if (loading) return <p>Cargando operaciones...</p>;
   if (error) return <p>Error: {error}</p>;
-
+  const handleSelectChange = (selectedTipo) => {
+    setTipo(selectedTipo);
+};
   return (
     <div className={styles.popupContainer}>
       <div className={styles.popupContent}>
         <button className={styles.popupClose} onClick={onClose}>
           &times;
         </button>
-        <h1>Operaciones para la cuenta: {cuentaNombre}</h1>
+        <div className={styles.selectorContainer}>
+                <button
+                    className={`${styles.selectorButton} ${idtipos === 1 ? styles.selected : ''}`}
+                    onClick={() => handleSelectChange(1)}
+                >
+                    Gastos
+                </button>
+                <button
+                    className={`${styles.selectorButton} ${idtipos === 2 ? styles.selected : ''}`}
+                    onClick={() => handleSelectChange(2)}
+                >
+                    Ingresos
+                </button>
+            </div>
+            <div className={styles.cardHeader}>
+                <h2>{idtipos === 1 ? `Operaciones gastos para la cuenta: ${cuentaNombre}` : `Operaciones ingresos para la cuenta: ${cuentaNombre}`}</h2>
+            </div>
         {loading && <p>Cargando operaciones...</p>}
         {error && <p>Error: {error}</p>}
         {!loading && !error && (
@@ -91,3 +110,4 @@ const OperacionesTipoPage = ({onClose}) => {
 };
 
 export default OperacionesTipoPage;
+
