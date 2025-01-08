@@ -1,9 +1,14 @@
 @media screen and (max-width: 600px) {
+    .contenedor{
+        padding-bottom: 95px;
+    }
     .headerContainer {
         position: relative;
-        width: 100%;
+        width: 99%;
         height: 80px; /* Altura del contenedor de la cabecera */
-        margin-bottom: 20%;
+    }
+    .description{
+        padding: 15%;
     }
     
     .Titulo {
@@ -33,22 +38,26 @@
         cursor: pointer;
         object-fit: cover;
     }
-    .contenedortarjetas{
+    .contenedortarjetas {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        justify-content: center; /* Centra verticalmente */
+        align-items: center;    /* Centra horizontalmente */
+        min-height: calc(100vh - 160px); /* Asegura un mínimo espacio disponible */
+        margin-bottom: 2rem; /* Añade espacio extra para los botones */
+        padding: 0;
     }
-    .cards{
+    
+    .cards {
         display: flex;
         flex-direction: column;
         justify-content: center;
         text-align: center;
         margin-bottom: 15%;
-        border-top-left-radius: 16px;
-        border-top-right-radius: 16px;
+        border-radius: 16px;
         border: solid 2px #3278FB;
         width: 75%;
+        padding: 10%;
     }
 
     .boton
@@ -57,10 +66,9 @@
         border-radius: 8px;
         width: 75%;
         height: 50px;
-        margin-bottom: 5%;
         background-color: white;
     }
-
+    
 
 
 }

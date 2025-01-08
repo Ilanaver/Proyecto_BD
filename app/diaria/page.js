@@ -52,7 +52,7 @@ const Diara = () => {
 
     return (
         <>
-            <section>
+            <section className={styles.contenedor}>
                 <div className={styles.headerContainer}>
                     <div className={styles.Titulo}>
                         <Titulo texto={"Lecciones diarias"} />
@@ -72,7 +72,7 @@ const Diara = () => {
                     {lecciones.map((leccion, index) => (
                         <div className={styles.cards} key={index}>
                             <Subtitulo texto={leccion.titulo} />
-                            <p>{leccion.descripcion}</p>
+                            <p className={styles.description}>{leccion.descripcion}</p>
                             <Link href={leccion.contenido} passHref>
                                 <button className={styles.boton}>Ir a la lección diaria</button>
                             </Link>
