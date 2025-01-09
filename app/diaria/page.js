@@ -55,7 +55,7 @@ const Diara = () => {
             <section className={styles.contenedor}>
                 <div className={styles.headerContainer}>
                     <div className={styles.Titulo}>
-                        <Titulo texto={"Lecciones diarias"} />
+                        <Titulo texto={"Lección diaria"} />
                     </div>
                     <div className={styles.fotoPerfilContainer}>
                         <img 
