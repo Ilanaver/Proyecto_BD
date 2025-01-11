@@ -4,7 +4,6 @@
         bottom: 0;
         left: 0;
         width: 100%;
-        background-color: #f8f8f8; /* O el color que prefieras */
         z-index: 1000; /* Asegúrate de que esté por encima de otros elementos */
     }
 
