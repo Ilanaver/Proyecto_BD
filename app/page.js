@@ -81,7 +81,7 @@ const Home = () => {
           </div>
           <div className={styles.contenedorTexto}>
             <h2>
-              <span className={styles.palabrasInicio}>Cargando</span> tu experiencia...
+              <span className={styles.palabrasInicio}>Loading</span> your experience...
             </h2>
           </div>
           <div className={styles.contenedorBarra}>

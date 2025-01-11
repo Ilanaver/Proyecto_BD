@@ -9,17 +9,39 @@
     max-width: 1200px;
     position: relative; /* Necesario para posicionar la foto de perfil */
 }
-
+.headerContainer {
+    position: relative;
+    width: 99%;
+    height: 80px; /* Altura del contenedor de la cabecera */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px; /* Añade un espacio lateral */
+}
 .tituloGestor {
     display: flex;
-    align-items: center; /* Alinea verticalmente el título */
+    align-items: center; /* Alinea verticalmente el título y la imagen de perfil */
     width: 100%; /* Asegúrate de que el contenedor ocupe todo el ancho disponible */
     justify-content: center; /* Centra el título horizontalmente */
-    padding: 20px; /* Espaciado interno para separarlo del borde */
-    box-sizing: border-box;
-    margin-top: 7%;
+    position: relative; /* Necesario para posicionar la imagen de perfil dentro del contenedor */
+    gap: 35px;
+    margin-top: 5%;
+    padding: 3%;
+} 
+.fotoPerfilContainer {
+    position: absolute; /* Cambiado a posición absoluta */
+    right: 10px; /* Espacio desde el borde derecho del contenedor */
+    width: 50px; /* Tamaño pequeño para la imagen */
+    height: 50px; /* Tamaño pequeño para la imagen */
 }
 
+.fotoPerfil {
+    width: 100%; /* Asegúrate de que la imagen ocupe todo el contenedor */
+    height: 100%; /* Asegúrate de que la imagen ocupe todo el contenedor */
+    border-radius: 50%; /* Hace que la imagen tenga bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar sobre la imagen para indicar que es clickeable */
+    object-fit: cover; /* Ajusta la imagen para que se ajuste dentro del contenedor sin distorsionarse */
+}
 .balanceMensual {
     margin-bottom: 2%;
     text-align: center;
@@ -117,27 +139,11 @@
 }
 
 /* Contenedor para la imagen de perfil */
-.fotoPerfilContainer {
-    position: absolute; /* Posiciona la foto de perfil dentro del ContenedorGestor */
-    top: 10px; /* Espaciado desde la parte superior */
-    right: 10px; /* Espaciado desde el borde derecho */
-    width: 50px; /* Tamaño pequeño para la imagen */
-    height: 50px; /* Tamaño pequeño para la imagen */
-}
 
-.fotoPerfil {
-    width: 100%; /* Asegúrate de que la imagen ocupe todo el contenedor */
-    height: 100%; /* Asegúrate de que la imagen ocupe todo el contenedor */
-    border-radius: 50%; /* Hace que la imagen tenga bordes redondeados */
-    cursor: pointer; /* Cambia el cursor al pasar sobre la imagen para indicar que es clickeable */
-    object-fit: cover; /* Ajusta la imagen para que se ajuste dentro del contenedor sin distorsionarse */
-}
 
 /* Para pantallas pequeñas */
 @media screen and (max-width: 550px) {
-    .tituloGestor {
-        justify-content: center; /* Centra el título */
-    }
+    
 
     .tarjetasGestor {
         grid-template-columns: 1fr; /* Una sola columna */

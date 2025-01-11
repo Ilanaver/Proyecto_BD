@@ -352,17 +352,17 @@
     return (
       <main>
         <section className={style.ContenedorGestor}>
-          <div className={style.tituloGestor}>
-            <Titulo texto={"Gestor"} />
-            <div className={style.fotoPerfilContainer}>
-              <img
-                src={perfilData.foto ? perfilData.foto : "./fotoPerfil.png"}
-                alt="Perfil"
-                className={style.fotoPerfil}
-                onClick={() => router.push('/Perfil')}
-              />
+            <div className={style.tituloGestor}>
+                <Titulo texto={"Gestor"} />
+                <div className={style.fotoPerfilContainer}>
+                    <img 
+                        src={perfilData.foto ? perfilData.foto : "./fotoPerfil.png"}  
+                        alt="Perfil" 
+                        className={style.fotoPerfil} 
+                        onClick={() => router.push('/Perfil')}  
+                    />
+                </div>
             </div>
-          </div>
           <div className={style.MesGestor}>
             <Mes onMesChange={handleMesChange} />
           </div>
