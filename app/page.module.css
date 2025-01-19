@@ -6,7 +6,7 @@
         align-items: center;
         flex-direction: column;
         height: 100vh; /* Ajusta para que ocupe toda la pantalla */
-        background-color: #f0f0f0; /* Fondo claro para la pantalla de carga */
+        background-color: white; /* Fondo claro para la pantalla de carga */
       }
       
       .contenedorParteArriba {
