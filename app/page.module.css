@@ -14,7 +14,6 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 20px;
       }
       
       .contenedorImagen {
@@ -23,11 +22,13 @@
       }
       
       .ImagenPrincipal {
-        width: 150px; /* Tamaño reducido del logo */
+        margin-top: -20px;
+        width: 250px; /* Tamaño reducido del logo */
         height: auto;
       }
       
       .contenedorTexto {
+
         text-align: center;
         color: #0F77F0; /* Color azul del texto */
         font-size: 18px;

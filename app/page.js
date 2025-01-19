@@ -77,7 +77,7 @@ const Home = () => {
       <div className={styles.PaginaPrincipal}>
         <div className={styles.contenedorParteArriba}>
           <div className={styles.contenedorImagen}>
-            <img className={styles.ImagenPrincipal} src="./logo.png" alt="logo página" />
+            <img className={styles.ImagenPrincipal} src="./Logo-removebg-preview.png" alt="logo página" />
           </div>
           <div className={styles.contenedorTexto}>
             <h2>
